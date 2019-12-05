@@ -1,0 +1,99 @@
+body {
+    padding: 20px;
+}
+
+ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0 10px;
+}
+
+li {
+    
+}
+
+table {
+    background: #707070;
+    border: 1px solid black;
+    padding: 1px 1px 0 0;
+    margin: 30px auto;
+}
+
+tr {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 1px 0;
+    padding: 0;
+}
+
+td {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    background: #d0d0d0;
+    border: solid #d0d0d0;
+    border-width: 2px;
+    margin: 0 0 0 1px;
+    padding: 0;
+    font-weight: bold;
+}
+
+td.n-decouvert {
+    border-width: 2px;
+    border-top-color: #b0b0b0;
+    border-left-color: #b0b0b0;
+    border-bottom-color: #808080;
+    border-right-color: #808080;
+}
+
+td.n-decouvert:active {
+    background: #b0b0b0;
+    border-top-color: #808080;
+    border-left-color: #808080;
+    border-bottom-color: #b0b0b0;
+    border-right-color: #b0b0b0;
+}
+
+td.decouvert {
+    background: #d0d0d0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.mine-1 {
+    color: blue;
+}
+
+.mine-2 {
+    color: green;
+}
+
+.mine-3 {
+    color: red;
+}
+
+.mine-4 {
+    color: purple;
+}
+
+.mine-5 {
+    color: #803a00;
+}
+
+.mine-6 {
+    color: #103f1c;
+}
+
+.mine-7 {
+    color: #222;
+}
+
+.mine-8 {
+    color: grey;
+}
