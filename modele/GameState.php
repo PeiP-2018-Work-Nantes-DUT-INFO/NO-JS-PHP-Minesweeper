@@ -2,10 +2,22 @@
 /**
  * @version 1.0.0
  * @license MIT
- * @author Simon <simon.sassi@etu.univ-nantes.fr>
+ * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
  */
+
+ /**
+  * Nombre de colonnes du demineur
+  */
 define("NBR_COLONNES", 8);
+
+/**
+ * Nombre de lignes du demineur
+ */
 define("NBR_LIGNES", 8);
+
+/**
+ * Nombre de mines contenues dans le demineur
+ */
 define("NBR_MINES", 10);
 
 /**
@@ -14,83 +26,74 @@ define("NBR_MINES", 10);
 class GameState
 {
     /**
-     * Undocumented variable
+     * Contient l'état des cases
      *
-     * @var [type]
+     * @var \CaseMetier[][]
      */
     private $etatCaseJeu;
 
     /**
-     * Undocumented variable
+     * Identifiant du joueur en train de jouer
      *
-     * @var [type]
-     */
-    private $mines;
-
-    /**
-     * Undocumented variable
-     *
-     * @var [type]
+     * @var int
      */
     private $joueurId;
 
     /**
-     * Undocumented variable
-     * @var [type]
+     * Nombre de case restantes
+     * @var int
      */
     private $caseRestantes;
 
     /**
      * Initialise le jeu et génère les mines.
-     * @param [int] $joueurId identifiant du joueur
+     * @param int $joueurId identifiant du joueur
      */
     public function __construct($joueurId)
     {
-        $this->etatCaseJeu = array_fill(0, NBR_COLONNES, array_fill(0, NBR_LIGNES, true));
-        $this->mines = [];
-        $this->genererMines();
-        $this->joueurId = $joueurId;
-        $this->caseRestantes = NBR_COLONNES * NBR_LIGNES;
-        
-    }
-    
-    public function compterToutesLesMines() {
-        for($i = 0; $i < NBR_COLONNES; $i++) {
-            for($j = 0; $j < NBR_LIGNES; $j++) {
-                
+        $mines = $this->genererMines();
+        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, null));
+        for ($i = 0; $i < NBR_LIGNES; $i++) {
+            for ($j = 0; $j < NBR_COLONNES; $j++) {
+                $this->etatCaseJeu[$i][$j] = new CaseMetier(false, $this->compterMines($mines, $i, $j), $mines[$i] === $j);
             }
         }
+        $this->joueurId = $joueurId;
+        $this->caseRestantes = NBR_COLONNES * NBR_LIGNES;
     }
+
     /**
      * Permet de genérer les mines
-     * @return void
+     * @return int[] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
      */
     private function genererMines()
     {
+        $mines = [];
         $i = 0;
         while ($i < NBR_MINES) {
             $x = rand(0, 7);
             $y = rand(0, 7);
-            if (!$this->mines[$x] == $y) {
-                $this->mines[$x] = $y;
+            if (!$mines[$x] == $y) {
+                $mines[$x] = $y;
                 $i++;
             }
         }
+        return $mines;
     }
 
     /**
      * Permet de jouer
      *
-     * @param [int] $x numéro de la colonne de la case
-     * @param [int] $y numéro de la ligne de la case
+     * @param int $x numéro de la colonne de la case
+     * @param int $y numéro de la ligne de la case
      * @return boolean vrai si le mouvement est possible, faux sinon
      */
     public function jouer($x, $y): bool
     {
         if ($this->mouvementPossible($x, $y)) {
             $this->caseRestantes--;
-            $this->etatCaseJeu[$x][$y] = false;
-            if ($this->compterMines($x, $y) == 0) {
+            $this->etatCaseJeu[$x][$y]->jouer();
+            if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0) {
                 $this->jouerCaseAdjacentes($x, $y);
             }
             return true;
@@ -101,18 +104,18 @@ class GameState
     /**
      * Permet de jouer les cases adjacentes d'une case donnée.
      *
-     * @param [type] $x numéro de la colonne de la case
-     * @param [type] $y numéro de la ligne de la case
+     * @param int $x numéro de la colonne de la case
+     * @param int $y numéro de la ligne de la case
      * @return void
      * @throws Exception Si la case à jouer à une mine adjacente.
      */
     private function jouerCaseAdjacentes($x, $y)
     {
-        if ($this->compterMines($x, $y) == 0) {
+        if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0) {
             $casesAJouer = [];
             for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
                 for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
-                    if (isset($this->mines[$i][j])) {
+                    if (!$this->etatCaseJeu[$i][$j]->estUneMine()) {
                         $casesAJouer[$i] =$j;
                     }
                 }
@@ -137,58 +140,58 @@ class GameState
 
     /**
      * Compte les mines adjacentes à la case
-     *
-     * @param [int] $x numéro de la colonne de la case
-     * @param [int] $y numéro de la ligne de la case
+     * @param int[] $mines tableau des mines
+     * @param int $x numéro de la colonne de la case
+     * @param int $y numéro de la ligne de la case
      * @return integer le nombre de mines adjacentes.
-     * @throws Exception si la case donnée est une mine
      */
-    private function compterMines($x, $y): int
+    private function compterMines($mines, $x, $y): int
     {
         $nbrMines = 0;
-        if ($this->mouvementPossible($x, $y)) {
-            for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
-                for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
-                    if (isset($this->mines[$i]) && $this->mines[$i] == $j) {
-                        $nbrMines++;
-                    }
+        for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
+            for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
+                if (isset($mines[$i]) && $mines[$i] == $j) {
+                    $nbrMines++;
                 }
             }
-            return $nbrMines;
-        } else {
-            throw new Exception("La case testée pour le comptage de mine est une mine");
         }
+        return $nbrMines;
     }
     /**
      * Permet de tester si un mouvement est possible
      *
-     * @param [type] $x numéro de la colonne
-     * @param [type] $y numéro de la ligne
+     * @param int $x numéro de la colonne
+     * @param int $y numéro de la ligne
      * @return boolean vrai si la case n'a pas déjà été jouée
      */
     public function mouvementPossible($x, $y): bool
     {
-        return $this->etatCaseJeu[$x][$y];
+        return !$this->etatCaseJeu[$x][$y]->estJouee();
     }
 
     /**
      * Permet de tester si un mouvement fait perdre le jeu
      *
-     * @param [type] $x numéro de la colonne
-     * @param [type] $y numéro de la ligne
+     * @param int $x numéro de la colonne
+     * @param int $y numéro de la ligne
      * @return boolean vrai si le mouvement joué contient une mine
      */
     public function testerCase($x, $y): bool
     {
-        if ($this->mines[$x] == $y) {
+        if ($this->etatCaseJeu[$x][$y]->estUneMine()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function obtenirEtatJeu(): array {
-        foreach()
-        return [];
+    /**
+     * Obtient l'etat du jeu
+     *
+     * @return \CaseMetier[][]
+     */
+    public function obtenirEtatJeu(): array
+    {
+        return $this->etatCaseJeu;
     }
 }
