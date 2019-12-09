@@ -26,8 +26,8 @@ class Routeur
             } else {
                 $this->ctrlMessage->afficherInterfaceMessages($_SESSION['pseudo']);
             }
-        } else if (isset($_POST['pseudo'])) {
-            $this->ctrlAuthentification->login($_POST['pseudo']);
+        } else if (isset($_POST['username'])) {
+            $this->ctrlAuthentification->login($_POST['username'], $_POST['password']);
         } else {
             $this->ctrlAuthentification->accueil();
         }
