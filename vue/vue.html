@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="stylesheet" href="vue.css">
-    <link rel="stylesheet" href="webfontkit/stylesheet.css">
-    <style>
-        *{
-            font-family: 'pc_seniorregular'
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/vue.css">
+    <link rel="stylesheet" href="../assets/webfontkit/stylesheet.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,88 +14,100 @@
         <li><a href="#">Restart</a></li>
         <li><a href="#">Déconnexion</a></li>
     </ul>
+
+    <div class="content">
+        <div class="game_window">
+            <div class="head box-shadow">
+                <div class="n-decouvert">
+                    <a href="#" draggable="false"></a>
+                </div>
+            </div>
+            <div class="game box-shadow">
+                <table>
+                    <tr>
+                        <td class="decouvert mine-1">1</td>
+                        <td class="decouvert mine-2">2</td>
+                        <td class="decouvert mine-3">3</td>
+                        <td class="decouvert mine-4">4</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                    <tr>
+                        <td class="decouvert mine-5">5</td>
+                        <td class="decouvert mine-6">6</td>
+                        <td class="decouvert mine-7">7</td>
+                        <td class="decouvert mine-8">8</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                    <tr>
+                        <td class="decouvert mine-1">1</td>
+                        <td class="decouvert mine-2">2</td>
+                        <td class="decouvert mine-3">3</td>
+                        <td class="decouvert mine-4">4</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                    <tr>
+                        <td class="decouvert mine-5">5</td>
+                        <td class="decouvert mine-6">6</td>
+                        <td class="decouvert mine-7">7</td>
+                        <td class="decouvert mine-8">8</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                    <tr>
+                        <td class="decouvert mine-1">1</td>
+                        <td class="decouvert mine-2">2</td>
+                        <td class="decouvert mine-3">3</td>
+                        <td class="decouvert mine-4">4</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                    <tr>
+                        <td class="decouvert mine-1">1</td>
+                        <td class="decouvert mine-2">2</td>
+                        <td class="decouvert mine-3">3</td>
+                        <td class="decouvert mine-4">4</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                    <tr>
+                        <td class="decouvert mine-1">1</td>
+                        <td class="decouvert mine-2">2</td>
+                        <td class="decouvert mine-3">3</td>
+                        <td class="decouvert mine-4">4</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                    <tr>
+                        <td class="decouvert mine-1">1</td>
+                        <td class="decouvert mine-2">2</td>
+                        <td class="decouvert mine-3">3</td>
+                        <td class="decouvert mine-4">4</td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                        <td class="n-decouvert"><a href="#" draggable="false"></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
     
-    <table>
-        <tr>
-            <td class="decouvert mine-1">1</td>
-            <td class="decouvert mine-2">2</td>
-            <td class="decouvert mine-3">3</td>
-            <td class="decouvert mine-4">4</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-        <tr>
-            <td class="decouvert mine-5">5</td>
-            <td class="decouvert mine-6">6</td>
-            <td class="decouvert mine-7">7</td>
-            <td class="decouvert mine-8">8</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-        <tr>
-            <td class="decouvert mine-1">1</td>
-            <td class="decouvert mine-2">2</td>
-            <td class="decouvert mine-3">3</td>
-            <td class="decouvert mine-4">4</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-        <tr>
-            <td class="decouvert mine-5">5</td>
-            <td class="decouvert mine-6">6</td>
-            <td class="decouvert mine-7">7</td>
-            <td class="decouvert mine-8">8</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-        <tr>
-            <td class="decouvert mine-1">1</td>
-            <td class="decouvert mine-2">2</td>
-            <td class="decouvert mine-3">3</td>
-            <td class="decouvert mine-4">4</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-        <tr>
-            <td class="decouvert mine-1">1</td>
-            <td class="decouvert mine-2">2</td>
-            <td class="decouvert mine-3">3</td>
-            <td class="decouvert mine-4">4</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-        <tr>
-            <td class="decouvert mine-1">1</td>
-            <td class="decouvert mine-2">2</td>
-            <td class="decouvert mine-3">3</td>
-            <td class="decouvert mine-4">4</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-        <tr>
-            <td class="decouvert mine-1">1</td>
-            <td class="decouvert mine-2">2</td>
-            <td class="decouvert mine-3">3</td>
-            <td class="decouvert mine-4">4</td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-            <td class="n-decouvert"><a href="#" draggable="false"></a></td>
-        </tr>
-    </table>
 </body>
 </html>
