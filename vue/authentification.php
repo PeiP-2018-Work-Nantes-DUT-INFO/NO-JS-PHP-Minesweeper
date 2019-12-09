@@ -2,11 +2,9 @@
 
 class Authentification
 {
-
     public function demandePseudo($err)
     {
-        header("Content-type: text/html; charset=utf-8");
-        ?>
+        header("Content-type: text/html; charset=utf-8"); ?>
 <html>
 
 <body>
