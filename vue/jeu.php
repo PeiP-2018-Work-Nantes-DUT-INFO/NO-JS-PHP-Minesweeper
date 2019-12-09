@@ -15,5 +15,7 @@ class Jeu
             <?php endforeach;?>
         </body>
         </html>
-
+    <?php
+    }
+}
 ?>
