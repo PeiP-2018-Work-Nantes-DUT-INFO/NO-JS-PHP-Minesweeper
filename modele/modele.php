@@ -44,7 +44,7 @@ class Modele
             $this->connexion = new PDO($chaine, LOGIN, PASSWORD);
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            $exception=new ConnexionException("problème de connexion à la base");
+            $exception=new ConnexionException("Problème de connexion à la base");
             throw $exception;
         }
     }
@@ -69,9 +69,12 @@ class Modele
     public function verifierPassword($pseudo, $password)
     {
         try {
-            $statement = $this->connexion->prepare("select pseudo from joueurs where pseudo=? and motDePasse;");
+            $statement = $this->connexion->prepare("SELECT pseudo from joueurs where pseudo=? and motDePasse=?;");
             $statement->bindParam(1, $pseudo);
-            $statement->bindParam(2, password_hash($password, PASSWORD_DEFAULT));
+            $pwd = password_hash($password, PASSWORD_DEFAULT);
+            var_dump($password);
+            var_dump($pwd);
+            $statement->bindParam(2, $pwd);
 
             $statement->execute();
             $result=$statement->fetch(PDO::FETCH_ASSOC);
@@ -82,7 +85,7 @@ class Modele
             }
         } catch (PDOException $e) {
             $this->deconnexion();
-            throw new TableAccesException("problème avec la table pseudonyme");
+            throw new TableAccesException("Problème avec la table joueurs");
         }
     }
 
@@ -96,7 +99,7 @@ class Modele
     public function getPseudos()
     {
         try {
-            $statement=$this->connexion->query("SELECT pseudo from pseudonyme;");
+            $statement=$this->connexion->query("SELECT pseudo from joueurs;");
 
             while ($ligne=$statement->fetch()) {
                 $result[]=$ligne['pseudo'];
@@ -117,20 +120,20 @@ class Modele
     public function exists($pseudo)
     {
         try {
-            $statement = $this->connexion->prepare("select id from pseudonyme where pseudo=?;");
+            $statement = $this->connexion->prepare("SELECT pseudo from joueurs where pseudo=?;");
             $statement->bindParam(1, $pseudoParam);
             $pseudoParam=$pseudo;
             $statement->execute();
             $result=$statement->fetch(PDO::FETCH_ASSOC);
 
-            if ($result["id"]!=null) {
+            if ($result["pseudo"]!=null) {
                 return true;
             } else {
                 return false;
             }
         } catch (PDOException $e) {
             $this->deconnexion();
-            throw new TableAccesException("problème avec la table pseudonyme");
+            throw new TableAccesException("Problème avec la table joueurs");
         }
     }
 
@@ -146,7 +149,7 @@ class Modele
     public function majSalon($pseudo, $message)
     {
         try {
-            $statement = $this->connexion->prepare("select id from pseudonyme where pseudo=?;");
+            $statement = $this->connexion->prepare("select pseudo from joueurs where pseudo=?;");
             $statement->bindParam(1, $pseudoParam);
             $pseudoParam=$pseudo;
             $statement->execute();
