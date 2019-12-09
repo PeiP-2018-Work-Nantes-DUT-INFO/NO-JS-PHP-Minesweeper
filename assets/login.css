@@ -1,0 +1,77 @@
+* {
+    font-family: 'MS Sans Serif';
+    font-size: small;
+}
+
+body {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.logon {
+    background: #ECE9D8;
+    border: solid 3px #0055EA;
+    border-radius: 6px 6px 3px 3px;
+    border-top-color: #2B90FF;
+    border-left-color: #026AFE;
+    width: 400px;
+}
+
+div.logon .header {
+    background: linear-gradient( #2B90FF, #0055EA 20%, #0055EA 50%, #0270ff 75%, #026AFE);
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 1px rgba(0, 0, 0, 0.5);
+    line-height: 20px;
+    height: 20px;
+}
+
+div.logon .winxp-bg {
+    background-image: url("winxp_login.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 90px;
+}
+
+div.logon .content {
+    height: 100%;
+    margin: 13px 10px;
+}
+
+div.logon .content .field {
+    padding: 3px 0;
+}
+
+div.logon .content .field label {
+    display: inline-block;
+    width: 80px;
+    font-size: smaller;
+}
+
+div.logon .content .field input {
+    width: 225px;
+    border: solid 1px;
+    border-color: #86a5c2;
+}
+
+div.logon .content .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 0 0 0;
+}
+
+div.logon .content .buttons input,
+div.logon .content .buttons button {
+    padding: 2px 0;
+    margin: 0 3px;
+    font-size: smaller;
+    width: 69px;
+    border-radius: 4px;
+    background: #f5f5f5;
+}
+
+div.logon .content .buttons input#submit {
+    border: solid 3px rgba(68, 157, 252, 0.5);
+}
