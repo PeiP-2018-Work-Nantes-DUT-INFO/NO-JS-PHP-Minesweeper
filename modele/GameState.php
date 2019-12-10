@@ -5,6 +5,8 @@
  * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
  */
 
+require_once 'Case.php';
+
  /**
   * Nombre de colonnes du demineur
   */
@@ -73,8 +75,8 @@ class GameState
         while ($i < NBR_MINES) {
             $x = rand(0, 7);
             $y = rand(0, 7);
-            if (!$mines[$x] == $y) {
-                $mines[$x] = $y;
+            if (!array_search(array($x, $y), $mines)) {
+                $mines[$i] = array($x, $y);
                 $i++;
             }
         }
