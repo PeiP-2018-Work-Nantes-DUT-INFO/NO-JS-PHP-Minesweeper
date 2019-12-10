@@ -4,7 +4,7 @@ require_once PATH_METIER . "/Message.php";
 class Vue
 {
 
-    public function demandePseudo($err)
+    public function connexion($err)
     {
         header("Content-type: text/html; charset=utf-8");
         ?>

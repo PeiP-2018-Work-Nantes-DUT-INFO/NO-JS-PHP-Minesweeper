@@ -13,7 +13,7 @@ class ControleurAuthentification{
 	}
 
 	function accueil(){
-		$this->vue->demandePseudo(null);
+		$this->vue->connexion(null);
 	}
 
 	function login($login, $password) {
@@ -22,10 +22,10 @@ class ControleurAuthentification{
 				$_SESSION['pseudo']=$login;
 				header('Location: index.php', false, 301);
 			} else {
-				$this->vue->demandePseudo('Le mot de passe est incorrect');
+				$this->vue->connexion('Le mot de passe est incorrect');
 			}
 		} else {
-			$this->vue->demandePseudo('Le pseudo n\'est pas dans la base de données');
+			$this->vue->connexion('Le pseudo n\'est pas dans la base de données');
 		}
 	}
 
