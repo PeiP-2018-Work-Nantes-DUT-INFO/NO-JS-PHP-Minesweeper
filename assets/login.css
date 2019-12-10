@@ -8,34 +8,42 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("winxp_logon_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-div.logon {
+div.popup {
     background: #ECE9D8;
     border: solid 3px #0055EA;
     border-radius: 6px 6px 3px 3px;
     border-top-color: #2B90FF;
     border-left-color: #026AFE;
-    width: 400px;
 }
 
-div.logon .header {
+div.logon {
+    width: 500px;
+    z-index: 1;
+}
+
+div.header {
     background: linear-gradient( #2B90FF, #0055EA 20%, #0055EA 50%, #0270ff 75%, #026AFE);
     color: white;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: medium;
     text-shadow: 2px 1px rgba(0, 0, 0, 0.5);
-    line-height: 20px;
-    height: 20px;
+    line-height: 25px;
+    height: 25px;
 }
 
 div.logon .winxp-bg {
     background-image: url("winxp_login.png");
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 90px;
+    height: 112px;
 }
 
-div.logon .content {
+div.content {
     height: 100%;
     margin: 13px 10px;
 }
@@ -51,7 +59,7 @@ div.logon .content .field label {
 }
 
 div.logon .content .field input {
-    width: 225px;
+    width: 300px;
     border: solid 1px;
     border-color: #86a5c2;
 }
@@ -74,4 +82,17 @@ div.logon .content .buttons button {
 
 div.logon .content .buttons input#submit {
     border: solid 3px rgba(68, 157, 252, 0.5);
+}
+
+/* DISPLAY ERROR */
+div.error {
+    position: absolute;
+    max-width: 70%;
+    left: auto;
+    top: 40%;
+    z-index: 10;
+}
+
+div.error div.content {
+    display: flex;
 }

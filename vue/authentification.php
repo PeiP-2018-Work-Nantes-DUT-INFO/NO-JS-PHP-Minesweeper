@@ -8,10 +8,11 @@ class Authentification
         <html>
             <head>
                 <link rel="stylesheet" href="assets/login.css">
+                <link rel="icon" href="favicon.gif" type="image/gif">
             </head>
         <body>
 
-            <div class="logon">
+            <div class="logon popup">
                 <div class="header">Log On to Windows</div>
                 <div class="winxp-bg"></div>
 
@@ -45,10 +46,10 @@ class Authentification
         ?>
         <html>
         <body>
-            <div class="error">
+            <div class="error popup">
                 <div class="header">Logon Message</div>
                 <div class="content">
-                    <img src="#" alt="warning_icon">
+                    <img src="assets/warning_icon.png" alt="warning_icon">
                     <p>The system could not log you on. Make sure your User name is correct, then type your password again. Letters in passwords must be typed using the correct case.</p>
                 </div>
             </div>
