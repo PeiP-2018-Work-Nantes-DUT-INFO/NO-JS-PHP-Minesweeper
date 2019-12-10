@@ -1,30 +1,28 @@
 <?php
 
 require_once 'controleurAuthentification.php';
-require_once 'controleurMessage.php';
+require_once 'controleurJeu.php';
 
 class Routeur
 {
 
     private $ctrlAuthentification;
-    private $ctrlMessage;
+    private $ctrlJeu;
 
     public function __construct()
     {
         $this->ctrlAuthentification = new ControleurAuthentification();
-        $this->ctrlMessage = new ControleurMessage();
+        $this->ctrlJeu = new ControleurJeu();
     }
 
     // Traite une requête entrante
     public function routerRequete()
     {
         if (isset($_SESSION['pseudo'])) {
-            if (isset($_POST['message'])) {
-                $this->ctrlMessage->envoyerMessage($_SESSION['pseudo'], $_POST['message']);
-            } else if (isset($_GET['deconnexion'])) {
-                $this->ctrlAuthentification->logout();
+            if (isset($_GET['x']) && isset($_GET['y'])) {
+                $this->ctrlJeu->jouer($x, $y);
             } else {
-                $this->ctrlMessage->afficherInterfaceMessages($_SESSION['pseudo']);
+                $this->ctrlJeu->afficherJeu($_SESSION['pseudo']);
             }
         } else if (isset($_POST['username'])) {
             $this->ctrlAuthentification->login($_POST['username'], $_POST['password']);
