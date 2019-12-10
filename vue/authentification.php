@@ -2,7 +2,11 @@
 
 class Authentification
 {
-    public function demandePseudo($err)
+    /**
+     * Affiche la vue de connexion
+     * @var mixed $err permet d'identifier si il y a erreur ou non
+     */
+    public function connexion($err)
     {
         header("Content-type: text/html; charset=utf-8"); ?>
         <html>
@@ -41,7 +45,9 @@ class Authentification
     <?php
     }
 
-
+    /**
+     * Affiche une erreur de connexion sur la vue appelante
+     */
     public function loadError() {
         ?>
         <html>
