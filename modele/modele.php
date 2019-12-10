@@ -69,17 +69,13 @@ class Modele
     public function verifierPassword($pseudo, $password)
     {
         try {
-            $statement = $this->connexion->prepare("SELECT pseudo from joueurs where pseudo=? and motDePasse=?;");
+            $statement = $this->connexion->prepare("SELECT motDePasse from joueurs where pseudo=?;");
             $statement->bindParam(1, $pseudo);
-            $pwd = password_hash($password, PASSWORD_DEFAULT);
-            var_dump($password);
-            var_dump($pwd);
-            $statement->bindParam(2, $pwd);
-
             $statement->execute();
-            $result=$statement->fetch(PDO::FETCH_ASSOC);
-            if ($result["pseudo"]!=null) {
-                return true;
+            $hash = $statement->fetch(PDO::FETCH_ASSOC);
+            
+            if ($hash["motDePasse"]!=null) {
+                return password_verify($password, $hash["motDePasse"]);
             } else {
                 return false;
             }
