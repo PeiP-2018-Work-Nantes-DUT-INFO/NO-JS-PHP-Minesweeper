@@ -37,9 +37,9 @@ class GameState
     /**
      * Identifiant du joueur en train de jouer
      *
-     * @var int
+     * @var string
      */
-    private $joueurId;
+    private $pseudoJoueur;
 
     /**
      * Nombre de case restantes
@@ -56,9 +56,9 @@ class GameState
 
     /**
      * Initialise le jeu et génère les mines.
-     * @param int $joueurId identifiant du joueur
+     * @param string $pseudoJoueur identifiant du joueur
      */
-    public function __construct($joueurId)
+    public function __construct($pseudoJoueur)
     {
         $mines = $this->genererMines();
         $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, new CaseMetier(false, 0, false)));
@@ -71,7 +71,7 @@ class GameState
                 );
             }
         }
-        $this->joueurId = $joueurId;
+        $this->pseudoJoueur = $pseudoJoueur;
         $this->caseRestantes = NBR_COLONNES * NBR_LIGNES;
     }
 
