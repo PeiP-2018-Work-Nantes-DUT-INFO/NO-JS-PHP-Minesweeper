@@ -108,11 +108,12 @@ class Modele
 
 
 
-    //A développer
-    // utiliser une requête préparée
-    //vérifie qu'un pseudo existe dans la table pseudonyme
-    // post-condition retourne vrai si le pseudo existe sinon faux
-    // si un problème est rencontré, une exception de type TableAccesException est levée
+    /**
+     * Permet de s'avoir si un pseudo existe
+     *
+     * @param string $pseudo le pseudo du compte
+     * @return boolean vrai si le pseu
+     */
     public function exists($pseudo)
     {
         try {
