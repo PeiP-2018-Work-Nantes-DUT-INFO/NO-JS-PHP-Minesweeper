@@ -5,7 +5,6 @@ require_once 'controleurJeu.php';
 
 class Routeur
 {
-
     private $ctrlAuthentification;
     private $ctrlJeu;
 
@@ -21,17 +20,19 @@ class Routeur
         if (isset($_SESSION['pseudo'])) {
             if (isset($_GET['deconnexion'])) {
                 $this->ctrlAuthentification->logout();
-            } else if (isset($_GET['x']) && isset($_GET['y'])) {
-                $this->ctrlJeu->jouer($x, $y);
+            } elseif (isset($_SESSION['game']) && !isset($_GET['reset'])) {
+                if (isset($_GET['x']) && isset($_GET['y'])) {
+                    $this->ctrlJeu->jouer($_GET['x'], $_GET['y']);
+                } else {
+                    $this->ctrlJeu->afficherJeu();
+                }
             } else {
-                $this->ctrlJeu->afficherJeu($_SESSION['pseudo']);
+                $this->ctrlJeu->nouveauJeu($_SESSION['pseudo']);
             }
-        } else if (isset($_POST['username'])) {
+        } elseif (isset($_POST['username'])) {
             $this->ctrlAuthentification->login($_POST['username'], $_POST['password']);
         } else {
             $this->ctrlAuthentification->accueil();
         }
-
     }
-
 }
