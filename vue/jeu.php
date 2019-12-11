@@ -36,9 +36,9 @@ class Jeu
                         <div class="game_window">
                             <div class="head box-shadow">
                                 <div class="display-bomb" style="background-image: url(assets/display.png);">
-                                    <div class="bomb centaine" style="background-image: url(assets/display0.png);"></div>
-                                    <div class="bomb dizaine" style="background-image: url(assets/display1.png);"></div>
-                                    <div class="bomb unite" style="background-image: url(assets/display0.png);"></div>
+                                <div class="bomb centaine" style="background-image: url(assets/display<?= $c = (int)($gameState->drapeauxRestants()/100) ?>.png);"></div>
+                                    <div class="bomb dizaine" style="background-image: url(assets/display<?= $d = (int)($gameState->drapeauxRestants()/10)-($c*10) ?>.png);"></div>
+                                    <div class="bomb unite" style="background-image: url(assets/display<?= (int)($gameState->drapeauxRestants())-($c*100)-($d*10) ?>.png);"></div>
                                 </div>
                                 <div class="n-decouvert"  id="smile">
                                     <a href="#" draggable="false"></a>
