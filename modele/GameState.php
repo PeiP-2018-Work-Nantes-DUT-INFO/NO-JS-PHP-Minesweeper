@@ -162,7 +162,7 @@ class GameState
         $nbrMines = 0;
         for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
             for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
-                if (isset($mines[$i]) && $mines[$i] == $j) {
+                if (isset($mines[$i][$j])) {
                     $nbrMines++;
                 }
             }
@@ -178,7 +178,6 @@ class GameState
      */
     public function mouvementPossible($x, $y): bool
     {
-        echo $this->etatCaseJeu[$x][$y]->estJouee();
         return !$this->etatCaseJeu[$x][$y]->estJouee();
     }
 
