@@ -8,6 +8,7 @@ class MonException extends Exception
     private $chaine;
     public function __construct($chaine)
     {
+        parent::__construct($chaine);
         $this->chaine=$chaine;
     }
 
