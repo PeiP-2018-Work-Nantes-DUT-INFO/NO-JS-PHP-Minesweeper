@@ -13,6 +13,7 @@ class ControleurJeu{
 	} 
 
 	function afficherJeu($pseudo) {
+		$this->vue->header();
         $this->vue->view($pseudo, $this->modele);
 	}
 

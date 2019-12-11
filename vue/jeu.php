@@ -43,5 +43,22 @@ class Jeu
             </html>
         <?php
     }
+
+    public function header()
+    {
+        ?>
+            <head>
+                <link rel="stylesheet" href="assets/game.css">
+                <link rel="stylesheet" href="assets/webfontkit/stylesheet.css">
+                <meta charset="UTF-8">
+                <title>Minesweeper</title>
+            </head>
+            <body>
+                <ul>
+                    <li>Pseudo</li>
+                    <li><a href="index.php?deconnexion">Déconnexion</a></li>
+                </ul>
+        <?php
+    }
 }
 ?>
