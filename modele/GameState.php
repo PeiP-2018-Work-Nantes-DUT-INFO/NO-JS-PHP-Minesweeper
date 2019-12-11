@@ -48,16 +48,27 @@ class GameState
     private $caseRestantes;
 
     /**
+     * Represente le nombre de drapeau poses
+     *
+     * @var int
+     */
+    private $drapeauxPosees;
+
+    /**
      * Initialise le jeu et génère les mines.
      * @param int $joueurId identifiant du joueur
      */
     public function __construct($joueurId)
     {
         $mines = $this->genererMines();
-        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, null));
+        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, new CaseMetier(false, 0, false)));
         for ($i = 0; $i < NBR_LIGNES; $i++) {
             for ($j = 0; $j < NBR_COLONNES; $j++) {
-                $this->etatCaseJeu[$i][$j] = new CaseMetier(false, $this->compterMines($mines, $i, $j), isset($mines[$i][$j]));
+                $this->etatCaseJeu[$i][$j] = new CaseMetier(
+                    false,
+                    $this->compterMines($mines, $i, $j),
+                    isset($mines[$i][$j])
+                );
             }
         }
         $this->joueurId = $joueurId;
@@ -66,7 +77,7 @@ class GameState
 
     /**
      * Permet de genérer les mines
-     * @return int[][] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
+     * @return bool[][] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
      */
     private function genererMines()
     {
@@ -142,7 +153,7 @@ class GameState
 
     /**
      * Compte les mines adjacentes à la case
-     * @param int[] $mines tableau des mines
+     * @param bool[][] $mines tableau des mines
      * @param int $x numéro de la colonne de la case
      * @param int $y numéro de la ligne de la case
      * @return integer le nombre de mines adjacentes.
@@ -182,6 +193,50 @@ class GameState
     {
         if ($this->etatCaseJeu[$x][$y]->estUneMine()) {
             return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Obtient le nombre de drapeau restants
+     * Ce chiffre peut être négatif
+     *
+     * @return integer
+     */
+    public function drapeauxRestants() : int
+    {
+        return NBR_MINES - $this->drapeauxPosees;
+    }
+
+    /**
+     * Pose un drapeau sur une case
+     *
+     * @param int $x numéro de la colonne
+     * @param int $y numéro de la ligne
+     * @return boolean vrai si le drapeau a été pausé
+     */
+    public function poserDrapeau($x, $y): bool
+    {
+        if ($this->mouvementPossible($x, $y) && !$this->etatCaseJeu[$x][$y]->aDrapeau()) {
+            $this->etatCaseJeu[$x][$y]->setDrapeau(true);
+            $this->drapeauxPosees++;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Retire un drapeau d'une case
+     *
+     * @param int $x numéro de la colonne
+     * @param int $y numéro de la ligne
+     * @return boolean vrai si le drapeau a été retiré
+     */
+    public function retirerDrapeau($x, $y): bool
+    {
+        if ($this->mouvementPossible($x, $y) && $this->etatCaseJeu[$x][$y]->aDrapeau()) {
+            $this->etatCaseJeu[$x][$y]->setDrapeau(false);
+            $this->drapeauxPosees--;
         } else {
             return false;
         }
