@@ -23,6 +23,7 @@ class Jeu
     {
         ?>
             <html>
+                <?php $this->header(); ?>
                 <div class="popup minesweeper">
                     <div class="header">Minesweeper</div>
                     <div class="nav-bar">
