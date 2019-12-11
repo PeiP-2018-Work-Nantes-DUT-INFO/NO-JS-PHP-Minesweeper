@@ -61,11 +61,10 @@ class GameState
     public function __construct($pseudoJoueur)
     {
         $mines = $this->genererMines();
-        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, new CaseMetier(false, 0, false)));
+        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, new CaseMetier(0, false)));
         for ($i = 0; $i < NBR_LIGNES; $i++) {
             for ($j = 0; $j < NBR_COLONNES; $j++) {
                 $this->etatCaseJeu[$i][$j] = new CaseMetier(
-                    false,
                     $this->compterMines($mines, $i, $j),
                     isset($mines[$i][$j])
                 );
@@ -179,6 +178,7 @@ class GameState
      */
     public function mouvementPossible($x, $y): bool
     {
+        echo $this->etatCaseJeu[$x][$y]->estJouee();
         return !$this->etatCaseJeu[$x][$y]->estJouee();
     }
 

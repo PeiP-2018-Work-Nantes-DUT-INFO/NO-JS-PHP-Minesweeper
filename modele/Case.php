@@ -30,9 +30,9 @@ class CaseMetier
     private $aDrapeau;
 
 
-    public function __construct($jouee, $nombreMinesAdjancentes, $estMine)
+    public function __construct($nombreMinesAdjancentes, $estMine)
     {
-        $this->jouee = $jouee;
+        $this->jouee = false;
         $this->nombreMinesAdjancentes = $nombreMinesAdjancentes;
         $this->estMine = $estMine;
         $this->aDrapeau = false;
