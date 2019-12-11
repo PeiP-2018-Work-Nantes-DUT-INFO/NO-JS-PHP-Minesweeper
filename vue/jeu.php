@@ -3,7 +3,7 @@
 class Jeu
 {
 
-    public function view($gameState)
+    public function view($pseudo, $gameState)
     {
         ?>
             <html>
