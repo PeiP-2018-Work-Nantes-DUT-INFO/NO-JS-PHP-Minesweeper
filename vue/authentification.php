@@ -50,8 +50,6 @@ class Authentification
      */
     public function loadError() {
         ?>
-        <html>
-        <body>
             <div class="error popup">
                 <div class="header">Logon Message</div>
                 <div class="content">
@@ -59,8 +57,6 @@ class Authentification
                     <p>The system could not log you on. Make sure your User name is correct, then type your password again. Letters in passwords must be typed using the correct case.</p>
                 </div>
             </div>
-        </body>
-        </html>
         <?php
     }
 }
