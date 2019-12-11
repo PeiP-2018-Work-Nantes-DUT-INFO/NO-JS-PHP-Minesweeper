@@ -57,7 +57,7 @@ class GameState
         $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, null));
         for ($i = 0; $i < NBR_LIGNES; $i++) {
             for ($j = 0; $j < NBR_COLONNES; $j++) {
-                $this->etatCaseJeu[$i][$j] = new CaseMetier(false, $this->compterMines($mines, $i, $j), $mines[$i] === $j);
+                $this->etatCaseJeu[$i][$j] = new CaseMetier(false, $this->compterMines($mines, $i, $j), isset($mines[$i][$j]));
             }
         }
         $this->joueurId = $joueurId;
@@ -66,17 +66,17 @@ class GameState
 
     /**
      * Permet de genérer les mines
-     * @return int[] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
+     * @return int[][] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
      */
     private function genererMines()
     {
-        $mines = [];
+        $mines = array_fill(0, NBR_LIGNES, []);
         $i = 0;
         while ($i < NBR_MINES) {
             $x = rand(0, 7);
             $y = rand(0, 7);
-            if (!array_search(array($x, $y), $mines)) {
-                $mines[$i] = array($x, $y);
+            if (!isset($mines[$x][$y])) {
+                $mines[$x][$y] = true;
                 $i++;
             }
         }
