@@ -6,21 +6,28 @@ class CaseMetier
      *
      * @var boolean
      */
-    public $jouee;
+    private $jouee;
 
     /**
      * Donne le nombre de mines adjacentes
      *
      * @var int
      */
-    public $nombreMinesAdjancentes;
+    private $nombreMinesAdjancentes;
 
     /**
-     * Si est à vraie, la case est une mine
+     * Si est vraie, la case est une mine
      *
      * @var boolean
      */
     public $estMine;
+
+    /**
+     * Si est vraie, la case à un drapeau
+     *
+     * @var boolean
+     */
+    private $aDrapeau;
 
 
     public function __construct($jouee, $nombreMinesAdjancentes, $estMine)
@@ -28,13 +35,12 @@ class CaseMetier
         $this->jouee = $jouee;
         $this->nombreMinesAdjancentes = $nombreMinesAdjancentes;
         $this->estMine = $estMine;
+        $this->aDrapeau = false;
     }
 
     public function jouer()
     {
-        if ($this->estMine) {
-            $this->jouee = true;
-        }
+        $this->jouee = true;
     }
 
     public function getMinesAdjacentes() : int
@@ -47,7 +53,18 @@ class CaseMetier
         return $this->estMine;
     }
 
-    public function estJouee() : bool {
+    public function estJouee() : bool
+    {
         return $this->jouee;
+    }
+    
+    public function setDrapeau($etat)
+    {
+        $this->aDrapeau = $etat;
+    }
+
+    public function aDrapeau() : bool
+    {
+        return $this->aDrapeau;
     }
 }
