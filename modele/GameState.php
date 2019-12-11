@@ -128,7 +128,7 @@ class GameState
             $casesAJouer = [];
             for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
                 for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
-                    if (!$this->etatCaseJeu[$i][$j]->estUneMine()) {
+                    if (isset($this->etatCaseJeu[$i][$j]) && !$this->etatCaseJeu[$i][$j]->estUneMine()) {
                         $casesAJouer[$i] =$j;
                     }
                 }
