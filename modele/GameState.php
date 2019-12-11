@@ -61,17 +61,17 @@ class GameState
     public function __construct($pseudoJoueur)
     {
         $mines = $this->genererMines();
-        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, new CaseMetier(0, false)));
+        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, new CaseMetier(false)));
         for ($i = 0; $i < NBR_LIGNES; $i++) {
             for ($j = 0; $j < NBR_COLONNES; $j++) {
                 $this->etatCaseJeu[$i][$j] = new CaseMetier(
-                    $this->compterMines($mines, $i, $j),
                     isset($mines[$i][$j])
                 );
             }
         }
         $this->pseudoJoueur = $pseudoJoueur;
         $this->caseRestantes = NBR_COLONNES * NBR_LIGNES;
+        $this->compterMines($mines);
     }
 
     /**
@@ -151,24 +151,28 @@ class GameState
     }
 
     /**
-     * Compte les mines adjacentes à la case
+     * Incrémente les cases adjacentes aux mines
      * @param bool[][] $mines tableau des mines
-     * @param int $x numéro de la colonne de la case
-     * @param int $y numéro de la ligne de la case
-     * @return integer le nombre de mines adjacentes.
+     * @returnvoid
      */
-    private function compterMines($mines, $x, $y): int
+    private function compterMines($mines)
     {
         $nbrMines = 0;
-        for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
-            for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
-                if (isset($mines[$i][$j])) {
-                    $nbrMines++;
+        foreach ($mines as $x => $arr) {
+            foreach (array_keys($arr) as $y) {
+                for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
+                    for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
+                        if (isset($this->etatCaseJeu[$i][$j]) && !$this->etatCaseJeu[$i][$j]->estUneMine()) {
+                            $this->etatCaseJeu[$i][$j]->incrementerCompteurMine();
+                        }
+                    }
                 }
             }
         }
+
         return $nbrMines;
     }
+    
     /**
      * Permet de tester si un mouvement est possible
      *
