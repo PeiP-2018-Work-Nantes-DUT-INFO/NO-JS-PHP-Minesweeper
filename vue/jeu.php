@@ -61,7 +61,7 @@ class Jeu
                                                         for ($colonne=0; $colonne < NBR_COLONNES; $colonne++) {
                                                             $case = $etatCases[$colonne][$ligne];
                                                             $nb_mines = $case->getMinesAdjacentes();
-                                                            if ($nb_mines) {
+                                                            if ($case->estJouee()) {
                                                                 ?><td class="decouvert mine-<?= $nb_mines ?>"><?= $nb_mines ?></td><?php
                                                             } else {
                                                                 ?><td class="n-decouvert"><a href="index.php?x=<?= $colonne ?>&y=<?= $ligne ?>" draggable="false"></a></td><?php
