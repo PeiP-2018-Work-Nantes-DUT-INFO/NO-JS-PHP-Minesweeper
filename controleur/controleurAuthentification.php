@@ -9,7 +9,7 @@ class ControleurAuthentification
 
     public function __construct()
     {
-        $this->vue = new Authentification();
+        $this->vue = new VueAuthentification();
         $this->modele = new Modele();
     }
 

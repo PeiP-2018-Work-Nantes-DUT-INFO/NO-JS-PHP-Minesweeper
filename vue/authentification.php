@@ -1,6 +1,6 @@
 <?php
 
-class Authentification
+class VueAuthentification
 {
     /**
      * Affiche la vue de connexion
