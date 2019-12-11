@@ -2,11 +2,11 @@
 
 class Jeu
 {
-
     public function view($pseudo, $gameState)
     {
         ?>
             <html>
+            <?php $this->header() ?>
                 <div class="content">
                     <div class="game_window">
                         <div class="head box-shadow">
@@ -18,8 +18,8 @@ class Jeu
                             <table>
                                 <?php
                                     $etatCases = $gameState->obtenirEtatJeu();
-                                    for ($ligne=0; $ligne < NBR_LIGNES; $ligne++) { 
-                                        ?>
+        for ($ligne=0; $ligne < NBR_LIGNES; $ligne++) {
+            ?>
                                             <tr>
                                                 <?php
                                                     for ($colonne=0; $colonne < NBR_COLONNES; $colonne++) {
@@ -30,12 +30,10 @@ class Jeu
                                                         } else {
                                                             ?><td class="n-decouvert"><a href="index.php?x=<?= $colonne ?>&y=<?= $ligne ?>" draggable="false"></a></td><?php
                                                         }
-                                                    }
-                                                ?>
+                                                    } ?>
                                             </tr>
                                         <?php
-                                    }
-                                ?>
+        } ?>
                             </table>
                         </div>
                     </div>
