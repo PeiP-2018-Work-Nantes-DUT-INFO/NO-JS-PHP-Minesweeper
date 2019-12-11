@@ -1,6 +1,8 @@
 <?php
 require_once PATH_VUE."/jeu.php";
 require_once PATH_MODELE."/GameState.php";
+require_once PATH_MODELE."/modele.php";
+
 
 class ControleurJeu
 {
@@ -10,22 +12,31 @@ class ControleurJeu
     public function __construct()
     {
         $this->vue = new Jeu();
-        $this->modele = new GameState(1);
+        $this->modele =  new Modele();
     }
 
-    public function afficherJeu($pseudo)
+    public function afficherJeu()
     {
-        $this->vue->header();
-        $this->vue->view($pseudo, $this->modele);
+        $game = unserialize($_SESSION['game']);
+        $this->vue->view($_SESSION['pseudo'], $game);
     }
     
     public function jouer($x, $y)
     {
-        return null;
+        /**
+         * @var GameState
+         */
+        $game = unserialize($_SESSION['game']);
+        $game->jouer($x, $y);
+        $this->vue->view($_SESSION['pseudo'], $game);
+        $_SESSION['game'] = serialize($game);
     }
     
     public function nouveauJeu()
     {
-		$_SESSION['game'] = null;
+        $pseudo = $_SESSION['pseudo'];
+        $game = new GameState($pseudo);
+        $_SESSION['game'] = serialize($game);
+        $this->vue->view($pseudo, $game);
     }
 }
