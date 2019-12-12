@@ -41,6 +41,12 @@ class GameState
     private $drapeauxPosees;
 
     /**
+     * Si a vrai, le jeu est perdu
+     *
+     * @var boolean
+     */
+    private $estPerdu;
+    /**
      * Initialise le jeu et génère les mines.
      * @param string $pseudoJoueur identifiant du joueur
      */
@@ -94,9 +100,30 @@ class GameState
             if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0) {
                 $this->jouerCaseAdjacentes($x, $y);
             }
+            if ($this->testerCase($x, $y)) {
+                $this->etatCaseJeu[$x][$y]->surbriller();
+                $this->revelerMines();
+                $this->estPerdu = true;
+            }
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Révèle toutes les mines en fin de jeu
+     *
+     * @return void
+     */
+    private function revelerMines()
+    {
+        foreach ($this->etatCaseJeu as $ligne) {
+            foreach ($ligne as $case) {
+                if ($case->estUneMine()) {
+                    $case->jouer();
+                }
+            }
         }
     }
     /**
@@ -239,5 +266,15 @@ class GameState
     public function obtenirEtatJeu(): array
     {
         return $this->etatCaseJeu;
+    }
+
+    /**
+     * Permet de savoir si le jeu est perdu
+     *
+     * @return boolean Vrai si le jeu est perdu
+     */
+    public function estPerdu()
+    {
+        return $this->estPerdu;
     }
 }
