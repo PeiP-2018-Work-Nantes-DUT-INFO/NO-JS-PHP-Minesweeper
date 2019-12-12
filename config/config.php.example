@@ -20,4 +20,19 @@ define("HOST","localhost");
 define("BD","E189580Q_php");
 define("LOGIN","E189580Q_php");
 define("PASSWORD","password"); 
+ 
+ /**
+  * Nombre de colonnes du demineur
+  */
+define("NBR_COLONNES", 8);
+
+/**
+ * Nombre de lignes du demineur
+ */
+define("NBR_LIGNES", 8);
+
+/**
+ * Nombre de mines contenues dans le demineur
+ */
+define("NBR_MINES", 10);
 ?>
