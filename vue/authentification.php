@@ -41,16 +41,19 @@ class VueAuthentification
                 </div>
             </div>
 
-            <?php if ($err) {$this->loadError();} ?>
+            <?php if ($err) {
+                $this->loadError();
+            } ?>
         </body>
         </html>
-    <?php
+        <?php
     }
 
     /**
      * Affiche une erreur de connexion sur la vue appelante
      */
-    public function loadError() {
+    public function loadError()
+    {
         ?>
             <div class="popup error">
                 <div class="header">Logon Message</div>
