@@ -23,8 +23,8 @@ class Vue
     </form>
     <br />
     <br />
-    <?php
-}
+        <?php
+    }
     public function interfaceMessage($pseudo, $messages)
     {
         header("Content-type: text/html; charset=utf-8");
@@ -35,7 +35,7 @@ class Vue
 
         <a href="index.php?deconnexion">Deconnexion</a>
         <h1>Bienvenue sur le salon, <?=$pseudo?></h1>
-        <?php foreach ($messages as $msg): ?>
+        <?php foreach ($messages as $msg) : ?>
         <p><b><?=$msg->pseudo?></b>: <?=$msg->message?> </p>
         <?php endforeach;?>
         <form method="post" action="index.php">
@@ -87,5 +87,5 @@ class Vue
         }
         </script>
         <?php
-}
+    }
 }

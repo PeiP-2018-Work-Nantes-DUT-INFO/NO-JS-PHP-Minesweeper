@@ -1,5 +1,6 @@
 <?php
-class Message{
-	public $pseudo;
-	public $message;
+class Message
+{
+    public $pseudo;
+    public $message;
 }
