@@ -30,10 +30,10 @@ class CaseMetier
     private $aDrapeau;
 
 
-    public function __construct($nombreMinesAdjancentes, $estMine)
+    public function __construct($estMine)
     {
         $this->jouee = false;
-        $this->nombreMinesAdjancentes = $nombreMinesAdjancentes;
+        $this->nombreMinesAdjancentes = 0;
         $this->estMine = $estMine;
         $this->aDrapeau = false;
     }
@@ -42,7 +42,11 @@ class CaseMetier
     {
         $this->jouee = true;
     }
-
+    public function incrementerCompteurMine()
+    {
+        $this->nombreMinesAdjancentes++;
+    }
+    
     public function getMinesAdjacentes() : int
     {
         return $this->nombreMinesAdjancentes;
