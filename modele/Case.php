@@ -29,6 +29,13 @@ class CaseMetier
      */
     private $aDrapeau;
 
+    /**
+     * Si est a vraie, indique que l'utilisateur vient de cliquer sur la case
+     * Cela est utilisé pour colorer en rouge une mine lorsque la partie est perdu
+     *
+     * @var boolean
+     */
+    private $estEnSurbrillance;
 
     public function __construct($estMine)
     {
@@ -46,7 +53,7 @@ class CaseMetier
     {
         $this->nombreMinesAdjancentes++;
     }
-    
+
     public function getMinesAdjacentes() : int
     {
         return $this->nombreMinesAdjancentes;
@@ -70,5 +77,15 @@ class CaseMetier
     public function aDrapeau() : bool
     {
         return $this->aDrapeau;
+    }
+
+    public function surbriller()
+    {
+        $this->estEnSurbrillance = true;
+    }
+
+    public function getSurbrillance()
+    {
+        return $this->estEnSurbrillance;
     }
 }
