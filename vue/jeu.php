@@ -8,6 +8,7 @@ class Jeu
         ?>
             <head>
                 <link rel="stylesheet" href="assets/main.css">
+                <link rel="stylesheet" href="assets/nav.css">
                 <link rel="stylesheet" href="assets/game.css">
                 <link rel="stylesheet" href="assets/window.css">
                 <meta charset="UTF-8">
