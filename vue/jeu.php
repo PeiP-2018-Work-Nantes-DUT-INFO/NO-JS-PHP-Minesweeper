@@ -7,11 +7,13 @@ class Jeu
     {
         ?>
             <head>
+                <link rel="stylesheet" href="assets/main.css">
                 <link rel="stylesheet" href="assets/game.css">
+                <link rel="stylesheet" href="assets/window.css">
                 <meta charset="UTF-8">
                 <title>Minesweeper</title>
             </head>
-            <body>
+            <body class="game-page">
                 <ul class="nav nav-menu">
                     <li>Pseudo</li>
                     <li><a href="index.php?deconnexion">Deconnexion</a></li>

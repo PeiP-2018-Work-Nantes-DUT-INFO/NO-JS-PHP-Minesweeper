@@ -11,12 +11,14 @@ class VueAuthentification
         header("Content-type: text/html; charset=utf-8"); ?>
         <html>
             <head>
+                <link rel="stylesheet" href="assets/main.css">
                 <link rel="stylesheet" href="assets/login.css">
+                <link rel="stylesheet" href="assets/window.css">
                 <link rel="icon" href="favicon.gif" type="image/gif">
             </head>
-        <body>
+        <body class="log-page">
 
-            <div class="logon popup">
+            <div class="popup logon">
                 <div class="header">Log On to Windows</div>
                 <div class="winxp-bg"></div>
 
@@ -50,7 +52,7 @@ class VueAuthentification
      */
     public function loadError() {
         ?>
-            <div class="error popup">
+            <div class="popup error">
                 <div class="header">Logon Message</div>
                 <div class="content">
                     <img src="assets/warning_icon.png" alt="warning_icon">
