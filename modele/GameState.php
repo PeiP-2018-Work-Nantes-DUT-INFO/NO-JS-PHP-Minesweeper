@@ -7,20 +7,6 @@
 
 require_once 'Case.php';
 
- /**
-  * Nombre de colonnes du demineur
-  */
-define("NBR_COLONNES", 8);
-
-/**
- * Nombre de lignes du demineur
- */
-define("NBR_LIGNES", 8);
-
-/**
- * Nombre de mines contenues dans le demineur
- */
-define("NBR_MINES", 10);
 
 /**
  * Class content l'état de jeu
