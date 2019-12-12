@@ -3,7 +3,7 @@
 class Jeu
 {
 
-    public function header()
+    public function header($pseudo)
     {
         ?>
             <head>
@@ -16,7 +16,7 @@ class Jeu
             </head>
             <body class="game-page">
                 <ul class="nav nav-menu">
-                    <li>Pseudo</li>
+                    <li><?= $pseudo ?></li>
                     <li><a href="index.php?deconnexion">Deconnexion</a></li>
                 </ul>
         <?php
@@ -26,7 +26,7 @@ class Jeu
     {
         ?>
             <html>
-                <?php $this->header(); ?>
+                <?php $this->header($pseudo); ?>
                 <div class="popup minesweeper">
                     <div class="header">Minesweeper</div>
                     <div class="nav-bar">
@@ -39,12 +39,12 @@ class Jeu
                         <div class="game_window">
                             <div class="head box-shadow">
                                 <div class="display-bomb" style="background-image: url(assets/display.png);">
-                                <div class="bomb centaine" style="background-image: url(assets/display<?= $c = (int)($gameState->drapeauxRestants()/100) ?>.png);"></div>
+                                    <div class="bomb centaine" style="background-image: url(assets/display<?= $c = (int)($gameState->drapeauxRestants()/100) ?>.png);"></div>
                                     <div class="bomb dizaine" style="background-image: url(assets/display<?= $d = (int)($gameState->drapeauxRestants()/10)-($c*10) ?>.png);"></div>
                                     <div class="bomb unite" style="background-image: url(assets/display<?= (int)($gameState->drapeauxRestants())-($c*100)-($d*10) ?>.png);"></div>
                                 </div>
                                 <div class="n-decouvert"  id="smile">
-                                    <a href="#" draggable="false"></a>
+                                    <a href="index.php?reset" draggable="false"></a>
                                 </div>
                                 <div class="w41">
                                     <div class="n-decouvert"  id="flag">
@@ -57,15 +57,15 @@ class Jeu
                                 <table>
                                     <?php
                                         $etatCases = $gameState->obtenirEtatJeu();
-                                        for ($ligne=0; $ligne < NBR_LIGNES; $ligne++) { 
+                                        for ($ligne=0; $ligne < count($etatCases); $ligne++) { 
                                             ?>
                                                 <tr>
                                                     <?php
-                                                        for ($colonne=0; $colonne < NBR_COLONNES; $colonne++) {
+                                                        for ($colonne=0; $colonne < count($etatCases[$ligne]); $colonne++) {
                                                             $case = $etatCases[$colonne][$ligne];
                                                             $nb_mines = $case->getMinesAdjacentes();
                                                             if ($case->estJouee()) {
-                                                                ?><td class="decouvert mine-<?= $nb_mines ?>"><?= $nb_mines ?></td><?php
+                                                                ?><td class="decouvert mine-<?= $nb_mines ?>"><?php if($nb_mines) {echo $nb_mines;} ?></td><?php
                                                             } else {
                                                                 ?><td class="n-decouvert"><a href="index.php?x=<?= $colonne ?>&y=<?= $ligne ?>" draggable="false"></a></td><?php
                                                             }
