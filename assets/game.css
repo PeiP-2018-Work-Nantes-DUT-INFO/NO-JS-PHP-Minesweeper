@@ -106,8 +106,9 @@
 }
 
 .minesweeper .game table td {
-    width: 12px;
-    height: 12px;
+    line-height: 13px;
+    width: 13px;
+    height: 13px;
     background: var(--gris-moyen);
     margin: 0 0 0 1px;
     padding: 0;
@@ -115,6 +116,10 @@
 
 .minesweeper .game table tr td:last-child {
     margin: 0 1px 0 1px;
+}
+
+.minesweeper .game table tr td.decouvert.entourer {
+    background: red;
 }
 
 .minesweeper .game table tr td.decouvert {
