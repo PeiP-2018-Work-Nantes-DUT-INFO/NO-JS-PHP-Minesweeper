@@ -1,0 +1,25 @@
+@import 'reset.css';
+
+@font-face {
+    font-family: 'mine-sweeper';
+    src: url(mine-sweeper.ttf);
+}
+
+body {
+    font-family: 'MS Sans Serif';
+    margin: 0;
+    padding: 0;
+}
+
+body.game-page {
+    --gris-clair: rgb(245, 245, 245);
+    --gris-moyen: rgb(192, 192, 192);
+    --gris-fonce: rgb(128, 128, 128);
+}
+
+body.log-page {
+    background-image: url("winxp_logon_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: small;
+}

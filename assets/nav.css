@@ -1,0 +1,19 @@
+ul.nav {
+    display: flex;
+    list-style: none;
+}
+
+ul.nav-menu {
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+div.nav-bar {
+    height: 20px;
+}
+
+div.nav-bar ul.nav-btn li {
+    font-size: small;
+    line-height: 20px;
+    margin-left: 5px;
+}
