@@ -23,3 +23,8 @@ body.log-page {
     background-size: cover;
     font-size: small;
 }
+
+body a {
+    text-decoration: none;
+    color: black;
+}
