@@ -18,7 +18,13 @@ class ControleurJeu
     public function afficherJeu()
     {
         $game = unserialize($_SESSION['game']);
-        $this->vue->view($_SESSION['pseudo'], $game);
+        $etatCases = $game->obtenirEtatJeu();
+        $pseudo = $_SESSION['pseudo'];
+        $centaine = (int)($game->drapeauxRestants()/100);
+        $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
+        $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
+
+        $this->vue->loadPage($pseudo, $centaine, $dizaine, $unite, $game, $etatCases);        
     }
     
     public function jouer($x, $y)
@@ -28,8 +34,8 @@ class ControleurJeu
          */
         $game = unserialize($_SESSION['game']);
         $game->jouer($x, $y);
-        $this->vue->view($_SESSION['pseudo'], $game);
         $_SESSION['game'] = serialize($game);
+        $this->afficherJeu();
     }
     
     public function nouveauJeu()
@@ -37,6 +43,7 @@ class ControleurJeu
         $pseudo = $_SESSION['pseudo'];
         $game = new GameState($pseudo);
         $_SESSION['game'] = serialize($game);
-        $this->vue->view($pseudo, $game);
+        $this->afficherJeu();
     }
+
 }

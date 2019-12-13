@@ -79,6 +79,14 @@
     background-image: url("face_smile.png");
 }
 
+.minesweeper .game_window .head div#boss {
+    background-image: url("face_boss.png");
+}
+
+.minesweeper .game_window .head div#dead {
+    background-image: url("face_dead.png");
+}
+
 .minesweeper .game_window:active .head div#smile {
     background-image: url("face_omg.png");
 }
@@ -106,7 +114,8 @@
 }
 
 .minesweeper .game table td {
-    line-height: 13px;
+    text-align: right;
+    line-height: 15px;
     width: 13px;
     height: 13px;
     background: var(--gris-moyen);
@@ -120,6 +129,7 @@
 
 .minesweeper .game table tr td.decouvert.entourer {
     background: red;
+    border: 2px solid red;
 }
 
 .minesweeper .game table tr td.decouvert {
