@@ -236,3 +236,6 @@ div.won div.content div.buttons {
     margin: 15px 0;
 }
 
+div.won div.content div.buttons button {
+    border-radius: 4px;
+}

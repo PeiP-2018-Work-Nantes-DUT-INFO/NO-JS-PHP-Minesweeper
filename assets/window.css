@@ -47,7 +47,7 @@ div.header div.buttons {
 
 div.header div.buttons div.btn {
     border: 1px solid white;
-    border-radius: 2px;
+    border-radius: 4px;
     width: 19px;
     height: 19px;
     margin: 0 0 0 2px;
@@ -60,6 +60,11 @@ div.header div.buttons div.hide-btn {
 
 div.header div.buttons div.resize-btn {
     background-image: url("resizeButton.png");
+    background-size: 19px;
+}
+
+div.header div.buttons div.info-btn {
+    background-image: url("infoButton.png");
     background-size: 19px;
 }
 
@@ -77,4 +82,8 @@ div.header div.buttons div.close-btn a {
     top: -1px;
     left: -1px;
     overflow: auto;
+}
+
+div.disable {
+    filter: opacity(40%);
 }
