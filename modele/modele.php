@@ -111,25 +111,21 @@ class Modele
      * Permet de s'avoir si un pseudo existe
      *
      * @param string $pseudo le pseudo du compte
-     * @return boolean vrai si le pseu
+     * @param string $table la table où effectuer la recherche
+     * @return boolean vrai si le pseudo existe
      */
-    public function exists($pseudo)
+    public function exists($pseudo, $table)
     {
         try {
-            $statement = $this->connexion->prepare("SELECT pseudo from joueurs where pseudo=?;");
-            $statement->bindParam(1, $pseudoParam);
-            $pseudoParam=$pseudo;
+            $statement = $this->connexion->prepare("SELECT pseudo from $table where pseudo = ?;");
+            $statement->bindParam(1, $pseudo);
             $statement->execute();
             $result=$statement->fetch(PDO::FETCH_ASSOC);
 
-            if ($result["pseudo"]!=null) {
-                return true;
-            } else {
-                return false;
-            }
+            return ($result["pseudo"] != null);
         } catch (PDOException $e) {
             $this->deconnexion();
-            throw new TableAccesException("Problème avec la table joueurs");
+            throw new TableAccesException("Problème avec la table $table");
         }
     }
 
@@ -192,7 +188,14 @@ class Modele
      */
     public function addPartie($pseudo)
     {
-        
+        try {
+            $statement = $this->connexion->prepare("INSERT INTO parties VALUES (?,0,0);");
+            $statement->bindParam(1, $pseudo);
+            $statement->execute();
+        } catch (PDOException $e) {
+            $this->deconnexion();
+            throw new TableAccesException("Problème avec la table parties");
+        }
     }
 
 
@@ -203,21 +206,61 @@ class Modele
      */
     public function incrPartie($pseudo, $gagne)
     {
-        
+        try {
+            
+            $nb = 1;
+            $statement = $this->connexion->prepare("SELECT * FROM parties where pseudo=?;");
+            $statement->bindParam(1, $pseudo);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $plays = $result['nbPartiesJouees']+1;
+            $wins = $result['nbPartiesGagnees'];
+            if ($gagne) {
+                $wins = $wins +1;
+            }
+
+            $statement = $this->connexion->prepare("UPDATE parties SET nbPartiesJouees = ?, nbPartiesGagnees = ? WHERE pseudo = ?;");
+            $statement->bindParam(1, $plays);
+            $statement->bindParam(2, $wins);
+            $statement->bindParam(3, $pseudo);
+            $statement->execute();
+        } catch (PDOException $e) {
+            $this->deconnexion();
+            throw new TableAccesException("Problème avec la table parties");
+        }
     }
 
 
     /**
      * Permet d'obtenir un tableau des 3 meilleurs joueurs
+     * @return array ['pseudo', 'nbPartiesJouees', 'nbPartiesGagnees']
      */
     public function get3MeilleursDemineurs()
     {
         try {
-            $statement=$this->connexion->query("SELECT * FROM parties ORDER BY nbPartiesJouees, nbPartiesGagnees DESC LIMIT 0, 3;");
+            $statement=$this->connexion->query("SELECT *, (nbPartiesGagnees / nbPartiesJouees) AS quotient FROM parties ORDER BY quotient DESC LIMIT 0, 3;");
             return($statement->fetchAll(PDO::FETCH_ASSOC));
         } catch (PDOException $e) {
             $this->deconnexion();
-            throw new TableAccesException("problème avec la table parties");
+            throw new TableAccesException("Problème avec la table parties");
+        }
+    }
+
+
+    /**
+     * Permet d'obtenir les données d'un joueur
+     * @return array ['pseudo', 'nbPartiesJouees', 'nbPartiesGagnees']
+     */
+    public function getDataDemineur($pseudo)
+    {
+        try {
+            $statement=$this->connexion->query("SELECT * FROM parties WHERE pseudo = ?;");
+            $statement->bindParam(1, $pseudo);
+            $statement->execute();
+            return($statement->fetchAll(PDO::FETCH_ASSOC));
+        } catch (PDOException $e) {
+            $this->deconnexion();
+            throw new TableAccesException("Problème avec la table parties");
         }
     }
 }
