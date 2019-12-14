@@ -115,8 +115,6 @@
     width: 12px;
     height: 12px;
     background: var(--gris-moyen);
-    margin: 1px 0 0 1px;
-    padding: 0;
 }
 
 .minesweeper .game table tr td.decouvert.entourer {
@@ -129,6 +127,11 @@
     border: 2px solid var(--gris-moyen);
     vertical-align: middle;
     font-size: x-small;
+    margin: 1px 0 0 1px;
+}
+
+.minesweeper .game table tr td.n-decouvert {
+    padding: 1px 0 0 1px;
 }
 
 .game_window,
@@ -206,10 +209,13 @@ div.won div.content {
 div.won div.content div.titles {
     display: flex;
     align-items: center;
+    font-weight: 600;
+    margin: 7px 0;
 }
 
 div.won div.content div.scores div{
     display: flex;
+    margin: 2px 0;
 }
 
 div.won div.content div p:first-child {
@@ -223,3 +229,10 @@ div.won div.content div p:nth-child(2) {
 div.won div.content div p:last-child {
     width: 60px;
 }
+
+div.won div.content div.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+}
+
