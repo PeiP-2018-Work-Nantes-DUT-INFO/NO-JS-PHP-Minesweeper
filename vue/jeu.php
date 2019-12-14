@@ -31,7 +31,7 @@ class VueJeu
                         $this->discoveredCase($nb_mines, $nb_mines);
                     }
                 } else {
-                    if (!$perdu) {
+                    if (!$perdu && !$gagne) {
                         $this->hiddenCase($ligne, $colonne);
                     } else {
                         $this->noClickable();
@@ -153,31 +153,6 @@ class VueJeu
     {
         ?>
                 </table>
-            </div>
-        <?php
-    }
-    
-
-    public function endGame($winners)
-    {
-        ?>
-            <div class="won popup">
-                <div class="header">Best Mine Sweepers</div>
-                <div class="content">
-                    <div class="scores">
-                        <?php
-                        foreach ($winners as $win) {
-                            ?>
-                        <p class="pseudo"></p>
-                        <p class="wins"></p>
-                        <p class="plays"></p>
-                            <?php
-                        } ?>
-                    </div>
-                    <div class="buttons">
-
-                    </div>
-                </div>
             </div>
         <?php
     }

@@ -1,5 +1,6 @@
 <?php
 require_once PATH_VUE."/jeu.php";
+require_once PATH_VUE."/resultat.php";
 require_once PATH_MODELE."/GameState.php";
 require_once PATH_MODELE."/modele.php";
 
@@ -7,11 +8,13 @@ require_once PATH_MODELE."/modele.php";
 class ControleurJeu
 {
     private $vueJeu;
+    private $vueResultat;
     private $modele;
 
     public function __construct()
     {
         $this->vueJeu = new VueJeu();
+        $this->vueResultat = new VueResultat();
         $this->modele =  new Modele();
     }
 
@@ -26,7 +29,11 @@ class ControleurJeu
         $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
         $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
 
-        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);        
+        if ($gamePerdu || $gameGagne) {
+            $this->vueResultat->afficherVueResultat([], $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
+        } else {
+            $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
+        }
     }
     
     public function jouer($x, $y)
