@@ -6,25 +6,27 @@ require_once PATH_MODELE."/modele.php";
 
 class ControleurJeu
 {
-    private $vue;
+    private $vueJeu;
     private $modele;
 
     public function __construct()
     {
-        $this->vue = new Jeu();
+        $this->vueJeu = new VueJeu();
         $this->modele =  new Modele();
     }
 
     public function afficherJeu()
     {
         $game = unserialize($_SESSION['game']);
+        $gamePerdu = $game->estPerdu();
+        $gameGagne = $game->aGagne();
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
         $centaine = (int)($game->drapeauxRestants()/100);
         $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
         $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
 
-        $this->vue->loadPage($pseudo, $centaine, $dizaine, $unite, $game, $etatCases);        
+        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);        
     }
     
     public function jouer($x, $y)

@@ -1,13 +1,13 @@
 <?php
 
-class Jeu
+class VueJeu
 {
-    public function loadPage($pseudo, $centaine, $dizaine, $unite, $game, $etatCases)
+    public function afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $perdu, $gagne, $etatCases)
     {
         $this->header_page($pseudo);
-        if ($game->estPerdu()) {
+        if ($perdu) {
             $this->header_minesweeper($centaine, $dizaine, $unite, 'dead');
-        } else if ($game->aGagne()) {
+        } else if ($gagne) {
             $this->header_minesweeper($centaine, $dizaine, $unite, 'boss');
         } else {
             $this->header_minesweeper($centaine, $dizaine, $unite, 'smile');
@@ -24,14 +24,14 @@ class Jeu
                     } else {
                         $this->discoveredCase('', '*');
                     }
-                } else if ($case->estJouee() || ($game->aGagne() && !$case->estUneMine())) {
+                } else if ($case->estJouee() || ($gagne && !$case->estUneMine())) {
                     if ($nb_mines == 0) {
                         $this->discoveredCase($nb_mines, '');
                     } else {
                         $this->discoveredCase($nb_mines, $nb_mines);
                     }
                 } else {
-                    if (!$game->estPerdu()) {
+                    if (!$perdu) {
                         $this->hiddenCase($ligne, $colonne);
                     } else {
                         $this->noClickable();
