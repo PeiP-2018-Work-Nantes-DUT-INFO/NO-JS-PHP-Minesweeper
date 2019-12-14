@@ -11,6 +11,9 @@ class ControleurJeu
     private $vueResultat;
     private $modele;
 
+    /**
+     * 
+     */
     public function __construct()
     {
         $this->vueJeu = new VueJeu();
@@ -18,6 +21,10 @@ class ControleurJeu
         $this->modele =  new Modele();
     }
 
+
+    /**
+     * 
+     */
     public function afficherJeu()
     {
         $game = unserialize($_SESSION['game']);
@@ -30,12 +37,17 @@ class ControleurJeu
         $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
 
         if ($gamePerdu || $gameGagne) {
+            $this->updateScore($gameGagne);
             $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
         } else {
             $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
         }
     }
     
+
+    /**
+     * 
+     */
     public function jouer($x, $y)
     {
         /**
@@ -47,12 +59,30 @@ class ControleurJeu
         $this->afficherJeu();
     }
     
+
+    /**
+     * 
+     */
     public function nouveauJeu()
     {
         $pseudo = $_SESSION['pseudo'];
         $game = new GameState($pseudo);
         $_SESSION['game'] = serialize($game);
         $this->afficherJeu();
+    }
+
+
+    /**
+     * Permet de mettre à jour le score
+     * @param boolean $gagne vrai si la partie est gagnée
+     */
+    public function updateScore($gagne)
+    {
+        $pseudo = $_SESSION['pseudo'];
+        if (!$this->modele->exists($pseudo, 'parties')) {
+            $this->modele->addPartie($pseudo);
+        }
+        $this->modele->incrPartie($pseudo, $gagne);
     }
 
 }

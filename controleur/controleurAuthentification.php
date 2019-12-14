@@ -20,7 +20,7 @@ class ControleurAuthentification
 
     public function login($login, $password)
     {
-        if ($this->modele->exists($login)) {
+        if ($this->modele->exists($login, "joueurs")) {
             if ($this->modele->verifierPassword($login, $password)) {
                 $_SESSION['pseudo']=$login;
                 header('Location: index.php', false, 301);

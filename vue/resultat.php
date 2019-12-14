@@ -5,7 +5,7 @@ require_once PATH_VUE."/jeu.php";
 class VueResultat
 {
 
-    public function afficherVueResultat($winners, ...$args)
+    public function afficherVueResultat($winners, $player, ...$args)
     {
         $vueJeu = new VueJeu();
         call_user_func_array(array($vueJeu, "afficherVueJeu"), $args);
@@ -29,9 +29,9 @@ class VueResultat
                         foreach ($winners as $win) {
                             ?>
                             <div class="winner">
-                                <p class="pseudo"><?= $win[0] ?></p>
-                                <p class="wins"><?= $win[1] ?></p>
-                                <p class="plays"><?= $win[2] ?></p>
+                                <p class="pseudo"><?= $win['pseudo'] ?></p>
+                                <p class="wins"><?= $win['nbPartiesGagnees'] ?></p>
+                                <p class="plays"><?= $win['nbPartiesJouees'] ?></p>
                             </div>
                             <?php
                         } ?>
