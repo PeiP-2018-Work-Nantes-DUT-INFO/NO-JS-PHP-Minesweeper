@@ -184,4 +184,40 @@ class Modele
             throw new TableAccesException("problème avec la table salon");
         }
     }
+
+
+    /**
+     * Permet d'ajouter un joueur dans la table des parties
+     * @param string $pseudo identifiant du joueur
+     */
+    public function addPartie($pseudo)
+    {
+        
+    }
+
+
+    /**
+     * Permet d'incrémenter les parties jouées et gagnées d'un joueur
+     * @param string $pseudo identifiant du joueur
+     * @param boolean $gagne si la partie est gagne ou perdu
+     */
+    public function incrPartie($pseudo, $gagne)
+    {
+        
+    }
+
+
+    /**
+     * Permet d'obtenir un tableau des 3 meilleurs joueurs
+     */
+    public function get3MeilleursDemineurs()
+    {
+        try {
+            $statement=$this->connexion->query("SELECT * FROM parties ORDER BY nbPartiesJouees, nbPartiesGagnees DESC LIMIT 0, 3;");
+            return($statement->fetchAll(PDO::FETCH_ASSOC));
+        } catch (PDOException $e) {
+            $this->deconnexion();
+            throw new TableAccesException("problème avec la table parties");
+        }
+    }
 }
