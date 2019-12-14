@@ -14,7 +14,7 @@ class VueResultat
                 <div class="header">
                     <div class="title">Best Mine Sweepers</div>
                     <div class="buttons">
-                        <div class="btn"></div>
+                        <div class="btn info-btn"></div>
                         <div class="btn close-btn"><a href="index.php"></a></div>
                     </div>
                 </div>

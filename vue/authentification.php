@@ -21,12 +21,12 @@ class VueAuthentification
             <div class="popup logon">
                 <div class="header">
                     <div class="title">Log On to Windows</div>
-                        <div class="buttons">
-                            <div class="btn hide-btn"></div>
-                            <div class="btn resize-btn"></div>
-                            <div class="btn close-btn"><a href="#"></a></div>
-                        </div>
+                    <div class="buttons">
+                        <div class="btn hide-btn disable"></div>
+                        <div class="btn resize-btn disable"></div>
+                        <div class="btn close-btn"><a href="#"></a></div>
                     </div>
+                </div>
                 <div class="winxp-bg"></div>
 
                 <div class="content">
@@ -63,7 +63,13 @@ class VueAuthentification
     {
         ?>
             <div class="popup error">
-                <div class="header">Logon Message</div>
+            <div class="header">
+                    <div class="title">Logon Message</div>
+                    <div class="buttons">
+                        <div class="btn info-btn"></div>
+                        <div class="btn close-btn"><a href="#"></a></div>
+                    </div>
+                </div>
                 <div class="content">
                     <img src="assets/warning_icon.png" alt="warning_icon">
                     <p>The system could not log you on. Make sure your User name is correct, then type your password again. Letters in passwords must be typed using the correct case.</p>
