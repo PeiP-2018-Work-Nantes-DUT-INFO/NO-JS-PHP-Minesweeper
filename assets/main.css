@@ -5,9 +5,13 @@
     src: url(mine-sweeper.ttf);
 }
 
-body {
+@font-face {
     font-family: 'MS Sans Serif';
     src: url(micross.ttf);
+}
+
+body {
+    font-family: 'MS Sans Serif';
     margin: 0;
     padding: 0;
 }
