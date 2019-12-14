@@ -19,7 +19,14 @@ class VueAuthentification
         <body class="log-page">
 
             <div class="popup logon">
-                <div class="header">Log On to Windows</div>
+                <div class="header">
+                    <div class="title">Log On to Windows</div>
+                        <div class="buttons">
+                            <div class="btn hide-btn"></div>
+                            <div class="btn resize-btn"></div>
+                            <div class="btn close-btn"><a href="#"></a></div>
+                        </div>
+                    </div>
                 <div class="winxp-bg"></div>
 
                 <div class="content">

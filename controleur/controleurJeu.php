@@ -30,7 +30,7 @@ class ControleurJeu
         $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
 
         if ($gamePerdu || $gameGagne) {
-            $this->vueResultat->afficherVueResultat([], $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
+            $this->vueResultat->afficherVueResultat([['Eliott', 100, 10], ['Simon S', 1, 100], ['Simon Perrin', 50, 100]], $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
         } else {
             $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
         }
