@@ -5,7 +5,7 @@ require_once PATH_VUE."/jeu.php";
 class VueResultat
 {
 
-    public function afficherVueResultat($winners, $player, ...$args)
+    public function afficherVueResultat($winners, ...$args)
     {
         $vueJeu = new VueJeu();
         call_user_func_array(array($vueJeu, "afficherVueJeu"), $args);
