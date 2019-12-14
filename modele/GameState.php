@@ -132,24 +132,23 @@ class GameState
      * @param int $x numéro de la colonne de la case
      * @param int $y numéro de la ligne de la case
      * @return void
-     * @throws Exception Si la case à jouer à une mine adjacente.
      */
     private function jouerCaseAdjacentes($x, $y)
     {
-        if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0) {
-            $casesAJouer = [];
+        if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0 && !$this->etatCaseJeu[$x][$y]->estUneMine()) {
+            $casesAJouer = array_fill(0, NBR_LIGNES, []);
             for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
                 for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
                     if (isset($this->etatCaseJeu[$i][$j]) && !$this->etatCaseJeu[$i][$j]->estUneMine()) {
-                        $casesAJouer[$i] =$j;
+                        $casesAJouer[$i][$j] =true;
                     }
                 }
             }
-            foreach ($casesAJouer as $x => $y) {
-                $this->jouer($x, $y);
+            foreach ($casesAJouer as $x => $ligne) {
+                foreach (array_keys($ligne) as $y) {
+                    $this->jouer($x, $y);
+                }
             }
-        } else {
-            throw new Exception("Impossible de jouer les cases adjacentes");
         }
     }
 
@@ -191,11 +190,11 @@ class GameState
      *
      * @param int $x numéro de la colonne
      * @param int $y numéro de la ligne
-     * @return boolean vrai si la case n'a pas déjà été jouée
+     * @return boolean vrai si la case n'a pas déjà été jouée et que le jeu n'est pas perdu
      */
     public function mouvementPossible($x, $y): bool
     {
-        return !$this->etatCaseJeu[$x][$y]->estJouee();
+        return !$this->etatCaseJeu[$x][$y]->estJouee() &&!$this->estPerdu;
     }
 
     /**
