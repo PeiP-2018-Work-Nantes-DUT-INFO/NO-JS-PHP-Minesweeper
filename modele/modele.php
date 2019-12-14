@@ -1,6 +1,4 @@
 <?php
-require_once PATH_METIER."/Message.php";
-
 
 // Classe generale de definition d'exception
 class MonException extends Exception
