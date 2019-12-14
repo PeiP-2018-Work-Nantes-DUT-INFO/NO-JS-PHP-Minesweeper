@@ -69,7 +69,14 @@ class VueJeu
     {
         ?>
         <div class="popup minesweeper">
-            <div class="header">Minesweeper</div>
+            <div class="header">
+                <div class="title">Minesweeper</div>
+                <div class="buttons">
+                    <!--<div class="btn hide-btn"></div>
+                    <div class="btn resize-btn"></div>-->
+                    <div class="btn close-btn"><a href="#"></a></div>
+                </div>
+                </div>
             <div class="nav-bar">
                 <ul class="nav nav-btn">
                     <li id="game"><u>G</u>ame</li>

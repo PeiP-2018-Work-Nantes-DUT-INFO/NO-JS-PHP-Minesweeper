@@ -70,7 +70,7 @@
 
 .minesweeper .game_window .head div.n-decouvert {
     background-position: center;
-    background-size: 18px;
+    background-size: 17px;
     height: 20px;
     width: 20px;
 }
@@ -93,6 +93,7 @@
 
 .minesweeper .game_window .head div#flag {
     background-image: url("drapeau.png");
+    background-size: 12px;
 }
 
 .minesweeper .game {
@@ -106,25 +107,16 @@
 .minesweeper .game table tr {
     display: flex;
     flex-direction: row;
-    margin: 0 0 1px 0;
-}
-
-.minesweeper .game table table tr:first-child {
-    margin: 1px 0 1px 0;
 }
 
 .minesweeper .game table td {
-    text-align: right;
-    line-height: 15px;
-    width: 13px;
-    height: 13px;
+    text-align: center;
+    line-height: 12px;
+    width: 12px;
+    height: 12px;
     background: var(--gris-moyen);
-    margin: 0 0 0 1px;
+    margin: 1px 0 0 1px;
     padding: 0;
-}
-
-.minesweeper .game table tr td:last-child {
-    margin: 0 1px 0 1px;
 }
 
 .minesweeper .game table tr td.decouvert.entourer {
@@ -135,7 +127,6 @@
 .minesweeper .game table tr td.decouvert {
     background: var(--gris-moyen);
     border: 2px solid var(--gris-moyen);
-    text-align: center;
     vertical-align: middle;
     font-size: x-small;
 }
@@ -151,12 +142,12 @@
 
 .minesweeper .n-decouvert a {
     display: block;
-    padding: 4px;
+    padding: 3px;
     width: 100%;
     height: 100%;
     position: relative;
-    top: -4px;
-    left: -4px;
+    top: -3px;
+    left: -3px;
     overflow: auto;
 }
 
@@ -203,4 +194,32 @@
 
 .mine-8 {
     color: #000;
+}
+
+/* DISPLAY SCORES */
+div.won div.content {
+    height: min-content;
+    margin: 15px;
+    font-size: small;
+}
+
+div.won div.content div.titles {
+    display: flex;
+    align-items: center;
+}
+
+div.won div.content div.scores div{
+    display: flex;
+}
+
+div.won div.content div p:first-child {
+    width: 100px;
+}
+
+div.won div.content div p:nth-child(2) {
+    width: 60px;
+}
+
+div.won div.content div p:last-child {
+    width: 60px;
 }
