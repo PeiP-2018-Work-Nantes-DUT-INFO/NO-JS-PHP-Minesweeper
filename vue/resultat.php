@@ -1,14 +1,17 @@
 <?php
 
 require_once PATH_VUE."/jeu.php";
+require_once PATH_VUE.'/bandeau/bandeauJeu.php';
+require_once PATH_VUE.'/bandeau/piedDePageJeu.php';
 
 class VueResultat
 {
 
-    public function afficherVueResultat($winners, ...$args)
+    public function afficherVueResultat($winners, $pseudo, ...$args)
     {
         $vueJeu = new VueJeu();
-        call_user_func_array(array($vueJeu, "afficherVueJeu"), $args);
+        headerPageJeu($pseudo);
+        call_user_func_array(array($vueJeu, "afficherPopupJeu"), $args);
         ?>
             <div class="popup won">
                 <div class="header">
@@ -43,5 +46,6 @@ class VueResultat
                 </div>
             </div>
         <?php
+        footerPageJeu();
     }
 }

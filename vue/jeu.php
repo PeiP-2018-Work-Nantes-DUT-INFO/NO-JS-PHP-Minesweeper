@@ -1,5 +1,8 @@
 <?php
 
+require_once PATH_VUE.'/bandeau/bandeauJeu.php';
+require_once PATH_VUE.'/bandeau/piedDePageJeu.php';
+
 class VueJeu
 {
     /**
@@ -10,21 +13,28 @@ class VueJeu
      * @param int $unite l'unité de drapeaux restant
      * @param boolean $perdu vrai si le jeu est perdu
      * @param boolean $gagne vrai si le jeu est gagné
-     * @param Case[][] $etatCases un tableau a 2 dimensions de Case
+     * @param \CaseMetier[][] $etatCases un tableau a 2 dimensions de Case
      */
     public function afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $perdu, $gagne, $etatCases)
     {
-        $this->header_page($pseudo);
+        headerPageJeu($pseudo);
+        $this->afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases);
+        //$this->close_gameTable();
+        footerPageJeu();
+    }
+
+    public function afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases)
+    {
         if ($perdu) {
-            $this->header_minesweeper($centaine, $dizaine, $unite, 'dead');
-        } else if ($gagne) {
-            $this->header_minesweeper($centaine, $dizaine, $unite, 'boss');
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'dead');
+        } elseif ($gagne) {
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'boss');
         } else {
-            $this->header_minesweeper($centaine, $dizaine, $unite, 'smile');
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'smile');
         }
-        $this->open_gameTable();
+        $this->openGameTable();
         for ($ligne=0; $ligne < count($etatCases); $ligne++) {
-            $this->open_tableLine();
+            $this->openTableLine();
             for ($colonne=0; $colonne < count($etatCases[$ligne]); $colonne++) {
                 $case = $etatCases[$colonne][$ligne];
                 $nb_mines = $case->getMinesAdjacentes();
@@ -34,11 +44,11 @@ class VueJeu
                     } else {
                         $this->discoveredCase('', '*');
                     }
-                } else if ($case->estJouee() || ($gagne && !$case->estUneMine())) {
+                } elseif ($case->estJouee() || ($gagne && !$case->estUneMine())) {
                     if ($nb_mines == 0) {
-                        $this->discoveredCase($nb_mines, '');
+                        $this->discoveredCase(strval($nb_mines), '');
                     } else {
-                        $this->discoveredCase($nb_mines, $nb_mines);
+                        $this->discoveredCase(strval($nb_mines), strval($nb_mines));
                     }
                 } else {
                     if (!$perdu && !$gagne) {
@@ -48,36 +58,18 @@ class VueJeu
                     }
                 }
             }
-            $this->close_tableLine();
-        }
-        //$this->close_gameTable();
-        $this->footer_page();
-    }
-
-
-    /**
-     * Permet de charger la balise head ainsi que le haut de la page
-     * @param string $pseudo identifiant du joueur
-     */
-    public function header_page($pseudo)
-    {
-        ?>
-        <head>
-            <link rel="stylesheet" href="assets/main.css">
-            <link rel="stylesheet" href="assets/nav.css">
-            <link rel="stylesheet" href="assets/game.css">
-            <link rel="stylesheet" href="assets/window.css">
-            <meta charset="UTF-8">
-            <title>Minesweeper</title>
-        </head>
-
-        <body class="game-page">
-            <ul class="nav nav-menu">
-                <li><?= $pseudo ?></li>
-                <li><a href="index.php?deconnexion">Deconnexion</a></li>
-            </ul>
+            $this->closeTableLine();
+        } ?>
+        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
         <?php
     }
+
+
+   
 
 
     /**
@@ -87,7 +79,7 @@ class VueJeu
      * @param int $unite l'unité de drapeaux restant
      * @param string $smiley la tete du smiley a afficher
      */
-    public function header_minesweeper($centaine, $dizaine, $unite, $smiley)
+    public function headerMinesweeper($centaine, $dizaine, $unite, $smiley)
     {
         ?>
         <div class="popup minesweeper">
@@ -135,7 +127,7 @@ class VueJeu
     /**
      * Permet d'ouvrir la table de jeu
      */
-    public function open_gameTable()
+    public function openGameTable()
     {
         ?>
             <div class="game box-shadow">
@@ -147,7 +139,7 @@ class VueJeu
     /**
      * Permet d'ouvrir une ligne de la table de jeu
      */
-    public function open_tableLine()
+    public function openTableLine()
     {
         ?>
             <tr>
@@ -172,8 +164,8 @@ class VueJeu
 
     /**
      * Permet d'afficher une case découverte
-     * @param int $class le nombre de mine
-     * @param int $display le nombre de mine a afficher : ' ' si $class == 0, $class si $class > 0, '*' si est une mine
+     * @param string $class nombre de mines
+     * @param string $display le nombre de mine a afficher : ' ' si $class == 0, $class si $class > 0, '*' si est une mine
      */
     public function discoveredCase($class, $display)
     {
@@ -193,27 +185,10 @@ class VueJeu
     /**
      * Permet de fermer une ligne de la table de jeu
      */
-    public function close_tableLine()
+    public function closeTableLine()
     {
         ?>
             </tr>
-        <?php
-    }
-
-
-    /**
-     * Permet de fermer la table de jeu, le jeu 'Minesweeper' et la page de jeu
-     */
-    public function footer_page()
-    {
-        ?>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </body>
-            </html>
         <?php
     }
 }
