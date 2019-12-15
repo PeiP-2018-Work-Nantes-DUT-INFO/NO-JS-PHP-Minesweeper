@@ -1,3 +1,12 @@
+main {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+    position: relative;
+}
+
 .minesweeper {
     z-index: 1;
     width: min-content;
@@ -213,7 +222,7 @@ div.won div.content div.titles {
     margin: 7px 0;
 }
 
-div.won div.content div.scores div{
+div.won div.content div.scores div {
     display: flex;
     margin: 2px 0;
 }
