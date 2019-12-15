@@ -7,13 +7,12 @@
 
 @font-face {
     font-family: 'MS Sans Serif';
-    src: url(micross.ttf);
+    src: url(MSSansSerif.ttf);
 }
 
 body {
     font-family: 'MS Sans Serif';
-    margin: 0;
-    padding: 0;
+    height: 100%;
 }
 
 body.game-page {
@@ -27,6 +26,9 @@ body.log-page {
     background-repeat: no-repeat;
     background-size: cover;
     font-size: small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body a {
