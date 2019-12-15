@@ -10,7 +10,9 @@ div.logon .winxp-bg {
     background-repeat: no-repeat;
     height: 112px;
 }
-
+div.logon .content .buttons {
+    margin-top: 13px;
+}
 div.content {
     height: min-content;
     margin: 13px 10px;
@@ -30,12 +32,6 @@ div.logon .content .field input {
     width: 300px;
     border: solid 1px;
     border-color: #86a5c2;
-}
-
-div.logon .content .buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin: 15px 0 0 0;
 }
 
 div.logon .content .buttons input,

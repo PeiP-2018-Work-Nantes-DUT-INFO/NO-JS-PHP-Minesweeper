@@ -7,12 +7,27 @@ div.popup {
     border-top-color: #2B90FF;
     border-left-color: #026AFE;
 }
+div.popup > .content {
+    height: min-content;
+    margin: 10px 10px;
+}
+div.content div.buttons,
+div.popup > div.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0px 10px 0;
+    width: 100%;
+}
+div.popup > div.buttons button:last-child {
+    margin-right: 13px;
+}
+div.popup > div.buttons button {
+    border-radius: 4px;
+    margin-left: 5px;
+}
 
 div.popup.error {
     position: absolute;
-    top: 33%;
-    max-width: 70%;
-    margin: 0 15%;
     z-index: 10;
 }
 
