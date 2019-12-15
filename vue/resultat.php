@@ -39,11 +39,11 @@ class VueResultat
                             <?php
                         } ?>
                     </div>
-                    <div class="buttons">
+                </div>
+                <div class="buttons">
                         <button><u>R</u>eset Scrores</button>
                         <button formaction="index.php">OK</button>
                     </div>
-                </div>
             </div>
         <?php
         footerPageJeu();

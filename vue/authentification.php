@@ -49,8 +49,8 @@ class VueAuthentification
             </div>
 
             <?php if ($err) {
-                $this->loadError();
-            } ?>
+            $this->loadError();
+        } ?>
         </body>
         </html>
         <?php
@@ -67,12 +67,17 @@ class VueAuthentification
                     <div class="title">Logon Message</div>
                     <div class="buttons">
                         <div class="btn info-btn"></div>
-                        <div class="btn close-btn"><a href="#"></a></div>
+                        <div class="btn close-btn"><a href="index.php"></a></div>
                     </div>
                 </div>
                 <div class="content">
                     <img src="assets/warning_icon.png" alt="warning_icon">
                     <p>The system could not log you on. Make sure your User name is correct, then type your password again. Letters in passwords must be typed using the correct case.</p>
+                </div>
+                <div class="buttons">
+                    <form action="index.php">
+                        <button type="submit">OK</button>
+                    </form>
                 </div>
             </div>
         <?php

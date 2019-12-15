@@ -210,8 +210,6 @@ main {
 
 /* DISPLAY SCORES */
 div.won div.content {
-    height: min-content;
-    margin: 15px;
     font-size: small;
 }
 
@@ -237,14 +235,4 @@ div.won div.content div p:nth-child(2) {
 
 div.won div.content div p:last-child {
     width: 60px;
-}
-
-div.won div.content div.buttons {
-    display: flex;
-    justify-content: space-around;
-    margin: 15px 0;
-}
-
-div.won div.content div.buttons button {
-    border-radius: 4px;
 }
