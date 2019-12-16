@@ -32,7 +32,7 @@ class CaseMetier
     /**
      * Si est a vraie, indique que l'utilisateur vient de cliquer sur la case
      * Cela est utilisé pour colorer en rouge une mine lorsque la partie est perdu
-     *
+     * Selon Mr Berdujgin, concerne l'affichage
      * @var boolean
      */
     private $estEnSurbrillance;
