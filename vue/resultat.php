@@ -4,14 +4,16 @@ require_once PATH_VUE."/jeu.php";
 require_once PATH_VUE.'/bandeau/bandeauJeu.php';
 require_once PATH_VUE.'/bandeau/piedDePageJeu.php';
 
-class VueResultat
+/**
+ * Doit étendre VueJeu
+ */
+class VueResultat extends VueJeu
 {
 
     public function afficherVueResultat($winners, $pseudo, ...$args)
     {
-        $vueJeu = new VueJeu();
         headerPageJeu($pseudo);
-        call_user_func_array(array($vueJeu, "afficherPopupJeu"), $args);
+        call_user_func_array(array($this, "afficherPopupJeu"), $args);
         ?>
             <div class="popup won">
                 <div class="header">
