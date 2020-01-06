@@ -7,10 +7,10 @@ function headerPageJeu($pseudo)
 {
     ?>
         <head>
-            <link rel="stylesheet" href="assets/main.css">
-            <link rel="stylesheet" href="assets/nav.css">
-            <link rel="stylesheet" href="assets/game.css">
-            <link rel="stylesheet" href="assets/window.css">
+            <link rel="stylesheet" href="assets/css/main.css">
+            <link rel="stylesheet" href="assets/css/nav.css">
+            <link rel="stylesheet" href="assets/css/game.css">
+            <link rel="stylesheet" href="assets/css/window.css">
             <meta charset="UTF-8">
             <title>Minesweeper</title>
         </head>

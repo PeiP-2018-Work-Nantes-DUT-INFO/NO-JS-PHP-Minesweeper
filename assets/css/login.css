@@ -5,7 +5,7 @@ div.logon {
 }
 
 div.logon .winxp-bg {
-    background-image: url("winxp_login.png");
+    background-image: url("../img/winxp_login.png");
     background-size: 100%;
     background-repeat: no-repeat;
     height: 112px;
