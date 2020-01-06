@@ -71,7 +71,7 @@ class VueAuthentification
                     </div>
                 </div>
                 <div class="content">
-                    <img src="assets/warning_icon.png" alt="warning_icon">
+                    <img src="assets/img/warning_icon.png" alt="warning_icon">
                     <p>The system could not log you on. Make sure your User name is correct, then type your password again. Letters in passwords must be typed using the correct case.</p>
                 </div>
                 <div class="buttons">
