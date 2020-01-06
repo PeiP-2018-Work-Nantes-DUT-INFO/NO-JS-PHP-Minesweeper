@@ -11,10 +11,10 @@ class VueAuthentification
         header("Content-type: text/html; charset=utf-8"); ?>
         <html>
             <head>
-                <link rel="stylesheet" href="assets/main.css">
-                <link rel="stylesheet" href="assets/login.css">
-                <link rel="stylesheet" href="assets/window.css">
-                <link rel="icon" href="favicon.gif" type="image/gif">
+                <link rel="stylesheet" href="assets/css/main.css">
+                <link rel="stylesheet" href="assets/css/login.css">
+                <link rel="stylesheet" href="assets/css/window.css">
+                <link rel="icon" href="img/favicon.gif" type="image/gif">
             </head>
         <body class="log-page">
 

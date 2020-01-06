@@ -100,15 +100,15 @@ class VueJeu
             <div class="content">
                 <div class="game_window">
                     <div class="head box-shadow">
-                        <div class="display-bomb" style="background-image: url(assets/display.png);">
+                        <div class="display-bomb" style="background-image: url(assets/img/display.png);">
                             <div class="bomb centaine"
-                                style="background-image: url(assets/display<?= $centaine ?>.png);">
+                                style="background-image: url(assets/img/display<?= $centaine ?>.png);">
                             </div>
                             <div class="bomb dizaine"
-                                style="background-image: url(assets/display<?= $dizaine ?>.png);">
+                                style="background-image: url(assets/img/display<?= $dizaine ?>.png);">
                             </div>
                             <div class="bomb unite"
-                                style="background-image: url(assets/display<?= $unite ?>.png);">
+                                style="background-image: url(assets/img/display<?= $unite ?>.png);">
                             </div>
                         </div>
                         <div class="n-decouvert" id="<?= $smiley ?>">

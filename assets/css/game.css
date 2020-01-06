@@ -85,23 +85,23 @@ main {
 }
 
 .minesweeper .game_window .head div#smile {
-    background-image: url("face_smile.png");
+    background-image: url("../img/face_smile.png");
 }
 
 .minesweeper .game_window .head div#boss {
-    background-image: url("face_boss.png");
+    background-image: url("../img/face_boss.png");
 }
 
 .minesweeper .game_window .head div#dead {
-    background-image: url("face_dead.png");
+    background-image: url("../img/face_dead.png");
 }
 
 .minesweeper .game_window:active .head div#smile {
-    background-image: url("face_omg.png");
+    background-image: url("../img/face_omg.png");
 }
 
 .minesweeper .game_window .head div#flag {
-    background-image: url("drapeau.png");
+    background-image: url("../img/drapeau.png");
     background-size: 12px;
 }
 

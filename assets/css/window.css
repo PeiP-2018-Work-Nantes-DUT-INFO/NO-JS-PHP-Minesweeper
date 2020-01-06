@@ -66,22 +66,22 @@ div.header div.buttons div.btn {
 }
 
 div.header div.buttons div.hide-btn {
-    background-image: url("hideButton.png");
+    background-image: url("../img/hideButton.png");
     background-size: 19px;
 }
 
 div.header div.buttons div.resize-btn {
-    background-image: url("resizeButton.png");
+    background-image: url("../img/resizeButton.png");
     background-size: 19px;
 }
 
 div.header div.buttons div.info-btn {
-    background-image: url("infoButton.png");
+    background-image: url("../img/infoButton.png");
     background-size: 19px;
 }
 
 div.header div.buttons div.close-btn {
-    background-image: url("closeButton.png");
+    background-image: url("../img/closeButton.png");
     background-size: 19px;
 }
 
