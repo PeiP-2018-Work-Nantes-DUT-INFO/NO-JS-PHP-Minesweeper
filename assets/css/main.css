@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: 'mine-sweeper';
-    src: url(mine-sweeper.ttf);
+    src: url('../font/mine-sweeper.ttf');
 }
 
 @font-face {
     font-family: 'MS Sans Serif';
-    src: url(MSSansSerif.ttf);
+    src: url('../font/MSSansSerif.ttf');
 }
 
 body {

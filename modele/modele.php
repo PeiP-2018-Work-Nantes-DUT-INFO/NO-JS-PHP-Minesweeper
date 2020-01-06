@@ -263,4 +263,20 @@ class Modele
             throw new TableAccesException("Problème avec la table parties");
         }
     }
+
+
+    /**
+     * 
+     * 
+     */
+    public function resetParties()
+    {
+        try {
+            $statement=$this->connexion->query("DELETE FROM parties;");
+            $statement->execute();
+        } catch (PDOException $e) {
+            $this->deconnexion();
+            throw new TableAccesException("Problème avec la table parties");
+        }
+    }
 }

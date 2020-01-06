@@ -36,7 +36,8 @@ class ControleurJeu
         $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
         $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
 
-        if ($gamePerdu || $gameGagne) {
+        if (($gamePerdu || $gameGagne) && $_SESSION['afficherResultat']) {
+            $_SESSION['afficherResultat'] = false;
             $this->updateScore($gameGagne);
             $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
         } else {
@@ -66,6 +67,7 @@ class ControleurJeu
     public function nouveauJeu()
     {
         $pseudo = $_SESSION['pseudo'];
+        $_SESSION['afficherResultat'] = true;
         $game = new GameState($pseudo);
         $_SESSION['game'] = serialize($game);
         $this->afficherJeu();
@@ -85,4 +87,12 @@ class ControleurJeu
         $this->modele->incrPartie($pseudo, $gagne);
     }
 
+
+    /**
+     * Permet de remettre les scores à zéro
+     */
+    public function resetScores()
+    {
+        $this->modele->resetParties();
+    }
 }
