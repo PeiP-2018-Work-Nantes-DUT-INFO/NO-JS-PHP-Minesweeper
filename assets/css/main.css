@@ -13,6 +13,7 @@
 body {
     font-family: 'MS Sans Serif';
     height: 100%;
+    overflow: hidden;
 }
 
 body.game-page {
