@@ -20,6 +20,7 @@ class VueJeu
         headerPageJeu($pseudo);
         $this->afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases);
         //$this->close_gameTable();
+        $this->afficherWinBar();
         footerPageJeu();
     }
 
@@ -97,7 +98,7 @@ class VueJeu
                     <li id="help"><u>H</u>elp</li>
                 </ul>
             </div>
-            <div class="content">
+            <div class="content" id="game_container">
                 <div class="game_window">
                     <div class="head box-shadow">
                         <div class="display-bomb" style="background-image: url(assets/img/display.png);">
@@ -189,6 +190,30 @@ class VueJeu
     {
         ?>
             </tr>
+        <?php
+    }
+
+
+    public function afficherWinBar()
+    {
+        ?>
+            <div class="winbar">
+                <div class="start_stuff">
+                    <div class="start">
+                        <img class="logo" src="assets/img/startButton.png" alt="startButton">
+                    </div>
+                    <div class="process_gameMS">
+                        <img class="logo" src="assets/img/mine_logo.png" alt="mine_logo">
+                        <div class="title">Minesweeper</div>
+                    </div>
+                </div>
+                <div class="end_stuff">
+                    <img src="assets/img/sound.png" alt="speaker">
+                    <img src="assets/img/usb.png" alt="usb">
+                    <img src="assets/img/shield.png" alt="shield">
+                    <div class="date"><?= date('h:i A'); ?></div>
+                </div>
+            </div>
         <?php
     }
 }
