@@ -108,16 +108,15 @@ class Modele
 
 
     /**
-     * Permet de s'avoir si un pseudo existe
+     * Permet de s'avoir si un pseudo existe dans la table joueurs
      *
      * @param string $pseudo le pseudo du compte
-     * @param string $table la table où effectuer la recherche
      * @return boolean vrai si le pseudo existe
      */
-    public function exists($pseudo, $table)
+    public function existsInJoueurs($pseudo)
     {
         try {
-            $statement = $this->connexion->prepare("SELECT pseudo from $table where pseudo = ?;");
+            $statement = $this->connexion->prepare("SELECT pseudo from joueurs where pseudo = ?;");
             $statement->bindParam(1, $pseudo);
             $statement->execute();
             $result=$statement->fetch(PDO::FETCH_ASSOC);
@@ -125,7 +124,30 @@ class Modele
             return ($result["pseudo"] != null);
         } catch (PDOException $e) {
             $this->deconnexion();
-            throw new TableAccesException("Problème avec la table $table");
+            throw new TableAccesException("Problème avec la table joueurs");
+        }
+    }
+
+
+
+    /**
+     * Permet de s'avoir si un pseudo existe dans la table parties
+     *
+     * @param string $pseudo le pseudo du compte
+     * @return boolean vrai si le pseudo existe
+     */
+    public function existsInParties($pseudo)
+    {
+        try {
+            $statement = $this->connexion->prepare("SELECT pseudo from parties where pseudo = ?;");
+            $statement->bindParam(1, $pseudo);
+            $statement->execute();
+            $result=$statement->fetch(PDO::FETCH_ASSOC);
+
+            return ($result["pseudo"] != null);
+        } catch (PDOException $e) {
+            $this->deconnexion();
+            throw new TableAccesException("Problème avec la table parties");
         }
     }
 
@@ -200,29 +222,45 @@ class Modele
 
 
     /**
-     * Permet d'incrémenter les parties jouées et gagnées d'un joueur
+     * Permet d'incrémenter les parties jouées d'un joueur
      * @param string $pseudo identifiant du joueur
-     * @param boolean $gagne vrai si la partie est gagne
      */
-    public function incrPartie($pseudo, $gagne)
+    public function incrPartieJouees($pseudo)
     {
         try {
-            
-            $nb = 1;
             $statement = $this->connexion->prepare("SELECT * FROM parties where pseudo=?;");
             $statement->bindParam(1, $pseudo);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $plays = $result['nbPartiesJouees']+1;
-            $wins = $result['nbPartiesGagnees'];
-            if ($gagne) {
-                $wins = $wins +1;
-            }
+            $plays = $result['nbPartiesJouees'] +1;
 
-            $statement = $this->connexion->prepare("UPDATE parties SET nbPartiesJouees = ?, nbPartiesGagnees = ? WHERE pseudo = ?;");
+            $statement = $this->connexion->prepare("UPDATE parties SET nbPartiesJouees = ? WHERE pseudo = ?;");
             $statement->bindParam(1, $plays);
-            $statement->bindParam(2, $wins);
-            $statement->bindParam(3, $pseudo);
+            $statement->bindParam(2, $pseudo);
+            $statement->execute();
+        } catch (PDOException $e) {
+            $this->deconnexion();
+            throw new TableAccesException("Problème avec la table parties");
+        }
+    }
+
+
+    /**
+     * Permet d'incrémenter les parties gagnées d'un joueur
+     * @param string $pseudo identifiant du joueur
+     */
+    public function incrPartieGagnees($pseudo)
+    {
+        try {
+            $statement = $this->connexion->prepare("SELECT * FROM parties where pseudo=?;");
+            $statement->bindParam(1, $pseudo);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $wins = $result['nbPartiesGagnees'] +1;
+
+            $statement = $this->connexion->prepare("UPDATE parties SET nbPartiesGagnees = ? WHERE pseudo = ?;");
+            $statement->bindParam(1, $wins);
+            $statement->bindParam(2, $pseudo);
             $statement->execute();
         } catch (PDOException $e) {
             $this->deconnexion();
