@@ -90,7 +90,7 @@ class GameState
      *
      * @param int $x numéro de la colonne de la case
      * @param int $y numéro de la ligne de la case
-     * @return boolean vrai si le mouvement est possible, faux sinon
+     * @return boolean vrai si le mouvement fait perdre
      */
     public function jouer($x, $y): bool
     {
@@ -104,11 +104,12 @@ class GameState
                 $this->etatCaseJeu[$x][$y]->surbriller();
                 $this->revelerMines();
                 $this->estPerdu = true;
+                return false;
+            } else {
+                return true;
             }
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -190,7 +191,7 @@ class GameState
      *
      * @param int $x numéro de la colonne
      * @param int $y numéro de la ligne
-     * @return boolean vrai si la case n'a pas déjà été jouée et que le jeu n'est pas perdu
+     * @return boolean vrai si la case n'a pas déjà été jouée, qu'elle est valide et que le jeu n'est pas perdu
      */
     public function mouvementPossible($x, $y): bool
     {

@@ -25,7 +25,6 @@ class Routeur
                     $this->ctrlJeu->jouer($_GET['x'], $_GET['y']);
                 } elseif (isset($_GET['reset-scores'])) {
                     $this->ctrlJeu->resetScores();
-                    $_SESSION['afficherResultat'] = true;
                 } else {
                     $this->ctrlJeu->afficherJeu();
                 }
