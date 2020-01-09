@@ -214,6 +214,10 @@ main {
 }
 
 /* DISPLAY SCORES */
+div.popup.won {
+    margin: 45px 0;
+}
+
 div.won div.content {
     font-size: small;
 }
