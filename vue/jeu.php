@@ -85,16 +85,28 @@ class VueJeu
         ?>
         <div class="popup minesweeper">
             <div class="header">
-                <div class="title">Minesweeper</div>
+                <div class="title"><p>Minesweeper</p></div>
                 <div class="buttons">
-                    <!--<div class="btn hide-btn"></div>
-                    <div class="btn resize-btn disable"></div>-->
-                    <div class="btn close-btn"><a href="#"></a></div>
+                    <div class="btn hide-btn disable"></div>
+                    <div class="btn resize-btn disable"></div>
+                    <div class="btn close-btn"><a href="index.php?deconnexion"></a></div>
                 </div>
                 </div>
             <div class="nav-bar">
                 <ul class="nav nav-btn">
-                    <li id="game"><u>G</u>ame</li>
+                    <li id="game"><u>G</u>ame
+                        <ul class="dropdown-menu">
+                            <li><a href="index.php?reset"><div class="w18"></div><p>New</p></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#"><div class="w18 checked"></div><p>Beginner</p></a></li>
+                            <li><a href="#"><div class="w18"></div><p>Intermediate</p></a></li>
+                            <li><a href="#"><div class="w18"></div><p>Expert</p></a></li>
+                            <li class="separator"></li>
+                            <li><a href="index.php?scores"><div class="w18"></div><p>Best Players...</p></a></li>
+                            <li class="separator"></li>
+                            <li><a href="index.php?deconnexion"><div class="w18"></div><p>Exit</p></a></li>
+                        </ul>
+                    </li>
                     <li id="help"><u>H</u>elp</li>
                 </ul>
             </div>
