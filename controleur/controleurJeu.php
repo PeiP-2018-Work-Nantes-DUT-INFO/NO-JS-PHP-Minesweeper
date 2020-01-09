@@ -36,11 +36,7 @@ class ControleurJeu
         $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
         $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
 
-        if (($gamePerdu || $gameGagne)) {
-            $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
-        } else {
-            $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
-        }
+        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
     }
     
 
@@ -62,7 +58,7 @@ class ControleurJeu
                     $this->modele->addPartie($pseudo);
                 }
                 $this->modele->incrPartie($pseudo, !$faitPerdre);
-                $this->afficherJeu();
+                $this->afficherResultat();
             } else {
                 $this->afficherJeu();
             }
@@ -90,5 +86,19 @@ class ControleurJeu
     public function resetScores()
     {
         $this->modele->resetParties();
+        $this->afficherResultat();
+    }
+
+    public function afficherResultat()
+    {
+        $game = unserialize($_SESSION['game']);
+        $gamePerdu = $game->estPerdu();
+        $gameGagne = $game->aGagne();
+        $etatCases = $game->obtenirEtatJeu();
+        $pseudo = $_SESSION['pseudo'];
+        $centaine = (int)($game->drapeauxRestants()/100);
+        $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
+        $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
+        $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
     }
 }

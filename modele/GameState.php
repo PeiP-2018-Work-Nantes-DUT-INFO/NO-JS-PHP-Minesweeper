@@ -104,9 +104,9 @@ class GameState
                 $this->etatCaseJeu[$x][$y]->surbriller();
                 $this->revelerMines();
                 $this->estPerdu = true;
-                return false;
-            } else {
                 return true;
+            } else {
+                return false;
             }
         }
         return false;
@@ -276,5 +276,15 @@ class GameState
     public function estPerdu()
     {
         return $this->estPerdu;
+    }
+
+    /**
+     * Permet de savoir si le jeu a été commencé
+     *
+     * @return boolean vrai si au moins une case a été jouée
+     */
+    public function estCommence()
+    {
+        return $this->caseRestantes != NBR_COLONNES * NBR_LIGNES;
     }
 }
