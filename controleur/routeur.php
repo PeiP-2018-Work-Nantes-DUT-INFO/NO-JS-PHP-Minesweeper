@@ -23,7 +23,7 @@ class Routeur
             } elseif (isset($_SESSION['game']) && !isset($_GET['reset'])) {
                 if (isset($_GET['x']) && isset($_GET['y'])) {
                     $this->ctrlJeu->jouer($_GET['x'], $_GET['y']);
-                } elseif (isset($_GET['reset-scores'])) {
+                } elseif (isset($_POST['reset-scores'])) {
                     $this->ctrlJeu->resetScores();
                 } elseif (isset($_GET['scores'])) {
                     $this->ctrlJeu->afficherResultat();
