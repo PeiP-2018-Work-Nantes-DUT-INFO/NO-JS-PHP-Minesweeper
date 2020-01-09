@@ -75,8 +75,8 @@ class GameState
         $mines = array_fill(0, NBR_LIGNES, []);
         $i = 0;
         while ($i < NBR_MINES) {
-            $x = rand(0, 7);
-            $y = rand(0, 7);
+            $x = rand(0, NBR_COLONNES - 1);
+            $y = rand(0, NBR_LIGNES - 1);
             if (!isset($mines[$x][$y])) {
                 $mines[$x][$y] = true;
                 $i++;
