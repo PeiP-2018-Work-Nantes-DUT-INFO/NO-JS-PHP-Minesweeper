@@ -194,7 +194,7 @@ class GameState
      */
     public function mouvementPossible($x, $y): bool
     {
-        return !$this->etatCaseJeu[$x][$y]->estJouee() &&!$this->estPerdu;
+        return isset($this->etatCaseJeu[$x][$y]) && !$this->etatCaseJeu[$x][$y]->estJouee() &&!$this->estPerdu;
     }
 
     /**
