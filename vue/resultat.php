@@ -50,6 +50,7 @@ class VueResultat extends VueJeu
                 </div>
             </div>
         <?php
+        $this->afficherWinBar();
         footerPageJeu();
     }
 }

@@ -202,7 +202,7 @@ class Modele
     /**
      * Permet d'incrémenter les parties jouées et gagnées d'un joueur
      * @param string $pseudo identifiant du joueur
-     * @param boolean $gagne si la partie est gagne ou perdu
+     * @param boolean $gagne vrai si la partie est gagne
      */
     public function incrPartie($pseudo, $gagne)
     {
