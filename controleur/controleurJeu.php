@@ -60,7 +60,7 @@ class ControleurJeu
                 if ($game->aGagne()) {
                     $this->modele->incrPartieGagnees($pseudo);
                 }
-                $this->afficherResultat();
+                header("Location: ?scores");
             } else {
                 $this->afficherJeu();
             }
@@ -82,7 +82,7 @@ class ControleurJeu
             $this->modele->addPartie($pseudo);
         }
         $this->modele->incrPartieJouees($pseudo);
-        $this->afficherJeu();
+        header("Location: ?");
     }
 
 
