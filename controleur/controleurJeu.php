@@ -12,7 +12,7 @@ class ControleurJeu
     private $modele;
 
     /**
-     * 
+     *
      */
     public function __construct()
     {
@@ -23,7 +23,7 @@ class ControleurJeu
 
 
     /**
-     * 
+     *
      */
     public function afficherJeu()
     {
@@ -36,9 +36,7 @@ class ControleurJeu
         $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
         $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
 
-        if (($gamePerdu || $gameGagne) && $_SESSION['afficherResultat']) {
-            $_SESSION['afficherResultat'] = false;
-            $this->updateScore($gameGagne);
+        if (($gamePerdu || $gameGagne)) {
             $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
         } else {
             $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
@@ -47,7 +45,7 @@ class ControleurJeu
     
 
     /**
-     * 
+     *
      */
     public function jouer($x, $y)
     {
@@ -55,36 +53,34 @@ class ControleurJeu
          * @var GameState
          */
         $game = unserialize($_SESSION['game']);
-        $game->jouer($x, $y);
-        $_SESSION['game'] = serialize($game);
-        $this->afficherJeu();
+        if (!$game->aGagne() && !$game->estPerdu()) {
+            $faitPerdre = $game->jouer($x, $y);
+            $_SESSION['game'] = serialize($game);
+            $pseudo = $_SESSION['pseudo'];
+            if ($game->aGagne() || $game->estPerdu()) {
+                if (!$this->modele->exists($pseudo, 'parties')) {
+                    $this->modele->addPartie($pseudo);
+                }
+                $this->modele->incrPartie($pseudo, !$faitPerdre);
+                $this->afficherJeu();
+            } else {
+                $this->afficherJeu();
+            }
+        } else {
+            $this->afficherJeu();
+        }
     }
     
 
     /**
-     * 
+     *
      */
     public function nouveauJeu()
     {
         $pseudo = $_SESSION['pseudo'];
-        $_SESSION['afficherResultat'] = true;
         $game = new GameState($pseudo);
         $_SESSION['game'] = serialize($game);
         $this->afficherJeu();
-    }
-
-
-    /**
-     * Permet de mettre à jour le score
-     * @param boolean $gagne vrai si la partie est gagnée
-     */
-    public function updateScore($gagne)
-    {
-        $pseudo = $_SESSION['pseudo'];
-        if (!$this->modele->exists($pseudo, 'parties')) {
-            $this->modele->addPartie($pseudo);
-        }
-        $this->modele->incrPartie($pseudo, $gagne);
     }
 
 
