@@ -82,7 +82,8 @@ main {
     left: 5px;
 }
 
-.minesweeper .game_window .head div.n-decouvert {
+.minesweeper .game_window .head div.n-decouvert,
+.minesweeper .game_window .head div.decouvert {
     background-position: center;
     background-size: 17px;
     height: 20px;
@@ -106,6 +107,11 @@ main {
 }
 
 .minesweeper .game_window .head div#flag {
+    background-image: url("../img/drapeau.png");
+    background-size: 12px;
+}
+
+.minesweeper .game_window .head div#flag.decouvert {
     background-image: url("../img/drapeau.png");
     background-size: 12px;
 }
@@ -148,8 +154,14 @@ main {
     padding: 1px 0 0 1px;
 }
 
+.minesweeper .game table tr td.n-decouvert.flag {
+    background-image: url("../img/drapeau.png");
+    background-size: 12px;
+}
+
 .game_window,
-.n-decouvert {
+.n-decouvert,
+.decouvert {
     border: 2px solid;
     border-top-color: var(--gris-clair);
     border-left-color: var(--gris-clair);
@@ -157,7 +169,8 @@ main {
     border-right-color: var(--gris-fonce);
 }
 
-.minesweeper .n-decouvert a {
+.minesweeper .n-decouvert a,
+.minesweeper .decouvert a {
     display: block;
     padding: 3px;
     width: 100%;
@@ -174,7 +187,8 @@ main {
 }
 
 .minesweeper .box-shadow,
-.n-decouvert:active {
+.n-decouvert:active, 
+.decouvert#flag {
     border-top-color: var(--gris-fonce);
     border-left-color: var(--gris-fonce);
     border-bottom-color: var(--gris-clair);

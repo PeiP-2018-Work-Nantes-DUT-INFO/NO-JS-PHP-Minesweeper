@@ -142,7 +142,7 @@ class VueJeu
                             <a href="index.php?reset" draggable="false"></a>
                         </div>
                         <div class="w41">
-                            <div class="n-decouvert" id="flag">
+                            <div class="<?= $flagMode ? '' : 'n-'?>decouvert" id="flag">
                                 <a href="<?= $flagMode ? 'index.php' : 'index.php?flag-mode'?>" draggable="false"></a>
                             </div>
                         </div>
