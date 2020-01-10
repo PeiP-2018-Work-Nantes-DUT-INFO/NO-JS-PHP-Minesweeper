@@ -59,6 +59,10 @@ class ControleurJeu
             $game->jouer($x, $y);
             $_SESSION['game'] = serialize($game);
             if ($game->aGagne() || $game->estPerdu()) {
+                if (!$this->modele->existsInParties($pseudo)) {
+                    $this->modele->addPartie($pseudo);
+                    $this->modele->incrPartieJouees($pseudo);
+                }
                 if ($game->aGagne()) {
                     $this->modele->incrPartieGagnees($pseudo);
                 }
