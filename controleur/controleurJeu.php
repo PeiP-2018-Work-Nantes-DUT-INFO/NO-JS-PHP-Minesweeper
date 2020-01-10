@@ -32,11 +32,13 @@ class ControleurJeu
         $gameGagne = $game->aGagne();
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
+        $unite = (int)($game->drapeauxRestants()%10);
+        $dizaine = (int)($game->drapeauxRestants()-$unite)%100/10;
         $centaine = (int)($game->drapeauxRestants()/100);
-        $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
-        $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
         if ($game->drapeauxRestants() < 0) {
             $centaine = "-";
+            $unite = -$unite;
+            $dizaine = -$dizaine;
         }
 
         $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases, false);
@@ -95,11 +97,13 @@ class ControleurJeu
         $gameGagne = $game->aGagne();
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
+        $unite = (int)($game->drapeauxRestants()%10);
+        $dizaine = (int)($game->drapeauxRestants()-$unite)%100/10;
         $centaine = (int)($game->drapeauxRestants()/100);
-        $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
-        $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
         if ($game->drapeauxRestants() < 0) {
             $centaine = "-";
+            $unite = -$unite;
+            $dizaine = -$dizaine;
         }
 
         $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases, true);
@@ -137,11 +141,13 @@ class ControleurJeu
         $gameGagne = $game->aGagne();
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
+        $unite = (int)($game->drapeauxRestants()%10);
+        $dizaine = (int)($game->drapeauxRestants()-$unite)%100/10;
         $centaine = (int)($game->drapeauxRestants()/100);
-        $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
-        $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
         if ($game->drapeauxRestants() < 0) {
             $centaine = "-";
+            $unite = -$unite;
+            $dizaine = -$dizaine;
         }
 
         $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases, false);
