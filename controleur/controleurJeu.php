@@ -52,15 +52,18 @@ class ControleurJeu
          * @var GameState
          */
         $game = unserialize($_SESSION['game']);
+        $pseudo = $_SESSION['pseudo'];
+        if (!$game->estCommence() && $game->mouvementPossible($x, $y)) {
+            $this->modele->incrPartieJouees($pseudo);
+        }
         if (!$game->aGagne() && !$game->estPerdu()) {
             $faitPerdre = $game->jouer($x, $y);
             $_SESSION['game'] = serialize($game);
-            $pseudo = $_SESSION['pseudo'];
             if ($game->aGagne() || $game->estPerdu()) {
                 if ($game->aGagne()) {
                     $this->modele->incrPartieGagnees($pseudo);
                 }
-                header("Location: ?scores");
+                header("Location: ?scores", false, 301);
             } else {
                 $this->afficherJeu();
             }
@@ -81,8 +84,7 @@ class ControleurJeu
         if (!$this->modele->existsInParties($pseudo)) {
             $this->modele->addPartie($pseudo);
         }
-        $this->modele->incrPartieJouees($pseudo);
-        header("Location: ?");
+        $this->afficherJeu();
     }
 
 
