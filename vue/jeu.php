@@ -14,11 +14,12 @@ class VueJeu
      * @param boolean $perdu vrai si le jeu est perdu
      * @param boolean $gagne vrai si le jeu est gagné
      * @param \CaseMetier[][] $etatCases un tableau a 2 dimensions de Case
+     * @param bool $flagMode
      */
-    public function afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $perdu, $gagne, $etatCases)
+    public function afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $perdu, $gagne, $etatCases, $flagMode)
     {
         headerPageJeu($pseudo);
-        $this->afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases);
+        $this->afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases, $flagMode);
         //$this->close_gameTable();
         $this->afficherWinBar();
         footerPageJeu();
@@ -32,16 +33,17 @@ class VueJeu
      * @param mixed $perdu
      * @param mixed $gagne
      * @param \CaseMetier[][] $etatCases
+     * @param bool $flagMode
      * @return void
      */
-    public function afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases)
+    public function afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases, $flagMode)
     {
         if ($perdu) {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'dead');
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'dead', $flagMode);
         } elseif ($gagne) {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'boss');
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'boss', $flagMode);
         } else {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'smile');
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'smile', $flagMode);
         }
         $this->openGameTable();
         for ($ligne=0; $ligne < count($etatCases); $ligne++) {
@@ -62,10 +64,11 @@ class VueJeu
                         $this->discoveredCase(strval($nb_mines), strval($nb_mines));
                     }
                 } else {
-                    if (!$perdu && !$gagne) {
-                        $this->hiddenCase($ligne, $colonne);
+                    $class = $case->aDrapeau() ? 'flag' : '';
+                    if (!$perdu && !$gagne && (!$case->aDrapeau() || $flagMode)) {
+                        $this->hiddenCase($ligne, $colonne, $flagMode, $class);
                     } else {
-                        $this->noClickable($case->aDrapeau() ? 'flag' : '');
+                        $this->noClickable($class);
                     }
                 }
             }
@@ -89,8 +92,9 @@ class VueJeu
      * @param int $dizaine la dizaine de drapeaux restant
      * @param int $unite l'unité de drapeaux restant
      * @param string $smiley la tete du smiley a afficher
+     * @param boolean $flagMode
      */
-    public function headerMinesweeper($centaine, $dizaine, $unite, $smiley)
+    public function headerMinesweeper($centaine, $dizaine, $unite, $smiley, $flagMode)
     {
         ?>
         <div class="popup minesweeper">
@@ -139,7 +143,7 @@ class VueJeu
                         </div>
                         <div class="w41">
                             <div class="n-decouvert" id="flag">
-                                <a href="#" draggable="false"></a>
+                                <a href="<?= $flagMode ? 'index.php' : 'index.php?flag-mode'?>" draggable="false"></a>
                             </div>
                         </div>
                     </div>
@@ -174,12 +178,14 @@ class VueJeu
      * Permet d'afficher une case non-decouverte
      * @param int $ligne le numéro de la ligne
      * @param int $colonne le numéro de la colonne
+     * @param bool $flagMode
+     * @param string $class classe additionnelle de la case non découvert, utilisée pour les drapeaux
      */
-    public function hiddenCase($ligne, $colonne)
+    public function hiddenCase($ligne, $colonne, $flagMode, $class)
     {
         ?>
-            <td class="n-decouvert">
-                <a href="index.php?x=<?= $colonne ?>&y=<?= $ligne ?>" draggable="false"></a>
+            <td class="n-decouvert <?= $class ?>">
+                <a href="index.php?<?=$flagMode ? 'flag-mode&' : ''?>x=<?= $colonne ?>&y=<?= $ligne ?>" draggable="false"></a>
             </td>
         <?php
     }
@@ -200,7 +206,7 @@ class VueJeu
      * Permet d'afficher une case non-découverte non-cliquable
      * @param string $class classe additionnelle de la case non découvert, utilisée pour les drapeaux
      */
-    public function noClickable($class = "")
+    public function noClickable($class)
     {
         ?> <td class="n-decouvert <?= $class ?>"></td><?php
     }
@@ -237,8 +243,7 @@ class VueJeu
                     <div class="date">
                     <?php
                         $utc1 = 3600;
-                        echo gmdate('g:i A', time()+($utc1));
-                        ?>
+        echo gmdate('g:i A', time()+($utc1)); ?>
                     </div>
                 </div>
             </div>

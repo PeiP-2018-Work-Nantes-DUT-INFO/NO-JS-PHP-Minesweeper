@@ -39,7 +39,7 @@ class ControleurJeu
             $centaine = "-";
         }
 
-        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
+        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases, false);
     }
     
     /**
@@ -77,24 +77,9 @@ class ControleurJeu
          * @var GameState
          */
         $game = unserialize($_SESSION['game']);
-        $pseudo = $_SESSION['pseudo'];
-        if (!$game->estCommence() && $game->mouvementPossible($x, $y)) {
-            $this->modele->incrPartieJouees($pseudo);
-        }
-        if (!$game->aGagne() && !$game->estPerdu()) {
-            $game->jouer($x, $y);
-            $_SESSION['game'] = serialize($game);
-            if ($game->aGagne() || $game->estPerdu()) {
-                if ($game->aGagne()) {
-                    $this->modele->incrPartieGagnees($pseudo);
-                }
-                header("Location: ?scores", false, 301);
-            } else {
-                $this->afficherJeu();
-            }
-        } else {
-            $this->afficherJeu();
-        }
+        $game->placerDrapeau($x, $y);
+        $_SESSION['game'] = serialize($game);
+        $this->afficherJeuModeDrapeau();
     }
     /**
      *
@@ -102,7 +87,7 @@ class ControleurJeu
     public function afficherJeuModeDrapeau()
     {
         $game = unserialize($_SESSION['game']);
-        $gamePerdu = $game->estPecrdu();
+        $gamePerdu = $game->estPerdu();
         $gameGagne = $game->aGagne();
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
@@ -113,7 +98,7 @@ class ControleurJeu
             $centaine = "-";
         }
 
-        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
+        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases, true);
     }
     
 
@@ -155,6 +140,6 @@ class ControleurJeu
             $centaine = "-";
         }
 
-        $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
+        $this->vueResultat->afficherVueResultat($this->modele->get3MeilleursDemineurs(), $pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases, false);
     }
 }

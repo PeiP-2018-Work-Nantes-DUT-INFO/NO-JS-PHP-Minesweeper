@@ -94,7 +94,7 @@ class GameState
      */
     public function jouer($x, $y): bool
     {
-        if ($this->mouvementPossible($x, $y)) {
+        if ($this->mouvementPossible($x, $y) && !$this->etatCaseJeu[$x][$y]->aDrapeau()) {
             $this->caseRestantes--;
             $this->etatCaseJeu[$x][$y]->jouer();
             if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0) {
@@ -234,7 +234,7 @@ class GameState
      */
     public function placerDrapeau($x, $y): bool
     {
-        if ($this->mouvementPossible($x, $y) && !$this->etatCaseJeu[$x][$y]->aDrapeau()) {
+        if ($this->mouvementPossible($x, $y)) {
             $aDrapeau = $this->etatCaseJeu[$x][$y]->aDrapeau();
             $this->etatCaseJeu[$x][$y]->setDrapeau(!$aDrapeau);
             if ($aDrapeau) {
