@@ -23,7 +23,17 @@ class VueJeu
         $this->afficherWinBar();
         footerPageJeu();
     }
-
+    /**
+     * Undocumented function
+     *
+     * @param mixed $centaine
+     * @param mixed $dizaine
+     * @param mixed $unite
+     * @param mixed $perdu
+     * @param mixed $gagne
+     * @param \CaseMetier[][] $etatCases
+     * @return void
+     */
     public function afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases)
     {
         if ($perdu) {
@@ -55,7 +65,7 @@ class VueJeu
                     if (!$perdu && !$gagne) {
                         $this->hiddenCase($ligne, $colonne);
                     } else {
-                        $this->noClickable();
+                        $this->noClickable($case->aDrapeau() ? 'flag' : '');
                     }
                 }
             }
@@ -188,10 +198,11 @@ class VueJeu
 
     /**
      * Permet d'afficher une case non-découverte non-cliquable
+     * @param string $class classe additionnelle de la case non découvert, utilisée pour les drapeaux
      */
-    public function noClickable()
+    public function noClickable($class = "")
     {
-        ?> <td class="n-decouvert"></td><?php
+        ?> <td class="n-decouvert <?= $class ?>"></td><?php
     }
 
 

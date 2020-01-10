@@ -223,7 +223,31 @@ class GameState
     {
         return NBR_MINES - $this->drapeauxPosees;
     }
-
+    /**
+     * Place un drapeau sur une case
+     * Si une case a déjà le drapeau, il est retiré,
+     * Si elle n'en a pas, le drapeau est posé
+     *
+     * @param int $x numéro de la colonne
+     * @param int $y numéro de la ligne
+     * @return boolean vrai si le drapeau a été pausé
+     */
+    public function placerDrapeau($x, $y): bool
+    {
+        if ($this->mouvementPossible($x, $y) && !$this->etatCaseJeu[$x][$y]->aDrapeau()) {
+            $aDrapeau = $this->etatCaseJeu[$x][$y]->aDrapeau();
+            $this->etatCaseJeu[$x][$y]->setDrapeau(!$aDrapeau);
+            if ($aDrapeau) {
+                $this->drapeauxPosees--;
+                return false;
+            } else {
+                $this->drapeauxPosees++;
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
     /**
      * Pose un drapeau sur une case
      *
