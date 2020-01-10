@@ -42,7 +42,6 @@ class ControleurJeu
         $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
     }
     
-
     /**
      *
      */
@@ -57,7 +56,7 @@ class ControleurJeu
             $this->modele->incrPartieJouees($pseudo);
         }
         if (!$game->aGagne() && !$game->estPerdu()) {
-            $faitPerdre = $game->jouer($x, $y);
+            $game->jouer($x, $y);
             $_SESSION['game'] = serialize($game);
             if ($game->aGagne() || $game->estPerdu()) {
                 if ($game->aGagne()) {
@@ -70,6 +69,51 @@ class ControleurJeu
         } else {
             $this->afficherJeu();
         }
+    }
+
+    public function placerDrapeau($x, $y)
+    {
+        /**
+         * @var GameState
+         */
+        $game = unserialize($_SESSION['game']);
+        $pseudo = $_SESSION['pseudo'];
+        if (!$game->estCommence() && $game->mouvementPossible($x, $y)) {
+            $this->modele->incrPartieJouees($pseudo);
+        }
+        if (!$game->aGagne() && !$game->estPerdu()) {
+            $game->jouer($x, $y);
+            $_SESSION['game'] = serialize($game);
+            if ($game->aGagne() || $game->estPerdu()) {
+                if ($game->aGagne()) {
+                    $this->modele->incrPartieGagnees($pseudo);
+                }
+                header("Location: ?scores", false, 301);
+            } else {
+                $this->afficherJeu();
+            }
+        } else {
+            $this->afficherJeu();
+        }
+    }
+    /**
+     *
+     */
+    public function afficherJeuModeDrapeau()
+    {
+        $game = unserialize($_SESSION['game']);
+        $gamePerdu = $game->estPecrdu();
+        $gameGagne = $game->aGagne();
+        $etatCases = $game->obtenirEtatJeu();
+        $pseudo = $_SESSION['pseudo'];
+        $centaine = (int)($game->drapeauxRestants()/100);
+        $dizaine = (int)($game->drapeauxRestants()/10)-($centaine*10);
+        $unite = (int)($game->drapeauxRestants())-($centaine*100)-($dizaine*10);
+        if ($game->drapeauxRestants() < 0) {
+            $centaine = "-";
+        }
+
+        $this->vueJeu->afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $gamePerdu, $gameGagne, $etatCases);
     }
     
 

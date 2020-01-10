@@ -21,7 +21,11 @@ class Routeur
             if (isset($_GET['deconnexion'])) {
                 $this->ctrlAuthentification->logout();
             } elseif (isset($_SESSION['game']) && !isset($_GET['reset'])) {
-                if (isset($_GET['x']) && isset($_GET['y'])) {
+                if (isset($_GET['x']) && isset($_GET['y']) && isset($_GET['flag-mode'])) {
+                    $this->ctrlJeu->placerDrapeau($_GET['x'], $_GET['y']);
+                } elseif (isset($_GET['flag-mode'])) {
+                    $this->ctrlJeu->afficherJeuModeDrapeau();
+                } elseif (isset($_GET['x']) && isset($_GET['y'])) {
                     $this->ctrlJeu->jouer($_GET['x'], $_GET['y']);
                 } elseif (isset($_POST['reset-scores'])) {
                     $this->ctrlJeu->resetScores();
