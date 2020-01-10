@@ -59,6 +59,10 @@ class ControleurJeu
             $game->jouer($x, $y);
             $_SESSION['game'] = serialize($game);
             if ($game->aGagne() || $game->estPerdu()) {
+                if (!$this->modele->existsInParties($pseudo)) {
+                    $this->modele->addPartie($pseudo);
+                    $this->modele->incrPartieJouees($pseudo);
+                }
                 if ($game->aGagne()) {
                     $this->modele->incrPartieGagnees($pseudo);
                 }
@@ -86,9 +90,6 @@ class ControleurJeu
             $_SESSION['game'] = serialize($game);
             if ($game->aGagne() || $game->estPerdu()) {
                 if ($game->aGagne()) {
-                    if (!$this->modele->existsInParties($pseudo)) {
-                        $this->modele->addPartie($pseudo);
-                    }
                     $this->modele->incrPartieGagnees($pseudo);
                 }
                 header("Location: ?scores", false, 301);
