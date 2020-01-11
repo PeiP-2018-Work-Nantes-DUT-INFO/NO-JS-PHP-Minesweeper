@@ -239,7 +239,7 @@ class ControleurJeu
         $pseudo = $_SESSION['pseudo'];
         $id = intval($id);
         if ($id < count(CREDITS)) {
-            header("Refresh: 5; URL=index.php?credits=".($id+1));
+            header("Refresh: 3; URL=index.php?credits=".($id+1));
             $mode = CREDITS[$id][0];
             $text = CREDITS[$id][1];
             $lines = explode("\n", $text);
