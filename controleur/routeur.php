@@ -20,7 +20,7 @@ class Routeur
         if (isset($_SESSION['pseudo'])) {
             if (isset($_GET['deconnexion'])) {
                 $this->ctrlAuthentification->logout();
-            } elseif (isset($_SESSION['game']) && !isset($_GET['reset'])) {
+            } elseif (isset($_SESSION['game']) && !isset($_GET['reset']) && !isset($_GET['difficulty'])) {
                 if (isset($_GET['x']) && isset($_GET['y']) && isset($_GET['flag-mode'])) {
                     $this->ctrlJeu->placerDrapeau($_GET['x'], $_GET['y']);
                 } elseif (isset($_GET['flag-mode'])) {
@@ -31,11 +31,24 @@ class Routeur
                     $this->ctrlJeu->resetScores();
                 } elseif (isset($_GET['scores'])) {
                     $this->ctrlJeu->afficherResultat();
+                } elseif (isset($_GET['credits'])) {
+                    $this->ctrlJeu->afficherCredits(filter_input(
+                        INPUT_GET,
+                        'credits',
+                        FILTER_VALIDATE_INT,
+                        array("options" => array(
+                        "default" => 0,
+                        "min_range" => 0))
+                    ));
                 } else {
                     $this->ctrlJeu->afficherJeu();
                 }
             } else {
-                $this->ctrlJeu->nouveauJeu($_SESSION['pseudo']);
+                if (isset($_GET['difficulty'])) {
+                    $this->ctrlJeu->changerDifficultee($_GET['difficulty']);
+                } else {
+                    $this->ctrlJeu->nouveauJeu($_SESSION['pseudo']);
+                }
             }
         } elseif (isset($_POST['username'])) {
             $this->ctrlAuthentification->login($_POST['username'], $_POST['password']);
