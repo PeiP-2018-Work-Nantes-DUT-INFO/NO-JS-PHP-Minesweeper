@@ -107,7 +107,6 @@ O   O R R    I  G   G  I  N  NN A  A L
                BBBB    Y  
                B   B   Y  
                BBBB    Y  
-
 EOT],
          [0,
          <<<EOT
