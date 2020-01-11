@@ -53,16 +53,16 @@ class GameState
     public function __construct($pseudoJoueur)
     {
         $mines = $this->genererMines();
-        $this->etatCaseJeu = array_fill(0, NBR_LIGNES, array_fill(0, NBR_COLONNES, new CaseMetier(false)));
-        for ($i = 0; $i < NBR_LIGNES; $i++) {
-            for ($j = 0; $j < NBR_COLONNES; $j++) {
+        $this->etatCaseJeu = array_fill(0, NBR_COLONNES, array_fill(0, NBR_LIGNES, new CaseMetier(false)));
+        for ($i = 0; $i < NBR_COLONNES; $i++) {
+            for ($j = 0; $j < NBR_LIGNES; $j++) {
                 $this->etatCaseJeu[$i][$j] = new CaseMetier(
                     isset($mines[$i][$j])
                 );
             }
         }
         $this->pseudoJoueur = $pseudoJoueur;
-        $this->caseRestantes = NBR_COLONNES * NBR_LIGNES;
+        $this->caseRestantes = NBR_LIGNES * NBR_COLONNES;
         $this->compterMines($mines);
     }
 
@@ -72,11 +72,11 @@ class GameState
      */
     private function genererMines()
     {
-        $mines = array_fill(0, NBR_LIGNES, []);
+        $mines = array_fill(0, NBR_COLONNES, []);
         $i = 0;
         while ($i < NBR_MINES) {
-            $y = rand(0, NBR_COLONNES - 1);
-            $x = rand(0, NBR_LIGNES - 1);
+            $y = rand(0, NBR_LIGNES - 1);
+            $x = rand(0, NBR_COLONNES - 1);
             if (!isset($mines[$x][$y])) {
                 $mines[$x][$y] = true;
                 $i++;
@@ -137,7 +137,7 @@ class GameState
     private function jouerCaseAdjacentes($x, $y)
     {
         $casesAReveler= [[$x, $y]];
-        $casesAJouer = array_fill(0, NBR_LIGNES, []);
+        $casesAJouer = array_fill(0, NBR_COLONNES, []);
         while (count($casesAReveler) > 0) {
             [$x, $y] = array_pop($casesAReveler);
             if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0 && !$this->etatCaseJeu[$x][$y]->estUneMine()) {
@@ -316,6 +316,6 @@ class GameState
      */
     public function estCommence()
     {
-        return $this->caseRestantes != NBR_COLONNES * NBR_LIGNES;
+        return $this->caseRestantes != NBR_LIGNES * NBR_COLONNES;
     }
 }
