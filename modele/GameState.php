@@ -156,6 +156,7 @@ class GameState
         foreach ($casesAJouer as $x => $ligne) {
             foreach (array_keys($ligne) as $y) {
                 $this->etatCaseJeu[$x][$y]->jouer();
+                $this->caseRestantes--;
             }
         }
     }
