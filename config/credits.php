@@ -52,11 +52,11 @@ AAAA  SSS   SSS  EEE    TT    SSS
 A  A     S     S E      TT       S
 A  A SSSS  SSSS  EEEE   TT   SSSS 
 
-    FFFF RRRR   OOO  M   M     
-    F    R   R O   O MM MM     
-    FFF  RRRR  O   O M M M     
-    F    R R   O   O M   M     
-    F    R  RR  OOO  M   M     
+     FFFF RRRR   OOO  M   M     
+     F    R   R O   O MM MM     
+     FFF  RRRR  O   O M M M     
+     F    R R   O   O M   M     
+     F    R  RR  OOO  M   M     
 EOT],
         [0,
 <<<EOT
@@ -82,7 +82,7 @@ F     OOO  N   N   TT
 EOT],
         [0,
 <<<EOT
- GGG   AA  N   N  GGG  EEEE TTTTTT  SSS  H  H  AA  
+ GGG   AA  N   N  GGG  EEEE TTTTTT  SSS  H  H  AA 
 G     A  A NN  N G     E      TT   S     H  H A  A
 G  GG AAAA N N N G  GG EEE    TT    SSS  HHHH AAAA
 G   G A  A N  NN G   G E      TT       S H  H A  A
