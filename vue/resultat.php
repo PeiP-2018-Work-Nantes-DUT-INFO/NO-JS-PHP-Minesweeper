@@ -44,7 +44,7 @@ class VueResultat extends VueJeu
                 </div>
                 <div class="buttons">
                     <form method="post" action="index.php">
-                        <button name="reset-scores" value="true"><u>R</u>eset Scrores</button>
+                        <button name="reset-scores" value="true"><u>R</u>eset Scores</button>
                     </form>
                     <form method="get">
                         <button formaction="?">OK</button>
