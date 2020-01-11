@@ -220,7 +220,7 @@ class VueJeu
      */
     public function noClickable($class)
     {
-        ?> <td class="n-decouvert <?= $class ?>"></td><?php
+        ?> <td class="n-decouvert disabled-case <?= $class ?>"></td><?php
     }
 
 
