@@ -66,8 +66,10 @@ class GameState
      */
     private $nbrMines;
 
+
     /**
      * Initialise le jeu et génère les mines.
+     * 
      * @param string $pseudoJoueur identifiant du joueur
      * @param int $nbrColonnes Nombre de colonnes du jeu
      * @param int $nbrLignes Nombre de lignes du jeu
@@ -92,8 +94,10 @@ class GameState
         $this->compterMines($mines);
     }
 
+
     /**
      * Permet de genérer les mines
+     * 
      * @return bool[][] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
      */
     private function genererMines()
@@ -111,8 +115,9 @@ class GameState
         return $mines;
     }
 
+
     /**
-     * Permet de jouer
+     * Permet de jouer une case
      *
      * @param int $x numéro de la colonne de la case
      * @param int $y numéro de la ligne de la case
@@ -138,6 +143,7 @@ class GameState
         return false;
     }
 
+
     /**
      * Révèle toutes les mines en fin de jeu
      *
@@ -153,6 +159,8 @@ class GameState
             }
         }
     }
+
+
     /**
      * Permet de jouer les cases adjacentes d'une case donnée.
      *
@@ -189,6 +197,7 @@ class GameState
         }
     }
 
+
     /**
      * Permet de tester, **dans l'état actuel**, si le joueur à gagner
      *
@@ -198,6 +207,7 @@ class GameState
     {
         return $this->caseRestantes == $this->nbrMines;
     }
+
 
     /**
      * Incrémente les cases adjacentes aux mines
@@ -222,6 +232,7 @@ class GameState
         return $nbrMines;
     }
     
+
     /**
      * Permet de tester si un mouvement est possible
      *
@@ -233,6 +244,7 @@ class GameState
     {
         return isset($this->etatCaseJeu[$x][$y]) && !$this->etatCaseJeu[$x][$y]->estJouee() &&!$this->estPerdu;
     }
+
 
     /**
      * Permet de tester si un mouvement fait perdre le jeu
@@ -249,6 +261,8 @@ class GameState
             return false;
         }
     }
+
+
     /**
      * Obtient le nombre de drapeau restants
      * Ce chiffre peut être négatif
@@ -259,6 +273,8 @@ class GameState
     {
         return $this->nbrMines - $this->drapeauxPosees;
     }
+
+
     /**
      * Place un drapeau sur une case
      * Si une case a déjà le drapeau, il est retiré,
@@ -284,6 +300,8 @@ class GameState
             return false;
         }
     }
+
+
     /**
      * Pose un drapeau sur une case
      *
@@ -300,6 +318,7 @@ class GameState
             return false;
         }
     }
+
 
     /**
      * Retire un drapeau d'une case
@@ -318,6 +337,7 @@ class GameState
         }
     }
 
+
     /**
      * Obtient l'etat du jeu
      *
@@ -327,6 +347,7 @@ class GameState
     {
         return $this->etatCaseJeu;
     }
+
 
     /**
      * Permet de savoir si le jeu est perdu
@@ -338,6 +359,7 @@ class GameState
         return $this->estPerdu;
     }
 
+
     /**
      * Permet de savoir si le jeu a été commencé
      *
@@ -348,16 +370,28 @@ class GameState
         return $this->caseRestantes != $this->nbrLignes * $this->nbrColonnes;
     }
 
+
+    /**
+     * Permet d'obtenir le nombre de lignes du jeu actuel
+     */
     public function getNbrLignes()
     {
         return $this->nbrLignes;
     }
 
+
+    /**
+     * Permet d'obtenir le nombre de colonnes du jeu actuel
+     */
     public function getNbrColonnes()
     {
         return $this->nbrColonnes;
     }
 
+
+    /**
+     * Permet d'obtenir le nombre de mines du jeu actuel
+     */
     public function getNbrMines()
     {
         return $this->nbrMines;

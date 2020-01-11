@@ -4,6 +4,7 @@ class VueAuthentification
 {
     /**
      * Affiche la vue de connexion
+     * 
      * @var mixed $err permet d'identifier si il y a erreur ou non
      */
     public function connexion($err)

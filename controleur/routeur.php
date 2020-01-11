@@ -14,7 +14,9 @@ class Routeur
         $this->ctrlJeu = new ControleurJeu();
     }
 
-    // Traite une requête entrante
+    /**
+     * Permet de traiter une requête entrante
+     */
     public function routerRequete()
     {
         if (isset($_SESSION['pseudo'])) {
@@ -45,7 +47,7 @@ class Routeur
                 }
             } else {
                 if (isset($_GET['difficulty'])) {
-                    $this->ctrlJeu->changerDifficultee($_GET['difficulty']);
+                    $this->ctrlJeu->changerDifficulte($_GET['difficulty']);
                 } else {
                     $this->ctrlJeu->nouveauJeu($_SESSION['pseudo']);
                 }
