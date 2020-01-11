@@ -14,12 +14,37 @@ class VueJeu
      * @param boolean $perdu vrai si le jeu est perdu
      * @param boolean $gagne vrai si le jeu est gagné
      * @param \CaseMetier[][] $etatCases un tableau a 2 dimensions de Case
-     * @param bool $flagMode
+     * @param bool $flagMode si le on est en mode placement de drapeaux
+     * @param int $nbrLignes nombre de lignes
+     * @param int $nbrColonnes nombre de colonnes
+     * @param int $difficulty la difficultée du niveau
      */
-    public function afficherVueJeu($pseudo, $centaine, $dizaine, $unite, $perdu, $gagne, $etatCases, $flagMode)
-    {
+    public function afficherVueJeu(
+        $pseudo,
+        $centaine,
+        $dizaine,
+        $unite,
+        $perdu,
+        $gagne,
+        $etatCases,
+        $flagMode,
+        $nbrLignes,
+        $nbrColonnes,
+        $difficulty
+    ) {
         headerPageJeu($pseudo);
-        $this->afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases, $flagMode);
+        $this->afficherPopupJeu(
+            $centaine,
+            $dizaine,
+            $unite,
+            $perdu,
+            $gagne,
+            $etatCases,
+            $flagMode,
+            $nbrLignes,
+            $nbrColonnes,
+            $difficulty
+        );
         //$this->close_gameTable();
         $this->afficherWinBar();
         footerPageJeu();
@@ -34,21 +59,34 @@ class VueJeu
      * @param mixed $gagne
      * @param \CaseMetier[][] $etatCases
      * @param bool $flagMode
+     * @param int $nbrLignes
+     * @param int $nbrColonnes
+     * @param int $difficulty la difficultée du niveau
      * @return void
      */
-    public function afficherPopupJeu($centaine, $dizaine, $unite, $perdu, $gagne, $etatCases, $flagMode)
-    {
+    public function afficherPopupJeu(
+        $centaine,
+        $dizaine,
+        $unite,
+        $perdu,
+        $gagne,
+        $etatCases,
+        $flagMode,
+        $nbrLignes,
+        $nbrColonnes,
+        $difficulty
+    ) {
         if ($perdu) {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'dead', $flagMode);
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'dead', $flagMode, $difficulty);
         } elseif ($gagne) {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'boss', $flagMode);
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'boss', $flagMode, $difficulty);
         } else {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'smile', $flagMode);
+            $this->headerMinesweeper($centaine, $dizaine, $unite, 'smile', $flagMode, $difficulty);
         }
         $this->openGameTable();
-        for ($ligne=0; $ligne < NBR_LIGNES; $ligne++) {
+        for ($ligne=0; $ligne < $nbrLignes; $ligne++) {
             $this->openTableLine();
-            for ($colonne=0; $colonne < NBR_COLONNES; $colonne++) {
+            for ($colonne=0; $colonne < $nbrColonnes; $colonne++) {
                 $case = $etatCases[$colonne][$ligne];
                 $nb_mines = $case->getMinesAdjacentes();
                 if ($case->estUneMine() && $case->estJouee()) {
@@ -92,9 +130,10 @@ class VueJeu
      * @param int $dizaine la dizaine de drapeaux restant
      * @param int $unite l'unité de drapeaux restant
      * @param string $smiley la tete du smiley a afficher
+     * @param int $difficulty la diffultée du niveau
      * @param boolean $flagMode
      */
-    public function headerMinesweeper($centaine, $dizaine, $unite, $smiley, $flagMode)
+    public function headerMinesweeper($centaine, $dizaine, $unite, $smiley, $flagMode, $difficulty)
     {
         ?>
         <div class="popup minesweeper">
@@ -112,12 +151,12 @@ class VueJeu
                         <ul class="dropdown-menu">
                             <li><a href="index.php?reset"><div class="w18"></div><p>New</p></a></li>
                             <li class="separator"></li>
-                            <li><a href="#"><div class="w18 checked"></div><p>Beginner</p></a></li>
-                            <li><a href="#"><div class="w18"></div><p>Intermediate</p></a></li>
-                            <li><a href="#"><div class="w18"></div><p>Expert</p></a></li>
+                            <li><a href="<?= $difficulty !== 0 ? 'index.php?difficulty=default': '#'?>"><div class="w18 <?= $difficulty === 0? 'checked': ''?>"></div><p>Beginner</p></a></li>
+                            <li><a href="<?= $difficulty !== 1 ? 'index.php?difficulty=1': '#'?>"><div class="w18 <?= $difficulty === 1? 'checked': ''?>"></div><p>Intermediate</p></a></li>
+                            <li><a href="<?= $difficulty !== 2 ? 'index.php?difficulty=2': '#'?>"><div class="w18 <?= $difficulty === 2? 'checked': ''?>"></div><p>Expert</p></a></li>
                             <li class="separator"></li>
                             <li><a href="#"><div class="w18"></div><p>Marks (?)</p></a></li>
-                            <li><a href="#"><div class="w18 checked"></div><p>Color</p></a></li>
+                            <li><a href="#"><div class="w18"></div><p>Color</p></a></li>
                             <li><a href="#"><div class="w18"></div><p>Sound</p></a></li>
                             <li class="separator"></li>
                             <li><a href="index.php?scores"><div class="w18"></div><p>Best Players...</p></a></li>
@@ -131,7 +170,7 @@ class VueJeu
                             <li><a href="#"><div class="w18"></div><p>Search for Help on ...</p></a></li>
                             <li><a href="#"><div class="w18"></div><p>Using Help</p></a></li>
                             <li class="separator"></li>
-                            <li><a href="#"><div class="w18"></div><p>Credits</p></a></li>
+                            <li><a href="index.php?credits"><div class="w18"></div><p>Credits</p></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -255,7 +294,7 @@ class VueJeu
                     <div class="date">
                     <?php
                         $utc1 = 3600;
-        echo gmdate('g:i A', time()+($utc1)); ?>
+                    echo gmdate('g:i A', time()+($utc1)); ?>
                     </div>
                 </div>
             </div>

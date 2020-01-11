@@ -46,23 +46,49 @@ class GameState
      * @var boolean
      */
     private $estPerdu;
+
+    /**
+     * Nombre de colonnes du jeu
+     * @var int
+     */
+    private $nbrColonnes;
+
+    /**
+     * Nombre de lignes du jeu
+     * @var int
+     */
+    private $nbrLignes;
+
+    /**
+     * Nombre de mines du jeu
+     *
+     * @var int
+     */
+    private $nbrMines;
+
     /**
      * Initialise le jeu et génère les mines.
      * @param string $pseudoJoueur identifiant du joueur
+     * @param int $nbrColonnes Nombre de colonnes du jeu
+     * @param int $nbrLignes Nombre de lignes du jeu
+     * @param int $nbrMines Nombre de mines du jeu
      */
-    public function __construct($pseudoJoueur)
+    public function __construct($pseudoJoueur, $nbrColonnes, $nbrLignes, $nbrMines)
     {
+        $this->nbrColonnes = $nbrColonnes;
+        $this->nbrLignes = $nbrLignes;
+        $this->nbrMines = $nbrMines;
         $mines = $this->genererMines();
-        $this->etatCaseJeu = array_fill(0, NBR_COLONNES, array_fill(0, NBR_LIGNES, new CaseMetier(false)));
-        for ($i = 0; $i < NBR_COLONNES; $i++) {
-            for ($j = 0; $j < NBR_LIGNES; $j++) {
+        $this->etatCaseJeu = array_fill(0, $nbrColonnes, array_fill(0, $this->nbrLignes, new CaseMetier(false)));
+        for ($i = 0; $i < $nbrColonnes; $i++) {
+            for ($j = 0; $j < $nbrLignes; $j++) {
                 $this->etatCaseJeu[$i][$j] = new CaseMetier(
                     isset($mines[$i][$j])
                 );
             }
         }
         $this->pseudoJoueur = $pseudoJoueur;
-        $this->caseRestantes = NBR_LIGNES * NBR_COLONNES;
+        $this->caseRestantes = $nbrColonnes * $nbrLignes;
         $this->compterMines($mines);
     }
 
@@ -72,11 +98,11 @@ class GameState
      */
     private function genererMines()
     {
-        $mines = array_fill(0, NBR_COLONNES, []);
+        $mines = array_fill(0, $this->nbrColonnes, []);
         $i = 0;
-        while ($i < NBR_MINES) {
-            $y = rand(0, NBR_LIGNES - 1);
-            $x = rand(0, NBR_COLONNES - 1);
+        while ($i < $this->nbrMines) {
+            $y = rand(0, $this->nbrLignes - 1);
+            $x = rand(0, $this->nbrColonnes - 1);
             if (!isset($mines[$x][$y])) {
                 $mines[$x][$y] = true;
                 $i++;
@@ -137,7 +163,7 @@ class GameState
     private function jouerCaseAdjacentes($x, $y)
     {
         $casesAReveler= [[$x, $y]];
-        $casesAJouer = array_fill(0, NBR_COLONNES, []);
+        $casesAJouer = array_fill(0, $this->nbrColonnes, []);
         while (count($casesAReveler) > 0) {
             [$x, $y] = array_pop($casesAReveler);
             if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0 && !$this->etatCaseJeu[$x][$y]->estUneMine()) {
@@ -170,7 +196,7 @@ class GameState
      */
     public function aGagne() : bool
     {
-        return $this->caseRestantes == NBR_MINES;
+        return $this->caseRestantes == $this->nbrMines;
     }
 
     /**
@@ -231,7 +257,7 @@ class GameState
      */
     public function drapeauxRestants() : int
     {
-        return NBR_MINES - $this->drapeauxPosees;
+        return $this->nbrMines - $this->drapeauxPosees;
     }
     /**
      * Place un drapeau sur une case
@@ -319,6 +345,21 @@ class GameState
      */
     public function estCommence()
     {
-        return $this->caseRestantes != NBR_LIGNES * NBR_COLONNES;
+        return $this->caseRestantes != $this->nbrLignes * $this->nbrColonnes;
+    }
+
+    public function getNbrLignes()
+    {
+        return $this->nbrLignes;
+    }
+
+    public function getNbrColonnes()
+    {
+        return $this->nbrColonnes;
+    }
+
+    public function getNbrMines()
+    {
+        return $this->nbrMines;
     }
 }

@@ -103,4 +103,9 @@ class CaseMetier
     {
         return $this->getMinesAdjacentes() > 0 && !$this->estUneMine() && $this->aDrapeau();
     }
+
+    public function setMine($mine)
+    {
+        $this->estMine = $mine;
+    }
 }
