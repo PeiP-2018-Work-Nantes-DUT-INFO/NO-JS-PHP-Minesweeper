@@ -116,12 +116,24 @@ class VueJeu
                             <li><a href="#"><div class="w18"></div><p>Intermediate</p></a></li>
                             <li><a href="#"><div class="w18"></div><p>Expert</p></a></li>
                             <li class="separator"></li>
+                            <li><a href="#"><div class="w18"></div><p>Marks (?)</p></a></li>
+                            <li><a href="#"><div class="w18 checked"></div><p>Color</p></a></li>
+                            <li><a href="#"><div class="w18"></div><p>Sound</p></a></li>
+                            <li class="separator"></li>
                             <li><a href="index.php?scores"><div class="w18"></div><p>Best Players...</p></a></li>
                             <li class="separator"></li>
                             <li><a href="index.php?deconnexion"><div class="w18"></div><p>Exit</p></a></li>
                         </ul>
                     </li>
-                    <li id="help"><u>H</u>elp</li>
+                    <li id="help"><u>H</u>elp
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><div class="w18"></div><p>Content</p></a></li>
+                            <li><a href="#"><div class="w18"></div><p>Search for Help on ...</p></a></li>
+                            <li><a href="#"><div class="w18"></div><p>Using Help</p></a></li>
+                            <li class="separator"></li>
+                            <li><a href="#"><div class="w18"></div><p>Credits</p></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="content" id="game_container">
