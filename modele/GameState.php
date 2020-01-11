@@ -147,7 +147,7 @@ class GameState
                             if ($this->etatCaseJeu[$i][$j]->getMinesAdjacentes() === 0) {
                                 $casesAReveler[] = [$i, $j];
                             }
-                            $casesAJouer[$i][$j] =true;
+                            $casesAJouer[$i][$j] = true;
                         }
                     }
                 }
@@ -155,8 +155,10 @@ class GameState
         }
         foreach ($casesAJouer as $x => $ligne) {
             foreach (array_keys($ligne) as $y) {
+                if (!$this->etatCaseJeu[$x][$y]->estJouee()) {
+                    $this->caseRestantes--;
+                }
                 $this->etatCaseJeu[$x][$y]->jouer();
-                $this->caseRestantes--;
             }
         }
     }
