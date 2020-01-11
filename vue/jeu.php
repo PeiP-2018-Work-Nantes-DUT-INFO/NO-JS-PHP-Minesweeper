@@ -46,9 +46,9 @@ class VueJeu
             $this->headerMinesweeper($centaine, $dizaine, $unite, 'smile', $flagMode);
         }
         $this->openGameTable();
-        for ($ligne=0; $ligne < count($etatCases); $ligne++) {
+        for ($ligne=0; $ligne < NBR_COLONNES; $ligne++) {
             $this->openTableLine();
-            for ($colonne=0; $colonne < count($etatCases[$ligne]); $colonne++) {
+            for ($colonne=0; $colonne < NBR_LIGNES; $colonne++) {
                 $case = $etatCases[$colonne][$ligne];
                 $nb_mines = $case->getMinesAdjacentes();
                 if ($case->estUneMine() && $case->estJouee()) {
