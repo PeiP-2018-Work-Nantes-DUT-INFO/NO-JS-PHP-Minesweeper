@@ -157,7 +157,7 @@ class VueJeu
                             <li><a href="<?= $difficulty !== 2 ? 'index.php?difficulty=2': '#'?>"><div class="w18 <?= $difficulty === 2? 'checked': ''?>"></div><p>Expert</p></a></li>
                             <li class="separator"></li>
                             <li><a href="#"><div class="w18"></div><p>Marks (?)</p></a></li>
-                            <li><a href="#"><div class="w18"></div><p>Color</p></a></li>
+                            <li><a href="#"><div class="w18 checked"></div><p>Color</p></a></li>
                             <li><a href="#"><div class="w18"></div><p>Sound</p></a></li>
                             <li class="separator"></li>
                             <li><a href="index.php?scores"><div class="w18"></div><p>Best Players...</p></a></li>
