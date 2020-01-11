@@ -169,6 +169,10 @@ main {
     border-right-color: var(--gris-fonce);
 }
 
+.n-decouvert.disabled-case {
+    pointer-events: none;
+}
+
 .minesweeper .n-decouvert a,
 .minesweeper .decouvert a {
     display: block;
