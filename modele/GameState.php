@@ -136,19 +136,26 @@ class GameState
      */
     private function jouerCaseAdjacentes($x, $y)
     {
-        if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0 && !$this->etatCaseJeu[$x][$y]->estUneMine()) {
-            $casesAJouer = array_fill(0, NBR_LIGNES, []);
-            for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
-                for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
-                    if (isset($this->etatCaseJeu[$i][$j]) && !$this->etatCaseJeu[$i][$j]->estUneMine()) {
-                        $casesAJouer[$i][$j] =true;
+        $casesAReveler= [[$x, $y]];
+        $casesAJouer = array_fill(0, NBR_LIGNES, []);
+        while (count($casesAReveler) > 0) {
+            [$x, $y] = array_pop($casesAReveler);
+            if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0 && !$this->etatCaseJeu[$x][$y]->estUneMine()) {
+                for ($i = $x - 1, $cptI = 0; $cptI < 3; $i++, $cptI++) {
+                    for ($j = $y - 1, $cptJ = 0; $cptJ < 3; $j++, $cptJ++) {
+                        if (isset($this->etatCaseJeu[$i][$j]) && !$this->etatCaseJeu[$i][$j]->estUneMine() && !isset($casesAJouer[$i][$j])) {
+                            if ($this->etatCaseJeu[$i][$j]->getMinesAdjacentes() === 0) {
+                                $casesAReveler[] = [$i, $j];
+                            }
+                            $casesAJouer[$i][$j] =true;
+                        }
                     }
                 }
             }
-            foreach ($casesAJouer as $x => $ligne) {
-                foreach (array_keys($ligne) as $y) {
-                    $this->jouer($x, $y);
-                }
+        }
+        foreach ($casesAJouer as $x => $ligne) {
+            foreach (array_keys($ligne) as $y) {
+                $this->etatCaseJeu[$x][$y]->jouer();
             }
         }
     }
