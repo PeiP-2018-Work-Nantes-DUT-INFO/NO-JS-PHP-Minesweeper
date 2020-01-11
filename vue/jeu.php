@@ -99,7 +99,7 @@ class VueJeu
         ?>
         <div class="popup minesweeper">
             <div class="header">
-                <div class="title"><p>Minesweeper</p></div>
+                <div class="title">Minesweeper</div>
                 <div class="buttons">
                     <div class="btn hide-btn disable"></div>
                     <div class="btn resize-btn disable"></div>
