@@ -9,7 +9,22 @@ require_once PATH_VUE.'/bandeau/piedDePageJeu.php';
  */
 class VueResultat extends VueJeu
 {
-
+    /**
+     * Permet d'afficher la vue des résultats
+     * 
+     * @param mixed[] $winners un tableau d'objets représentants des gagnants
+     * @param string $pseudo identifiant du joueur
+     * @param int $centaine la centaine de drapeaux restant
+     * @param int $dizaine la dizaine de drapeaux restant
+     * @param int $unite l'unité de drapeaux restant
+     * @param boolean $perdu vrai si le jeu est perdu
+     * @param boolean $gagne vrai si le jeu est gagné
+     * @param \CaseMetier[][] $etatCases un tableau a 2 dimensions de Case
+     * @param bool $flagMode si le on est en mode placement de drapeaux
+     * @param int $nbrLignes nombre de lignes
+     * @param int $nbrColonnes nombre de colonnes
+     * @param int $difficulty la difficultée du niveau
+     */
     public function afficherVueResultat($winners, $pseudo, ...$args)
     {
         headerPageJeu($pseudo);

@@ -45,49 +45,60 @@ class CaseMetier
         $this->aDrapeau = false;
     }
 
+
     public function jouer()
     {
         $this->jouee = true;
     }
+
+
     public function incrementerCompteurMine()
     {
         $this->nombreMinesAdjancentes++;
     }
+
 
     public function getMinesAdjacentes() : int
     {
         return $this->nombreMinesAdjancentes;
     }
 
+
     public function estUneMine() : bool
     {
         return $this->estMine;
     }
+
 
     public function estJouee() : bool
     {
         return $this->jouee;
     }
     
+
     public function setDrapeau($etat)
     {
         $this->aDrapeau = $etat;
     }
+
 
     public function aDrapeau() : bool
     {
         return $this->aDrapeau;
     }
 
+
     public function surbriller()
     {
         $this->estEnSurbrillance = true;
     }
 
+
     public function getSurbrillance()
     {
         return $this->estEnSurbrillance;
     }
+
 
     /**
      * Permet de savoir si la mine doit être affichée "barrée".
@@ -104,6 +115,7 @@ class CaseMetier
         return $this->getMinesAdjacentes() > 0 && !$this->estUneMine() && $this->aDrapeau();
     }
 
+    
     public function setMine($mine)
     {
         $this->estMine = $mine;

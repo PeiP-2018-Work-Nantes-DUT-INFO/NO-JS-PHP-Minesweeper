@@ -13,11 +13,21 @@ class ControleurAuthentification
         $this->modele = new Modele();
     }
 
+
+    /**
+     * Permet de charger la vue de connexion
+     */
     public function accueil()
     {
         $this->vue->connexion(null);
     }
 
+
+    /**
+     * Permet de connecter un utilisateur
+     * @param string $login l'identifiant
+     * @param string $password le mot de passe
+     */
     public function login($login, $password)
     {
         if ($this->modele->existsInJoueurs($login)) {
@@ -32,6 +42,10 @@ class ControleurAuthentification
         }
     }
 
+
+    /**
+     * Permet de déconnecter un utilisateur
+     */
     public function logout()
     {
         session_destroy();

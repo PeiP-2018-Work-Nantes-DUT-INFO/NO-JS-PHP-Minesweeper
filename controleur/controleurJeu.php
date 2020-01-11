@@ -11,9 +11,6 @@ class ControleurJeu
     private $vueResultat;
     private $modele;
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->vueJeu = new VueJeu();
@@ -23,7 +20,7 @@ class ControleurJeu
 
 
     /**
-     *
+     * Permet de charger la vue du jeu
      */
     public function afficherJeu()
     {
@@ -55,12 +52,16 @@ class ControleurJeu
             false,
             $game->getNbrLignes(),
             $game->getNbrColonnes(),
-            $this->getSessionDifficultee()
+            $this->getSessionDifficulte()
         );
     }
-    
+
+
     /**
-     *
+     * Permet de jouer une case
+     * 
+     * @param int $x la coordonnée x de la case à jouer
+     * @param int $y la coordonnée y de la case à jouer
      */
     public function jouer($x, $y)
     {
@@ -92,21 +93,34 @@ class ControleurJeu
         }
     }
 
-    public function changerDifficultee($difficultee)
+
+    /**
+     * Permet changer la difficulté du jeu en changeant la taille et le nombre de mines
+     * 
+     * @param string $difficulte le niveau de difficulté : 0, 1 ou 2
+     */
+    public function changerDifficulte($difficulte)
     {
-        switch ($difficultee) {
+        switch ($difficulte) {
             case "1":
-                $_SESSION['difficultee'] = 1;
+                $_SESSION['difficulte'] = 1;
                 break;
             case "2":
-                $_SESSION['difficultee'] = 2;
+                $_SESSION['difficulte'] = 2;
                 break;
             default:
-                $_SESSION['difficultee'] = 0;
+                $_SESSION['difficulte'] = 0;
         }
         $this->nouveauJeu();
     }
 
+
+    /**
+     * Permet de placer un drapeau sur une case
+     * 
+     * @param int $x numéro de la colonne de la case
+     * @param int $y numéro de la ligne de la case
+     */
     public function placerDrapeau($x, $y)
     {
         /**
@@ -118,8 +132,9 @@ class ControleurJeu
         $this->afficherJeuModeDrapeau();
     }
 
+
     /**
-     *
+     * Permet de charger la vue du jeu en mode drapeau
      */
     public function afficherJeuModeDrapeau()
     {
@@ -151,21 +166,31 @@ class ControleurJeu
             true,
             $game->getNbrLignes(),
             $game->getNbrColonnes(),
-            $this->getSessionDifficultee()
+            $this->getSessionDifficulte()
         );
     }
-    private function getSessionDifficultee()
+
+
+    /**
+     * Permet d'obtenir le niveau de difficulté actuel du jeu
+     */
+    private function getSessionDifficulte()
     {
-        if (isset($_SESSION['difficultee'])) {
-            return $_SESSION['difficultee'];
+        if (isset($_SESSION['difficulte'])) {
+            return $_SESSION['difficulte'];
         } else {
-            $_SESSION['difficultee'] = 0;
+            $_SESSION['difficulte'] = 0;
             return 0;
         }
     }
-    private function getDifficultee()
+
+
+    /**
+     * Permet d'obtenir les caractéristiques du niveau de difficulté actuel du jeu : taille et nombre de mines
+     */
+    private function getDifficulte()
     {
-        switch ($this->getSessionDifficultee()) {
+        switch ($this->getSessionDifficulte()) {
             case 1: // Mode intermediaire
                 return [16, 16, 40];
                 break;
@@ -176,14 +201,16 @@ class ControleurJeu
                 return [NBR_COLONNES, NBR_LIGNES, NBR_MINES];
             }
     }
+
+
     /**
-     *
+     * Permet de démarrer une nouvelle partie
      */
     public function nouveauJeu()
     {
         header("Refresh: 30; URL=index.php?credits");
         $pseudo = $_SESSION['pseudo'];
-        [$nbrColonnes, $nbrLignes, $nbrMines] = $this->getDifficultee();
+        [$nbrColonnes, $nbrLignes, $nbrMines] = $this->getDifficulte();
         $game = new GameState($pseudo, $nbrColonnes, $nbrLignes, $nbrMines);
         $_SESSION['game'] = serialize($game);
         if (!$this->modele->existsInParties($pseudo)) {
@@ -202,6 +229,10 @@ class ControleurJeu
         $this->afficherResultat();
     }
 
+
+    /**
+     * Permet de charger la vue des résultats
+     */
     public function afficherResultat()
     {
         $game = unserialize($_SESSION['game']);
@@ -230,10 +261,16 @@ class ControleurJeu
             false,
             $game->getNbrLignes(),
             $game->getNbrColonnes(),
-            $this->getSessionDifficultee()
+            $this->getSessionDifficulte()
         );
     }
 
+
+    /**
+     * Permet de charger les vues de crédits
+     * 
+     * @param string $id le numéro de la page de crédits à charger
+     */
     public function afficherCredits($id)
     {
         $pseudo = $_SESSION['pseudo'];

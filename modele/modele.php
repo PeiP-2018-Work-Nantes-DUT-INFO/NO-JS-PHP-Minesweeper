@@ -49,10 +49,9 @@ class Modele
     }
 
 
-
-
-    // A développer
-    // méthode qui permet de se deconnecter de la base
+    /**
+     * Méthode qui permet de se deconnecter de la base
+     */
     public function deconnexion()
     {
         $this->connexion=null;
@@ -84,28 +83,6 @@ class Modele
         }
     }
 
-    //A développer
-    // utiliser une requête classique
-    // méthode qui permet de récupérer les pseudos dans la table pseudo
-    // post-condition:
-    //retourne un tableau à une dimension qui contient les pseudos.
-    // si un problème est rencontré, une exception de type TableAccesException est levée
-
-    public function getPseudos()
-    {
-        try {
-            $statement=$this->connexion->query("SELECT pseudo from joueurs;");
-
-            while ($ligne=$statement->fetch()) {
-                $result[]=$ligne['pseudo'];
-            }
-            return($result);
-        } catch (PDOException $e) {
-            throw new TableAccesException("problème avec la table pseudonyme");
-        }
-    }
-
-
 
     /**
      * Permet de s'avoir si un pseudo existe dans la table joueurs
@@ -127,7 +104,6 @@ class Modele
             throw new TableAccesException("Problème avec la table joueurs");
         }
     }
-
 
 
     /**
@@ -152,60 +128,9 @@ class Modele
     }
 
 
-
-    //A développer
-    // utiliser uen requête préparée
-    // ajoute un message sur le salon => pseudonyme + message
-    // precondition: le pseudo existe dans la table pseudonyme
-    // post-condition: le message est ajouté dans la table salon
-    // si un problème est rencontré, une exception de type TableAccesException est levée
-
-    public function majSalon($pseudo, $message)
-    {
-        try {
-            $statement = $this->connexion->prepare("select pseudo from joueurs where pseudo=?;");
-            $statement->bindParam(1, $pseudoParam);
-            $pseudoParam=$pseudo;
-            $statement->execute();
-            $result=$statement->fetch(PDO::FETCH_ASSOC);
-            $statement = $this->connexion->prepare("INSERT INTO salon (idpseudo, message) VALUES (?,?);");
-            $statement->bindParam(1, $result['id']);
-            $statement->bindParam(2, $message);
-            $statement->execute();
-        } catch (PDOException $e) {
-            $this->deconnexion();
-            throw new TableAccesException("problème avec la table salon");
-        }
-    }
-
-
-
-
-
-
-    //A développer
-    //utiliser une requête classique
-    // méthode qui permet de récupérer les 10 derniers messages émis sur le salon
-    // post-condition:
-    //retourne un tableau qui contient des objets de type Message (script de la classe Message dans le répertoire métier)
-    // c'est en fait simplement le résultat de l'application de la méthode fetchAll() avec le bon paramètre
-    // si un problème est rencontré, une exception de type TableAccesException est levée
-
-    public function get10RecentMessage()
-    {
-        try {
-            $statement=$this->connexion->query("SELECT pseudonyme.pseudo ,salon.message FROM salon, pseudonyme where salon.idpseudo=pseudonyme.id ORDER BY salon.id DESC LIMIT 0, 10;");
-
-            return($statement->fetchAll(PDO::FETCH_CLASS, "Message"));
-        } catch (PDOException $e) {
-            $this->deconnexion();
-            throw new TableAccesException("problème avec la table salon");
-        }
-    }
-
-
     /**
      * Permet d'ajouter un joueur dans la table des parties
+     * 
      * @param string $pseudo identifiant du joueur
      */
     public function addPartie($pseudo)
@@ -223,6 +148,7 @@ class Modele
 
     /**
      * Permet d'incrémenter les parties jouées d'un joueur
+     * 
      * @param string $pseudo identifiant du joueur
      */
     public function incrPartieJouees($pseudo)
@@ -247,6 +173,7 @@ class Modele
 
     /**
      * Permet d'incrémenter les parties gagnées d'un joueur
+     * 
      * @param string $pseudo identifiant du joueur
      */
     public function incrPartieGagnees($pseudo)
@@ -271,6 +198,7 @@ class Modele
 
     /**
      * Permet d'obtenir un tableau des 3 meilleurs joueurs
+     * 
      * @return array ['pseudo', 'nbPartiesJouees', 'nbPartiesGagnees']
      */
     public function get3MeilleursDemineurs()
@@ -287,6 +215,7 @@ class Modele
 
     /**
      * Permet d'obtenir les données d'un joueur
+     * 
      * @return array ['pseudo', 'nbPartiesJouees', 'nbPartiesGagnees']
      */
     public function getDataDemineur($pseudo)
@@ -304,8 +233,7 @@ class Modele
 
 
     /**
-     * 
-     * 
+     * Permet de vider la table 'parties'
      */
     public function resetParties()
     {

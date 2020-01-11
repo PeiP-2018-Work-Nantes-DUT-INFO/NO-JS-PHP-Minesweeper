@@ -7,6 +7,7 @@ class VueJeu
 {
     /**
      * Permet d'afficher la vue du jeu
+     * 
      * @param string $pseudo identifiant du joueur
      * @param int $centaine la centaine de drapeaux restant
      * @param int $dizaine la dizaine de drapeaux restant
@@ -49,9 +50,11 @@ class VueJeu
         $this->afficherWinBar();
         footerPageJeu();
     }
+
+
     /**
-     * Undocumented function
-     *
+     * Permet d'afficher la fenêtre/div contenant le jeu
+     * 
      * @param mixed $centaine
      * @param mixed $dizaine
      * @param mixed $unite
@@ -121,11 +124,9 @@ class VueJeu
     }
 
 
-   
-
-
     /**
      * Permet d'ouvrir et d'afficher le haut du jeu 'Minesweeper'
+     * 
      * @param int $centaine la centaine de drapeaux restant
      * @param int $dizaine la dizaine de drapeaux restant
      * @param int $unite l'unité de drapeaux restant
@@ -227,6 +228,7 @@ class VueJeu
 
     /**
      * Permet d'afficher une case non-decouverte
+     * 
      * @param int $ligne le numéro de la ligne
      * @param int $colonne le numéro de la colonne
      * @param bool $flagMode
@@ -244,6 +246,7 @@ class VueJeu
 
     /**
      * Permet d'afficher une case découverte
+     * 
      * @param string $class nombre de mines
      * @param string $display le nombre de mine a afficher : ' ' si $class == 0, $class si $class > 0, '*' si est une mine
      */
@@ -255,6 +258,7 @@ class VueJeu
 
     /**
      * Permet d'afficher une case non-découverte non-cliquable
+     * 
      * @param string $class classe additionnelle de la case non découvert, utilisée pour les drapeaux
      */
     public function noClickable($class)
@@ -274,6 +278,9 @@ class VueJeu
     }
 
 
+    /**
+     * Permet d'afficher la barre windows
+     */
     public function afficherWinBar()
     {
         ?>
