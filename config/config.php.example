@@ -1,4 +1,9 @@
 <?php
+/**
+ * @version 1.0.0
+ * @license MIT
+ * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
+ */
 
 // Chemin complet sur le serveur de la racine du site, il est supposé que config.php est dans un sous-repertoire de la racine du site
 define("HOME_SITE",__DIR__."/..");

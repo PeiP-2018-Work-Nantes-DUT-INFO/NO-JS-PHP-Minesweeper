@@ -1,4 +1,9 @@
 <?php
+/**
+ * @version 1.0.0
+ * @license MIT
+ * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
+ */
 
 require_once 'controleurAuthentification.php';
 require_once 'controleurJeu.php';

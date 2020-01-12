@@ -1,5 +1,11 @@
 <?php
 /**
+ * @version 1.0.0
+ * @license MIT
+ * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
+ */
+
+/**
  * Permet de charger la balise head ainsi que le haut de la page
  * 
  * @param string $pseudo identifiant du joueur
