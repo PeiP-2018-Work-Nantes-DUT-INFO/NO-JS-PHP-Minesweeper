@@ -7,9 +7,8 @@
 
 require_once 'Case.php';
 
-
 /**
- * Class content l'état de jeu
+ * Class qui contient l'état de jeu d'une partie
  */
 class GameState
 {

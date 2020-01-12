@@ -1,4 +1,9 @@
 <?php
+/**
+ * @version 1.0.0
+ * @license MIT
+ * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
+ */
 
 require_once PATH_VUE.'/bandeau/bandeauJeu.php';
 require_once PATH_VUE.'/bandeau/piedDePageJeu.php';

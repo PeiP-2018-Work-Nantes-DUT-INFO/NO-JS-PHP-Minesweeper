@@ -1,4 +1,10 @@
 <?php
+/**
+ * @version 1.0.0
+ * @license MIT
+ * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
+ */
+
 class CaseMetier
 {
     /**
@@ -102,11 +108,10 @@ class CaseMetier
 
     /**
      * Permet de savoir si la mine doit être affichée "barrée".
-     * Dans le minesweeper original, lorsque le jeu est perdu,
      * Dans le jeu original, lorsque le joueur clique sur une mine,
      * toutes les case portant un drapeau, qui ne sont pas une mine,
-     * et qui sont adjacentes à une mine, sont révélées avec un icone "mine barré"
-     * indiquant que le joueur s'est trompé
+     * sont révélées avec un icone "mine barré" indiquant que
+     * le joueur s'est trompé.
      *
      * @return boolean
      */

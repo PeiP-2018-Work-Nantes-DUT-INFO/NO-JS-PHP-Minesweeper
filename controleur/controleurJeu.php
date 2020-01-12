@@ -1,9 +1,14 @@
 <?php
+/**
+ * @version 1.0.0
+ * @license MIT
+ * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
+ */
+
 require_once PATH_VUE."/jeu.php";
 require_once PATH_VUE."/resultat.php";
 require_once PATH_MODELE."/GameState.php";
 require_once PATH_MODELE."/modele.php";
-
 
 class ControleurJeu
 {
