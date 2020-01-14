@@ -22,9 +22,9 @@ M   M III N   N EEEE SSSS    W W   EEEE EEEE P     EEEE R  RR
                             V V    11
                              V    11l1
 EOT
-],
+        ],
         [0,
-<<<'EOT'
+        <<<'EOT'
 EEEE L    III  OOO  TTTTTT TTTTTT
 E    L     I  O   O   TT     TT  
 EEE  L     I  O   O   TT     TT  
@@ -37,9 +37,9 @@ D  D U   U BBBB  O   O  I   SSS
 D  D U   U B   B O   O  I      S
 DDD   UUU  BBBB   OOO  III SSSS 
 EOT
-],
+        ],
         [0,
-<<<'EOT'
+        <<<'EOT'
  SSS  III M   M  OOO  N   N
 S      I  MM MM O   O NN  N
  SSS   I  M M M O   O N N N
@@ -52,9 +52,9 @@ S     A  A S     S      I
     S A  A     S     S  I 
 SSSS  A  A SSSS  SSSS  III
 EOT
-],
+        ],
         [1,
-<<<'EOT'
+        <<<'EOT'
  AA   SSS   SSS  EEEE TTTTTT  SSS 
 A  A S     S     E      TT   S    
 AAAA  SSS   SSS  EEE    TT    SSS 
@@ -67,18 +67,18 @@ A  A SSSS  SSSS  EEEE   TT   SSSS
      F    R R   O   O M   M     
      F    R  RR  OOO  M   M     
 EOT
-],
+        ],
         [0,
-<<<'EOT'
+        <<<'EOT'
 M   M                          ff  t 
 MM MM ii                       f   t 
 M M M     ccc rrr ooo  ss ooo fff ttt
 M   M ii c    r   o o  s  o o  f   t 
 M   M ii  ccc r   ooo ss  ooo  f   tt
 EOT
-],
+        ],
         [1,
-<<<'EOT'
+        <<<'EOT'
 FFFF  OOO  N   N TTTTTT
 F    O   O NN  N   TT  
 FFF  O   O N N N   TT  
@@ -91,9 +91,9 @@ F     OOO  N   N   TT
      B   B   Y  
      BBBB    Y 
 EOT
-],
+        ],
         [0,
-<<<'EOT'
+        <<<'EOT'
  GGG   AA  N   N  GGG  EEEE TTTTTT  SSS  H  H  AA 
 G     A  A NN  N G     E      TT   S     H  H A  A
 G  GG AAAA N N N G  GG EEE    TT    SSS  HHHH AAAA
@@ -106,7 +106,7 @@ G   G A  A N  NN G   G E      TT       S H  H A  A
                  L      Y    X X 
                  LLLL   Y   X   X
 EOT
-],
+        ],
         [1,
         <<<'EOT'
  OOO  RRRR  III  GGG  III N   N  AA  L   
@@ -121,7 +121,7 @@ O   O R R    I  G   G  I  N  NN A  A L
                B   B   Y  
                BBBB    Y  
 EOT
-],
+        ],
          [0,
          <<<'EOT'
     RRRR      b             t      DDD                       
@@ -137,9 +137,9 @@ EOT
 & & &     C    u  u r    t      J   J o o h  h n  n  s  o o n  n
  &&&&      CCC  uuu r    tt      JJJ  ooo h  h n  n ss  ooo n  n
 EOT
-],
+         ],
         [0,
-<<<'EOT'
+        <<<'EOT'
 III U   U TTTTTT        DDD  EEEE
  I  U   U   TT          D  D E   
  I  U   U   TT          D  D EEE 
@@ -158,5 +158,5 @@ N   N A  A N   N   TT   EEEE SSSS
        2   XX  X  2   XX  X
       2222  XXX  2222  XXX 
 EOT
-]]
+        ]]
     );
