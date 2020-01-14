@@ -17,7 +17,7 @@ class VueResultat extends VueJeu
 {
     /**
      * Permet d'afficher la vue des résultats
-     * 
+     *
      * @param mixed[] $winners un tableau d'objets représentants des gagnants
      * @param string $pseudo identifiant du joueur
      * @param int $centaine la centaine de drapeaux restant
@@ -34,8 +34,7 @@ class VueResultat extends VueJeu
     public function afficherVueResultat($winners, $pseudo, ...$args)
     {
         headerPageJeu();
-        call_user_func_array(array($this, "afficherPopupJeu"), $args);
-        ?>
+        call_user_func_array(array($this, "afficherPopupJeu"), $args); ?>
             <div class="popup won">
                 <div class="header">
                     <div class="title">Best Mine Sweepers</div>
@@ -73,8 +72,8 @@ class VueResultat extends VueJeu
                             }
                             array_pop($win);
                         }
-                        if (($current_player != NULL) && (!in_array($current_player[0]['pseudo'], array_column($winners, 'pseudo')))) {
-                        ?>
+                        if (($current_player != null) && (!in_array($current_player[0]['pseudo'], array_column($winners, 'pseudo')))) {
+                            ?>
                         <div class="winner">
                             <p class="pseudo">...</p>
                             <p class="wins">...</p>
@@ -85,9 +84,8 @@ class VueResultat extends VueJeu
                             <p class="wins"><b><?= $current_player[0]['nbPartiesGagnees'] ?></b></p>
                             <p class="plays"><b><?= $current_player[0]['nbPartiesJouees'] ?></b></p>
                         </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                        } ?>
                     </div>
                 </div>
                 <div class="buttons">

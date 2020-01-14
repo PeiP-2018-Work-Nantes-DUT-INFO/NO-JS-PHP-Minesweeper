@@ -68,7 +68,7 @@ class GameState
 
     /**
      * Initialise le jeu et génère les mines.
-     * 
+     *
      * @param string $pseudoJoueur identifiant du joueur
      * @param int $nbrColonnes Nombre de colonnes du jeu
      * @param int $nbrLignes Nombre de lignes du jeu
@@ -96,7 +96,7 @@ class GameState
 
     /**
      * Permet de genérer les mines
-     * 
+     *
      * @return bool[][] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
      */
     private function genererMines()

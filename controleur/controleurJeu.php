@@ -64,7 +64,7 @@ class ControleurJeu
 
     /**
      * Permet de jouer une case
-     * 
+     *
      * @param int $x la coordonnée x de la case à jouer
      * @param int $y la coordonnée y de la case à jouer
      */
@@ -101,7 +101,7 @@ class ControleurJeu
 
     /**
      * Permet changer la difficulté du jeu en changeant la taille et le nombre de mines
-     * 
+     *
      * @param string $difficulte le niveau de difficulté : 0, 1 ou 2
      */
     public function changerDifficulte($difficulte)
@@ -122,7 +122,7 @@ class ControleurJeu
 
     /**
      * Permet de placer un drapeau sur une case
-     * 
+     *
      * @param int $x numéro de la colonne de la case
      * @param int $y numéro de la ligne de la case
      */
@@ -204,7 +204,7 @@ class ControleurJeu
                     break;
             default:
                 return [NBR_COLONNES, NBR_LIGNES, NBR_MINES];
-            }
+        }
     }
 
 
@@ -276,7 +276,7 @@ class ControleurJeu
 
     /**
      * Permet de charger les vues de crédits
-     * 
+     *
      * @param string $id le numéro de la page de crédits à charger
      */
     public function afficherCredits($id)

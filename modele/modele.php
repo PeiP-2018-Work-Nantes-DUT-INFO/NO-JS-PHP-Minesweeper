@@ -135,7 +135,7 @@ class Modele
 
     /**
      * Permet d'ajouter un joueur dans la table des parties
-     * 
+     *
      * @param string $pseudo identifiant du joueur
      */
     public function addPartie($pseudo)
@@ -153,7 +153,7 @@ class Modele
 
     /**
      * Permet d'incrémenter les parties jouées d'un joueur
-     * 
+     *
      * @param string $pseudo identifiant du joueur
      */
     public function incrPartieJouees($pseudo)
@@ -178,7 +178,7 @@ class Modele
 
     /**
      * Permet d'incrémenter les parties gagnées d'un joueur
-     * 
+     *
      * @param string $pseudo identifiant du joueur
      */
     public function incrPartieGagnees($pseudo)
@@ -203,7 +203,7 @@ class Modele
 
     /**
      * Permet d'obtenir un tableau des 3 meilleurs joueurs
-     * 
+     *
      * @return array ['pseudo', 'nbPartiesJouees', 'nbPartiesGagnees']
      */
     public function get3MeilleursDemineurs()
@@ -220,7 +220,7 @@ class Modele
 
     /**
      * Permet d'obtenir les données d'un joueur
-     * 
+     *
      * @return array ['pseudo', 'nbPartiesJouees', 'nbPartiesGagnees']
      */
     public function getDataDemineur($pseudo)

@@ -9,7 +9,7 @@ class VueAuthentification
 {
     /**
      * Affiche la vue de connexion
-     * 
+     *
      * @var mixed $err permet d'identifier si il y a erreur ou non
      */
     public function connexion($err)
@@ -55,8 +55,8 @@ class VueAuthentification
             </div>
 
             <?php if ($err) {
-            $this->loadError();
-        } ?>
+                $this->loadError();
+            } ?>
         </body>
         </html>
         <?php
