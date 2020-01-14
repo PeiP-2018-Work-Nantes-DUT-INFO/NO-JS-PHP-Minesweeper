@@ -82,7 +82,7 @@ class ControleurJeu
             $game->jouer($x, $y);
             $_SESSION['game'] = serialize($game);
             if ($game->aGagne() || $game->estPerdu()) {
-                if (!$this->modele->existsInParties($pseudo)) {
+                if (!$this->modele->existsInParties($pseudo)) { // si le jouer a reset son score pendant la partie, on recréé la partie à la fin.
                     $this->modele->addPartie($pseudo);
                     $this->modele->incrPartieJouees($pseudo);
                 }
