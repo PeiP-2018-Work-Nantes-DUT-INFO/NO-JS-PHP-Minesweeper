@@ -31,8 +31,7 @@ function afficherWinBar($pseudo)
                     <div class="pseudo"><?= $pseudo ?></div>
                     <div class="date">
                     <?php
-                        $utc1 = 3600;
-                        echo gmdate('g:i A', time()+($utc1));
+                        echo gmdate('g:i A', time()+(UTC));
                     ?>
                     </div>
                 </div>
