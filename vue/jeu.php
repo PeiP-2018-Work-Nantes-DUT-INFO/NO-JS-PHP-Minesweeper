@@ -39,7 +39,7 @@ class VueJeu
         $nbrColonnes,
         $difficulty
     ) {
-        headerPageJeu($pseudo);
+        headerPageJeu();
         $this->afficherPopupJeu(
             $centaine,
             $dizaine,

@@ -254,8 +254,11 @@ class ControleurJeu
             $dizaine = -$dizaine;
         }
 
+        $winners = $this->modele->get3MeilleursDemineurs();
+        array_push($winners, $this->modele->getDataDemineur($pseudo));
+
         $this->vueResultat->afficherVueResultat(
-            $this->modele->get3MeilleursDemineurs(),
+            $winners,
             $pseudo,
             $centaine,
             $dizaine,
