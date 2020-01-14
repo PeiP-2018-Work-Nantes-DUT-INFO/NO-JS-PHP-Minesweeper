@@ -30,7 +30,7 @@ class VueAuthentification
                     <div class="buttons">
                         <div class="btn hide-btn disable"></div>
                         <div class="btn resize-btn disable"></div>
-                        <div class="btn close-btn"><a href="#"></a></div>
+                        <div class="btn close-btn disable"></div>
                     </div>
                 </div>
                 <div class="winxp-bg"></div>
