@@ -226,7 +226,7 @@ class Modele
     public function getDataDemineur($pseudo)
     {
         try {
-            $statement=$this->connexion->query("SELECT * FROM parties WHERE pseudo = ?;");
+            $statement=$this->connexion->prepare("SELECT * FROM parties WHERE pseudo = ?;");
             $statement->bindParam(1, $pseudo);
             $statement->execute();
             return($statement->fetchAll(PDO::FETCH_ASSOC));

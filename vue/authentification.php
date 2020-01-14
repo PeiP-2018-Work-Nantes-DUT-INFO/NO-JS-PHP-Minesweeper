@@ -72,7 +72,7 @@ class VueAuthentification
             <div class="header">
                     <div class="title">Logon Message</div>
                     <div class="buttons">
-                        <div class="btn info-btn"></div>
+                        <div class="btn info-btn disable"></div>
                         <div class="btn close-btn"><a href="index.php"></a></div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ class VueResultat extends VueJeu
                 <div class="header">
                     <div class="title">Best Mine Sweepers</div>
                     <div class="buttons">
-                        <div class="btn info-btn"></div>
+                        <div class="btn info-btn disable"></div>
                         <div class="btn close-btn"><a href="index.php"></a></div>
                     </div>
                 </div>
@@ -54,24 +54,40 @@ class VueResultat extends VueJeu
                         <?php
                         $current_player = array_pop($winners);
                         foreach ($winners as $win) {
-                            ?>
-                            <div class="winner">
-                                <p class="pseudo"><?= $win['pseudo'] ?></p>
-                                <p class="wins"><?= $win['nbPartiesGagnees'] ?></p>
-                                <p class="plays"><?= $win['nbPartiesJouees'] ?></p>
-                            </div>
-                            <?php
-                        } ?>
+                            if ($win['pseudo'] == $current_player[0]['pseudo']) {
+                                ?>
+                                <div class="winner">
+                                    <p class="pseudo"><b><?= $current_player[0]['pseudo'] ?></b></p>
+                                    <p class="wins"><b><?= $current_player[0]['nbPartiesGagnees'] ?></b></p>
+                                    <p class="plays"><b><?= $current_player[0]['nbPartiesJouees'] ?></b></p>
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <div class="winner">
+                                    <p class="pseudo"><?= $win['pseudo'] ?></p>
+                                    <p class="wins"><?= $win['nbPartiesGagnees'] ?></p>
+                                    <p class="plays"><?= $win['nbPartiesJouees'] ?></p>
+                                </div>
+                                <?php
+                            }
+                            array_pop($win);
+                        }
+                        if (($current_player != NULL) && (!in_array($current_player[0]['pseudo'], array_column($winners, 'pseudo')))) {
+                        ?>
                         <div class="winner">
                             <p class="pseudo">...</p>
                             <p class="wins">...</p>
                             <p class="plays">...</p>
                         </div>
                         <div class="winner">
-                            <p class="pseudo"><?= $current_player['pseudo'] ?></p>
-                            <p class="wins"><?= $current_player['nbPartiesGagnees'] ?></p>
-                            <p class="plays"><?= $current_player['nbPartiesJouees'] ?></p>
+                            <p class="pseudo"><b><?= $current_player[0]['pseudo'] ?></b></p>
+                            <p class="wins"><b><?= $current_player[0]['nbPartiesGagnees'] ?></b></p>
+                            <p class="plays"><b><?= $current_player[0]['nbPartiesJouees'] ?></b></p>
                         </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="buttons">
