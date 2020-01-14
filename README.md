@@ -1,11 +1,6 @@
-# Liste des choses à faires:
+# No-JS Minesweeper
 
-D'abord définir les actions
+Because we love PHP, and we are, as we says in french, 'des drapeauteurs', we made an entire Minesweeper in PHP.
+Don't try to find any JS function, it's full of emptiness here.
 
-Définir le routeur
-
-Définir le modèle
-
-Tout serializer dans la bdd
-
-E189580Q_demineur
+Almost in accordance to PSR-2.
