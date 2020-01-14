@@ -6,8 +6,9 @@
  */
 
 require_once PATH_VUE."/jeu.php";
-require_once PATH_VUE.'/bandeau/bandeauJeu.php';
-require_once PATH_VUE.'/bandeau/piedDePageJeu.php';
+require_once PATH_VUE.'/templates/headerPage.php';
+require_once PATH_VUE.'/templates/footerPage.php';
+require_once PATH_VUE.'/templates/winBar.php';
 
 /**
  * Doit étendre VueJeu
@@ -32,7 +33,7 @@ class VueResultat extends VueJeu
      */
     public function afficherVueResultat($winners, $pseudo, ...$args)
     {
-        headerPageJeu($pseudo);
+        headerPageJeu();
         call_user_func_array(array($this, "afficherPopupJeu"), $args);
         ?>
             <div class="popup won">
@@ -51,6 +52,7 @@ class VueResultat extends VueJeu
                     </div>
                     <div class="scores">
                         <?php
+                        $current_player = array_pop($winners);
                         foreach ($winners as $win) {
                             ?>
                             <div class="winner">
@@ -60,6 +62,16 @@ class VueResultat extends VueJeu
                             </div>
                             <?php
                         } ?>
+                        <div class="winner">
+                            <p class="pseudo">...</p>
+                            <p class="wins">...</p>
+                            <p class="plays">...</p>
+                        </div>
+                        <div class="winner">
+                            <p class="pseudo"><?= $current_player['pseudo'] ?></p>
+                            <p class="wins"><?= $current_player['nbPartiesGagnees'] ?></p>
+                            <p class="plays"><?= $current_player['nbPartiesJouees'] ?></p>
+                        </div>
                     </div>
                 </div>
                 <div class="buttons">
@@ -72,7 +84,7 @@ class VueResultat extends VueJeu
                 </div>
             </div>
         <?php
-        $this->afficherWinBar();
+        afficherWinBar($pseudo);
         footerPageJeu();
     }
 }
