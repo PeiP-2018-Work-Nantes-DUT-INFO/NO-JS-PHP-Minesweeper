@@ -20,13 +20,22 @@ define("PATH_METIER",HOME_SITE."/metier");
 define("HOST","localhost");
 define("BD","XXX");
 define("LOGIN","XXX");
-define("PASSWORD","XXX"); 
- 
-
+define("PASSWORD","XXX");
 
 /**
-* Nombre de colonnes du demineur
-*/
+ * Plage horaire
+ * La valeur représente le décalage horaire en secondes
+ * La valeur par défaut est UTC+1 == 3600
+ */
+define("UTC", 3600);
+ 
+/********************************
+* CONFIGURATION DU JEU PAR DEFAUT
+********************************/
+
+/**
+ * Nombre de colonnes du demineur
+ */
 define("NBR_LIGNES", 8);
 
 /**
