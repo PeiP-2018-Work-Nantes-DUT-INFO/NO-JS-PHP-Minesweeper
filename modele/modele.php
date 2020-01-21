@@ -104,7 +104,7 @@ class Modele
             $statement->execute();
             $result=$statement->fetch(PDO::FETCH_ASSOC);
 
-            return ($result["pseudo"] != null);
+            return $result != null;
         } catch (PDOException $e) {
             $this->deconnexion();
             throw new TableAccesException("Problème avec la table joueurs");
