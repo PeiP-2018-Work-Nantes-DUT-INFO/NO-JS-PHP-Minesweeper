@@ -97,6 +97,7 @@ class Modele
      */
     public function existsInJoueurs($pseudo)
     {
+        error_reporting(E_ALL);
         try {
             $statement = $this->connexion->prepare("SELECT pseudo from joueurs where pseudo = ?;");
             $statement->bindParam(1, $pseudo);
