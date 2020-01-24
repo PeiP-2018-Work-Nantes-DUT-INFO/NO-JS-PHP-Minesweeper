@@ -79,34 +79,27 @@ class GameState
         $this->nbrColonnes = $nbrColonnes;
         $this->nbrLignes = $nbrLignes;
         $this->nbrMines = $nbrMines;
-        $mines = $this->genererMines();
         $this->etatCaseJeu = array_fill(0, $nbrColonnes, array_fill(0, $this->nbrLignes, new CaseMetier(false)));
-        for ($i = 0; $i < $nbrColonnes; $i++) {
-            for ($j = 0; $j < $nbrLignes; $j++) {
-                $this->etatCaseJeu[$i][$j] = new CaseMetier(
-                    isset($mines[$i][$j])
-                );
-            }
-        }
         $this->pseudoJoueur = $pseudoJoueur;
         $this->caseRestantes = $nbrColonnes * $nbrLignes;
-        $this->compterMines($mines);
     }
 
 
     /**
      * Permet de genérer les mines
      *
+     * @param int $xPlayed Position en x de la première case jouée
+     * @param int $yPlayed Position en y de la première case jouée
      * @return bool[][] un tableau d'entier associant à un entier (le numéro de ligne) un autre entier (le numéro de colonne de la ligne)
      */
-    private function genererMines()
+    private function genererMines($xPlayed, $yPlayed)
     {
         $mines = array_fill(0, $this->nbrColonnes, []);
         $i = 0;
         while ($i < $this->nbrMines) {
             $y = rand(0, $this->nbrLignes - 1);
             $x = rand(0, $this->nbrColonnes - 1);
-            if (!isset($mines[$x][$y])) {
+            if ($x !== $xPlayed && $y !== $yPlayed && !isset($mines[$x][$y])) {
                 $mines[$x][$y] = true;
                 $i++;
             }
@@ -114,6 +107,26 @@ class GameState
         return $mines;
     }
 
+    /**
+     * Initialise les cases et les mines
+     * Ne place pas de mine sur la première case jouée
+     *
+     * @param int $x Coordonée en x de la première case jouée
+     * @param int $y Coordonée en y de la première case jouée
+     * @return void
+     */
+    private function initialiserCases($x, $y)
+    {
+        $mines = $this->genererMines($x, $y);
+        for ($i = 0; $i < $this->nbrColonnes; $i++) {
+            for ($j = 0; $j < $this->nbrLignes; $j++) {
+                $this->etatCaseJeu[$i][$j] = new CaseMetier(
+                    isset($mines[$i][$j])
+                );
+            }
+        }
+        $this->compterMines($mines);
+    }
 
     /**
      * Permet de jouer une case
@@ -125,8 +138,11 @@ class GameState
     public function jouer($x, $y): bool
     {
         if ($this->mouvementPossible($x, $y) && !$this->etatCaseJeu[$x][$y]->aDrapeau()) {
-            $this->caseRestantes--;
+            if (!$this->estCommence()) {
+                $this->initialiserCases(intval($x), intval($y));
+            }
             $this->etatCaseJeu[$x][$y]->jouer();
+            $this->caseRestantes--;
             if ($this->etatCaseJeu[$x][$y]->getMinesAdjacentes() === 0) {
                 $this->jouerCaseAdjacentes($x, $y);
             }
