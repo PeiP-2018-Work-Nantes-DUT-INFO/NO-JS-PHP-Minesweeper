@@ -7,7 +7,7 @@
 
 /**
  * Permet d'afficher la barre windows
- * 
+ *
  * @param string $pseudo identifiant du joueur
  */
 function afficherWinBar($pseudo)
@@ -31,8 +31,7 @@ function afficherWinBar($pseudo)
                     <div class="pseudo"><?= $pseudo ?></div>
                     <div class="date">
                     <?php
-                        echo gmdate('g:i A', time()+(UTC));
-                    ?>
+                        echo gmdate('g:i A', time()+(UTC)); ?>
                     </div>
                 </div>
             </div>

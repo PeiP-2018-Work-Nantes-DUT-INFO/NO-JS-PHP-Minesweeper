@@ -1,4 +1,6 @@
 <?php
+namespace Minesweeper\Modele;
+
 /**
  * @version 1.0.0
  * @license MIT

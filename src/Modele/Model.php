@@ -1,37 +1,16 @@
 <?php
+namespace Minesweeper\Modele;
+
+use PDO;
+use PDOException;
+use Minesweeper\Modele\Exceptions\TableAccesException;
+use Minesweeper\Modele\Exceptions\ConnexionException;
+
 /**
  * @version 1.0.0
  * @license MIT
  * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
  */
-
-// Classe generale de definition d'exception
-class MonException extends Exception
-{
-    private $chaine;
-    public function __construct($chaine)
-    {
-        parent::__construct($chaine);
-        $this->chaine=$chaine;
-    }
-
-    public function afficher()
-    {
-        return $this->chaine;
-    }
-}
-
-
-// Exception relative à un probleme de connexion
-class ConnexionException extends MonException
-{
-}
-
-// Exception relative à un probleme d'accès à une table
-class TableAccesException extends MonException
-{
-}
-
 
 // Classe qui gère les accès à la base de données
 

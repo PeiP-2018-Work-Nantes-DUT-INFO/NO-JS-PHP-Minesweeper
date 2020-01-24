@@ -1,14 +1,16 @@
 <?php
+namespace Minesweeper\Controleur;
+
 /**
  * @version 1.0.0
  * @license MIT
  * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
  */
 
-require_once PATH_VUE."/jeu.php";
-require_once PATH_VUE."/resultat.php";
-require_once PATH_MODELE."/GameState.php";
-require_once PATH_MODELE."/modele.php";
+use Minesweeper\Vue\VueJeu;
+use Minesweeper\Vue\VueResultat;
+use Minesweeper\Modele\Modele;
+use Minesweeper\Modele\GameState;
 
 class ControleurJeu
 {
@@ -82,7 +84,8 @@ class ControleurJeu
             $game->jouer($x, $y);
             $_SESSION['game'] = serialize($game);
             if ($game->aGagne() || $game->estPerdu()) {
-                if (!$this->modele->existsInParties($pseudo)) { // si le jouer a reset son score pendant la partie, on recréé la partie à la fin.
+                if (!$this->modele->existsInParties($pseudo)) {
+                    // si le jouer a reset son score pendant la partie, on recréé la partie à la fin.
                     $this->modele->addPartie($pseudo);
                     $this->modele->incrPartieJouees($pseudo);
                 }

@@ -191,7 +191,7 @@ main {
 }
 
 .minesweeper .box-shadow,
-.n-decouvert:active, 
+.n-decouvert:active,
 .decouvert#flag {
     border-top-color: var(--gris-fonce);
     border-left-color: var(--gris-fonce);
