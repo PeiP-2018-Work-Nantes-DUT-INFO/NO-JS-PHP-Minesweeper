@@ -1,11 +1,12 @@
 <?php
+namespace Minesweeper\Modele;
+
 /**
  * @version 1.0.0
  * @license MIT
  * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
  */
 
-require_once 'Case.php';
 
 /**
  * Class qui contient l'état de jeu d'une partie
@@ -15,7 +16,7 @@ class GameState
     /**
      * Contient l'état des cases
      *
-     * @var \CaseMetier[][]
+     * @var CaseMetier[][]
      */
     private $etatCaseJeu;
 
@@ -356,7 +357,7 @@ class GameState
     /**
      * Obtient l'etat du jeu
      *
-     * @return \CaseMetier[][]
+     * @return CaseMetier[][]
      */
     public function obtenirEtatJeu(): array
     {

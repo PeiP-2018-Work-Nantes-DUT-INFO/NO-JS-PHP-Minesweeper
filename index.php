@@ -1,8 +1,7 @@
 <?php
 session_start();
-require "config/config.php";
-require "config/credits.php";
-require PATH_CONTROLEUR."/routeur.php";
+require_once 'vendor/autoload.php';
+use Minesweeper\Controleur\Routeur;
 
 $routeur=new Routeur();
 $routeur->routerRequete();

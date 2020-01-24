@@ -1,0 +1,22 @@
+{
+    "name": "no-js/minesweeper",
+    "description": "A NO-JS Minesweeper made in PHP",
+    "type": "project",
+    "license": "MIT",
+    "require": {},
+    "autoload": {
+        "files": [
+            "src/Vue/templates/footerPage.php",
+            "src/Vue/templates/headerPage.php",
+            "src/Vue/templates/winBar.php",
+            "Config/config.php", "Config/credits.php"
+        ],
+        "classmap": ["src/"],
+        "psr-4": {
+            "Minesweeper\\": "src/"
+        }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
+    }
+}

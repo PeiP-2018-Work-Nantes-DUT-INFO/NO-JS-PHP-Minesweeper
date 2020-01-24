@@ -1,14 +1,13 @@
 <?php
+namespace Minesweeper\Vue;
+
 /**
  * @version 1.0.0
  * @license MIT
  * @author Simon <simon.sassi@etu.univ-nantes.fr> & Eliott <eliott.dubois@etu.univ-nantes.fr>
  */
 
-require_once PATH_VUE."/jeu.php";
-require_once PATH_VUE.'/templates/headerPage.php';
-require_once PATH_VUE.'/templates/footerPage.php';
-require_once PATH_VUE.'/templates/winBar.php';
+use Minesweeper\Vue\VueJeu;
 
 /**
  * Doit étendre VueJeu
@@ -20,16 +19,6 @@ class VueResultat extends VueJeu
      *
      * @param mixed[] $winners un tableau d'objets représentants des gagnants
      * @param string $pseudo identifiant du joueur
-     * @param int $centaine la centaine de drapeaux restant
-     * @param int $dizaine la dizaine de drapeaux restant
-     * @param int $unite l'unité de drapeaux restant
-     * @param boolean $perdu vrai si le jeu est perdu
-     * @param boolean $gagne vrai si le jeu est gagné
-     * @param \CaseMetier[][] $etatCases un tableau a 2 dimensions de Case
-     * @param bool $flagMode si le on est en mode placement de drapeaux
-     * @param int $nbrLignes nombre de lignes
-     * @param int $nbrColonnes nombre de colonnes
-     * @param int $difficulty la difficultée du niveau
      */
     public function afficherVueResultat($winners, $pseudo, ...$args)
     {
