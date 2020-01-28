@@ -11,6 +11,12 @@ ARG ENV_DBNAME=${ENV_DBNAME}
 #    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 #    && docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install pdo_mysql
+RUN apt-get update && \
+    apt-get install -y git zip unzip && \
+    apt-get -y autoremove && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 RUN curl --silent --show-error https://getcomposer.org/installer | php
 COPY . /var/www/html/
 WORKDIR /var/www/html
