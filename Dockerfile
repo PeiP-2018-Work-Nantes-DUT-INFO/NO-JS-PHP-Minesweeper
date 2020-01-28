@@ -14,9 +14,9 @@ RUN docker-php-ext-install pdo_mysql
 RUN curl --silent --show-error https://getcomposer.org/installer | php
 COPY . /var/www/html/
 WORKDIR /var/www/html
-COPY config/config.php.example config/config.php
-RUN sed -i "s|localhost|srv-captain--database-db|g" config/config.php
-RUN sed -i "s|XXX|$ENV_DBNAME|g" config/config.php
+COPY Config/config.php.example Config/config.php
+RUN sed -i "s|localhost|srv-captain--database-db|g" Config/config.php
+RUN sed -i "s|XXX|$ENV_DBNAME|g" Config/config.php
 RUN php composer.phar install
 
 
