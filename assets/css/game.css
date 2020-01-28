@@ -269,7 +269,7 @@ div.won div.content div p:last-child {
 
 .minesweeper .game_window .head .clock-group div.bomb {
     background-image: url(../img/display0.png), url(../img/display1.png), url(../img/display2.png), url(../img/display3.png), url(../img/display4.png), url(../img/display5.png), url(../img/display6.png), url(../img/display7.png), url(../img/display8.png), url(../img/display9.png);
-    background-position: 0% calc(21px * 0), 0% calc(21px * 1), 0% calc(21px * 2), 0% calc(21px * 3), 0% calc(21px * 4), 0% calc(21px * 5), 0% calc(21px * 6), 0% calc(21px * 7), 0% calc(21px * 8), 0% calc(21px * 9);
+    background-position: 0% calc(23px * 0), 0% calc(23px * 1), 0% calc(23px * 2), 0% calc(23px * 3), 0% calc(23px * 4), 0% calc(23px * 5), 0% calc(23px * 6), 0% calc(23px * 7), 0% calc(23px * 8), 0% calc(23px * 9);
 }
 
 .minesweeper .game_window .head .clock-group .display-bomb {
@@ -277,7 +277,7 @@ div.won div.content div p:last-child {
 }
 
 .minesweeper .game_window .head .clock-group .display-bomb .bomb {
-    height: 210px;
+    height: 230px;
     position: relative;
 }
 

@@ -378,7 +378,7 @@ class VueJeu
             </li>
             <li id="help"><u>H</u>elp
                 <ul class="dropdown-menu">
-                    <li><a href="https://github.com/PeiP-2018-Work-Nantes-DUT-INFO/NO-JS-PHP-Minesweeper">
+                    <li><a href="https://github.com/maxerbox/NO-JS-PHP-Minesweeper">
                             <div class="w18"></div>
                             <p>Github</p>
                         </a></li>
@@ -386,7 +386,7 @@ class VueJeu
                             <div class="w18"></div>
                             <p>Search for Help on ...</p>
                         </a></li>
-                    <li><a href="https://github.com/PeiP-2018-Work-Nantes-DUT-INFO/NO-JS-PHP-Minesweeper">
+                    <li><a href="https://github.com/maxerbox/NO-JS-PHP-Minesweeper/issues">
                             <div class="w18"></div>
                             <p>Using Help</p>
                         </a></li>
@@ -419,14 +419,11 @@ class VueJeu
                             <a href="<?= $flagMode ? 'index.php' : 'index.php?flag-mode'?>" draggable="false"></a>
                         </div>
                         <div class="display-bomb" style="background-image: url(assets/img/display.png);">
-                            <div class="bomb centaine <?= $animer ?  'animate' : ''?>"
-                                style="top:-<?= $chiffresTimer[0] * 0?>px;">
+                            <div class="bomb centaine <?= $animer ?  'animate' : ''?>">
                             </div>
-                            <div class="bomb dizaine <?= $animer ?  'animate' : ''?>"
-                                style="top: -<?= $chiffresTimer[1] * 0?>px;">
+                            <div class="bomb dizaine <?= $animer ?  'animate' : ''?>">
                             </div>
-                            <div class="bomb unite <?= $animer ?  'animate' : ''?>"
-                                style="top: -<?= $chiffresTimer[2] * 0?>px;">
+                            <div class="bomb unite <?= $animer ?  'animate' : ''?>">
                             </div>
                         </div>
                     </div>
