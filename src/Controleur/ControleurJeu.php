@@ -246,7 +246,7 @@ class ControleurJeu
      */
     public function nouveauJeu()
     {
-        header("Refresh: 30000; URL=index.php?credits");
+        header("Refresh: 60; URL=index.php?credits");
         $pseudo = $_SESSION['pseudo'];
         [$nbrColonnes, $nbrLignes, $nbrMines] = $this->getDifficulte();
         $game = new GameState($pseudo, $nbrColonnes, $nbrLignes, $nbrMines);
