@@ -1,6 +1,8 @@
 <?php
 namespace Minesweeper\Modele;
 
+use DateTime;
+
 /**
  * @version 1.0.0
  * @license MIT
@@ -66,6 +68,18 @@ class GameState
      */
     private $nbrMines;
 
+    /**
+     * Date de démarrage de la partie
+     *
+     * @var DateTime
+     */
+    private $dateDemarrage;
+
+    /**
+     * Nombre de secondes du dernier getSecondes
+     * @var int
+     */
+    private $secondes;
 
     /**
      * Initialise le jeu et génère les mines.
@@ -118,6 +132,7 @@ class GameState
      */
     private function initialiserCases($x, $y)
     {
+        $this->dateDemarrage = new DateTime();
         $mines = $this->genererMines($x, $y);
         for ($i = 0; $i < $this->nbrColonnes; $i++) {
             for ($j = 0; $j < $this->nbrLignes; $j++) {
@@ -411,5 +426,22 @@ class GameState
     public function getNbrMines()
     {
         return $this->nbrMines;
+    }
+    
+    /**
+     * Temps en secondes depuis le démarrage de la partie
+     *
+     * @return int
+     */
+    public function getSecondes()
+    {
+        if ($this->estPerdu() || $this->aGagne()) {
+            return $this->secondes;
+        } elseif ($this->dateDemarrage != null) {
+            $this->secondes = (new DateTime())->getTimestamp() - $this->dateDemarrage->getTimestamp();
+            return $this->secondes;
+        } else {
+            return 0;
+        }
     }
 }

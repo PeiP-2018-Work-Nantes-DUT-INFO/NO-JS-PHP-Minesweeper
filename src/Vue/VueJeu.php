@@ -26,6 +26,9 @@ class VueJeu
      * @param int $nbrLignes nombre de lignes
      * @param int $nbrColonnes nombre de colonnes
      * @param int $difficulty la difficultée du niveau
+     * @param int[] $chiffresTimer les centaines dizaines unite du timer
+     * @param boolean $animer si le timer doit s'animer
+     * @param boolean $son si le son doit être joué
      */
     public function afficherVueJeu(
         $pseudo,
@@ -38,7 +41,10 @@ class VueJeu
         $flagMode,
         $nbrLignes,
         $nbrColonnes,
-        $difficulty
+        $difficulty,
+        $chiffresTimer,
+        $animer,
+        $son
     ) {
         headerPageJeu();
         $this->afficherPopupJeu(
@@ -51,7 +57,10 @@ class VueJeu
             $flagMode,
             $nbrLignes,
             $nbrColonnes,
-            $difficulty
+            $difficulty,
+            $chiffresTimer,
+            $animer,
+            $son
         );
         afficherWinBar($pseudo);
         footerPageJeu();
@@ -71,6 +80,9 @@ class VueJeu
      * @param int $nbrLignes
      * @param int $nbrColonnes
      * @param int $difficulty la difficultée du niveau
+     * @param int[] $chiffresTimer les centaines dizaines unite du timer
+     * @param boolean $animer si le timer doit s'animer
+     * @param boolean $son si le son doit être joué
      * @return void
      */
     public function afficherPopupJeu(
@@ -83,14 +95,48 @@ class VueJeu
         $flagMode,
         $nbrLignes,
         $nbrColonnes,
-        $difficulty
+        $difficulty,
+        $chiffresTimer,
+        $animer,
+        $son
     ) {
+        $this->sonWave($son, $animer, $gagne, $perdu);
         if ($perdu) {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'dead', $flagMode, $difficulty);
+            $this->headerMinesweeper(
+                $centaine,
+                $dizaine,
+                $unite,
+                'dead',
+                $flagMode,
+                $difficulty,
+                $chiffresTimer,
+                $animer,
+                $son
+            );
         } elseif ($gagne) {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'boss', $flagMode, $difficulty);
+            $this->headerMinesweeper(
+                $centaine,
+                $dizaine,
+                $unite,
+                'boss',
+                $flagMode,
+                $difficulty,
+                $chiffresTimer,
+                $animer,
+                $son
+            );
         } else {
-            $this->headerMinesweeper($centaine, $dizaine, $unite, 'smile', $flagMode, $difficulty);
+            $this->headerMinesweeper(
+                $centaine,
+                $dizaine,
+                $unite,
+                'smile',
+                $flagMode,
+                $difficulty,
+                $chiffresTimer,
+                $animer,
+                $son
+            );
         }
         $this->openGameTable();
         for ($ligne=0; $ligne < $nbrLignes; $ligne++) {
@@ -121,13 +167,132 @@ class VueJeu
             }
             $this->closeTableLine();
         } ?>
-        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+</table>
+</div>
+</div>
+</div>
+</div>
         <?php
     }
+    /**
+     * Ajoute les balises audio
+     *
+     * @param boolean $active
+     * @param boolean $estCommencé
+     * @param boolean $estGagne
+     * @param boolean $estPerdu
+     * @return void
+     */
+    public function sonWave($active, $estCommencé, $estGagne, $estPerdu)
+    {
+        if (!$active) {
+            return;
+        } ?>
+        <?php if ($estCommencé) :?>
+<audio loop autoplay>
+    <source src="assets/sounds/beep.ogg" type="audio/ogg">
+</audio>
+        <?php endif?>
+
+        <?php if ($estGagne) :?>
+<audio autoplay>
+    <source src="assets/sounds/win.ogg" type="audio/ogg">
+</audio>
+        <?php endif?>
+
+        <?php if ($estPerdu) :?>
+<audio autoplay>
+    <source src="assets/sounds/game_over.ogg" type="audio/ogg">
+</audio>
+        <?php endif?>
+        <?php
+    }
+    public function genererStyleTimer($chiffresTimer)
+    {
+        ?>
+<style>
+.minesweeper .game_window .head .clock-group div.centaine.animate {
+    -webkit-animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000 - (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
+    animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000- (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
+    animation-delay: <?=1000 - $chiffresTimer[0] * 100 - $chiffresTimer[1] * 10 - $chiffresTimer[2]?>s, <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s, 0s;
+}
+
+.minesweeper .game_window .head .clock-group div.dizaine.animate {
+    -webkit-animation: counter 100s infinite steps(1) forwards, partcounterdizaines <?=100 - (($chiffresTimer[1]+1)%10) * 10?>s steps(<?=10 - (($chiffresTimer[1]+1)%10)?>), partcounterdizainesfirststage <?=10-$chiffresTimer[2]?>s steps(1);
+    animation: counter 100s infinite steps(10) forwards, partcounterdizaines <?=100 - (($chiffresTimer[1]+1)%10) * 10?>s steps(<?=10 - (($chiffresTimer[1]+1)%10)?>), partcounterdizainesfirststage <?=10-$chiffresTimer[2]?>s steps(1);
+    animation-delay: <?=100 - $chiffresTimer[1] * 10 - $chiffresTimer[2]?>s, <?=10 - $chiffresTimer[2]?>s, 0s;
+}
+
+.minesweeper .game_window .head .clock-group div.unite.animate {
+    -webkit-animation: counter 10s infinite steps(10) forwards, partcounterunites <?=10-$chiffresTimer[2]?>s steps(<?=10-$chiffresTimer[2]?>);
+    animation: counter 10s infinite steps(10) forwards, partcounterunites <?=10-$chiffresTimer[2]?>s steps(<?=10-$chiffresTimer[2]?>);
+    animation-delay: <?=10 - $chiffresTimer[2]?>s, 0s;
+
+}
+
+@keyframes partcounterunites {
+    0% {
+        -webkit-transform: translateY(-<?=$chiffresTimer[2] * 10?>%);
+        transform: translateY(-<?=$chiffresTimer[2] * 10?>%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes partcounterdizaines {
+    0% {
+        -webkit-transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+        transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes partcounterdizainesfirststage {
+    0% {
+        -webkit-transform: translateY(-<?=$chiffresTimer[1] * 10?>%);
+        transform: translateY(-<?=$chiffresTimer[1] * 10?>%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+        transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+    }
+}
+
+@keyframes partcountercentaines {
+    0% {
+        -webkit-transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+        transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes partcountercentainesfirststage {
+    0% {
+        -webkit-transform: translateY(-<?=$chiffresTimer[0] * 10?>%);
+        transform: translateY(-<?=$chiffresTimer[0] * 10?>%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+        transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+    }
+}
+</style>
+        <?php
+    }
+    
 
 
     /**
@@ -139,73 +304,135 @@ class VueJeu
      * @param string $smiley la tete du smiley a afficher
      * @param int $difficulty la diffultée du niveau
      * @param boolean $flagMode
+     * @param int[] $chiffresTimer les centaines dizaines unite du timer
+     * @param boolean $animer si le timer doit s'animer
+     * @param boolean $son si le son est activé
      */
-    public function headerMinesweeper($centaine, $dizaine, $unite, $smiley, $flagMode, $difficulty)
-    {
+    public function headerMinesweeper(
+        $centaine,
+        $dizaine,
+        $unite,
+        $smiley,
+        $flagMode,
+        $difficulty,
+        $chiffresTimer,
+        $animer,
+        $son
+    ) {
         ?>
-        <div class="popup minesweeper">
-            <div class="header">
-                <div class="title">Minesweeper</div>
-                <div class="buttons">
-                    <div class="btn hide-btn disable"></div>
-                    <div class="btn resize-btn disable"></div>
-                    <div class="btn close-btn"><a href="index.php?deconnexion"></a></div>
-                </div>
-                </div>
-            <div class="nav-bar">
-                <ul class="nav nav-btn">
-                    <li id="game"><u>G</u>ame
-                        <ul class="dropdown-menu">
-                            <li><a href="index.php?reset"><div class="w18"></div><p>New</p></a></li>
-                            <li class="separator"></li>
-                            <li><a href="<?= $difficulty !== 0 ? 'index.php?difficulty=default': '#'?>"><div class="w18 <?= $difficulty === 0? 'checked': ''?>"></div><p>Beginner</p></a></li>
-                            <li><a href="<?= $difficulty !== 1 ? 'index.php?difficulty=1': '#'?>"><div class="w18 <?= $difficulty === 1? 'checked': ''?>"></div><p>Intermediate</p></a></li>
-                            <li><a href="<?= $difficulty !== 2 ? 'index.php?difficulty=2': '#'?>"><div class="w18 <?= $difficulty === 2? 'checked': ''?>"></div><p>Expert</p></a></li>
-                            <li class="separator"></li>
-                            <li><a href="#"><div class="w18"></div><p>Marks (?)</p></a></li>
-                            <li><a href="#"><div class="w18 checked"></div><p>Color</p></a></li>
-                            <li><a href="#"><div class="w18"></div><p>Sound</p></a></li>
-                            <li class="separator"></li>
-                            <li><a href="index.php?scores"><div class="w18"></div><p>Best Players...</p></a></li>
-                            <li class="separator"></li>
-                            <li><a href="index.php?deconnexion"><div class="w18"></div><p>Exit</p></a></li>
-                        </ul>
-                    </li>
-                    <li id="help"><u>H</u>elp
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><div class="w18"></div><p>Content</p></a></li>
-                            <li><a href="#"><div class="w18"></div><p>Search for Help on ...</p></a></li>
-                            <li><a href="#"><div class="w18"></div><p>Using Help</p></a></li>
-                            <li class="separator"></li>
-                            <li><a href="index.php?credits"><div class="w18"></div><p>Credits</p></a></li>
-                        </ul>
-                    </li>
+<div class="popup minesweeper">
+        <?php $this->genererStyleTimer($chiffresTimer) ?>
+    <div class="header">
+        <div class="title">Minesweeper</div>
+        <div class="buttons">
+            <div class="btn hide-btn disable"></div>
+            <div class="btn resize-btn disable"></div>
+            <div class="btn close-btn"><a href="index.php?deconnexion"></a></div>
+        </div>
+    </div>
+    <div class="nav-bar">
+        <ul class="nav nav-btn">
+            <li id="game"><u>G</u>ame
+                <ul class="dropdown-menu">
+                    <li><a href="index.php?reset">
+                            <div class="w18"></div>
+                            <p>New</p>
+                        </a></li>
+                    <li class="separator"></li>
+                    <li><a href="<?= $difficulty !== 0 ? 'index.php?difficulty=default': '#'?>">
+                            <div class="w18 <?= $difficulty === 0? 'checked': ''?>"></div>
+                            <p>Beginner</p>
+                        </a></li>
+                    <li><a href="<?= $difficulty !== 1 ? 'index.php?difficulty=1': '#'?>">
+                            <div class="w18 <?= $difficulty === 1? 'checked': ''?>"></div>
+                            <p>Intermediate</p>
+                        </a></li>
+                    <li><a href="<?= $difficulty !== 2 ? 'index.php?difficulty=2': '#'?>">
+                            <div class="w18 <?= $difficulty === 2? 'checked': ''?>"></div>
+                            <p>Expert</p>
+                        </a></li>
+                    <li class="separator"></li>
+                    <li><a href="#">
+                            <div class="w18"></div>
+                            <p>Marks (?)</p>
+                        </a></li>
+                    <li><a href="#">
+                            <div class="w18 checked"></div>
+                            <p>Color</p>
+                        </a></li>
+                    <li><a href="index.php?sound">
+                            <div class="w18 <?= $son ? 'checked': ''?>"></div>
+                            <p>Sound</p>
+                        </a></li>
+                    <li class="separator"></li>
+                    <li><a href="index.php?scores">
+                            <div class="w18"></div>
+                            <p>Best Players...</p>
+                        </a></li>
+                    <li class="separator"></li>
+                    <li><a href="index.php?deconnexion">
+                            <div class="w18"></div>
+                            <p>Exit</p>
+                        </a></li>
                 </ul>
-            </div>
-            <div class="content" id="game_container">
-                <div class="game_window">
-                    <div class="head box-shadow">
+            </li>
+            <li id="help"><u>H</u>elp
+                <ul class="dropdown-menu">
+                    <li><a href="#">
+                            <div class="w18"></div>
+                            <p>Content</p>
+                        </a></li>
+                    <li><a href="#">
+                            <div class="w18"></div>
+                            <p>Search for Help on ...</p>
+                        </a></li>
+                    <li><a href="#">
+                            <div class="w18"></div>
+                            <p>Using Help</p>
+                        </a></li>
+                    <li class="separator"></li>
+                    <li><a href="index.php?credits">
+                            <div class="w18"></div>
+                            <p>Credits</p>
+                        </a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content" id="game_container">
+        <div class="game_window">
+            <div class="head box-shadow">
+                <div class="display-bomb" style="background-image: url(assets/img/display.png);">
+                    <div class="bomb centaine" style="background-image: url(assets/img/display<?= $centaine ?>.png);">
+                    </div>
+                    <div class="bomb dizaine" style="background-image: url(assets/img/display<?= $dizaine ?>.png);">
+                    </div>
+                    <div class="bomb unite" style="background-image: url(assets/img/display<?= $unite ?>.png);">
+                    </div>
+                </div>
+                <div class="n-decouvert" id="<?= $smiley ?>">
+                    <a href="index.php?reset" draggable="false"></a>
+                </div>
+                <div class="clock-group">
+                    <div class="w41">
+                        <div class="<?= $flagMode ? '' : 'n-'?>decouvert" id="flag">
+                            <a href="<?= $flagMode ? 'index.php' : 'index.php?flag-mode'?>" draggable="false"></a>
+                        </div>
                         <div class="display-bomb" style="background-image: url(assets/img/display.png);">
-                            <div class="bomb centaine"
-                                style="background-image: url(assets/img/display<?= $centaine ?>.png);">
+                            <div class="bomb centaine <?= $animer ?  'animate' : ''?>"
+                                style="top:-<?= $chiffresTimer[0] * 0?>px;">
                             </div>
-                            <div class="bomb dizaine"
-                                style="background-image: url(assets/img/display<?= $dizaine ?>.png);">
+                            <div class="bomb dizaine <?= $animer ?  'animate' : ''?>"
+                                style="top: -<?= $chiffresTimer[1] * 0?>px;">
                             </div>
-                            <div class="bomb unite"
-                                style="background-image: url(assets/img/display<?= $unite ?>.png);">
-                            </div>
-                        </div>
-                        <div class="n-decouvert" id="<?= $smiley ?>">
-                            <a href="index.php?reset" draggable="false"></a>
-                        </div>
-                        <div class="w41">
-                            <div class="<?= $flagMode ? '' : 'n-'?>decouvert" id="flag">
-                                <a href="<?= $flagMode ? 'index.php' : 'index.php?flag-mode'?>" draggable="false"></a>
+                            <div class="bomb unite <?= $animer ?  'animate' : ''?>"
+                                style="top: -<?= $chiffresTimer[2] * 0?>px;">
                             </div>
                         </div>
                     </div>
-        <?php
+                </div>
+            </div>
+            <?php
     }
 
 
@@ -217,7 +444,7 @@ class VueJeu
         ?>
             <div class="game box-shadow">
                 <table>
-        <?php
+                    <?php
     }
 
 
@@ -227,8 +454,8 @@ class VueJeu
     public function openTableLine()
     {
         ?>
-            <tr>
-        <?php
+                    <tr>
+                        <?php
     }
 
 
@@ -243,10 +470,11 @@ class VueJeu
     public function hiddenCase($ligne, $colonne, $flagMode, $class)
     {
         ?>
-            <td class="n-decouvert <?= $class ?>">
-                <a href="index.php?<?=$flagMode ? 'flag-mode&' : ''?>x=<?= $colonne ?>&y=<?= $ligne ?>" draggable="false"></a>
-            </td>
-        <?php
+                        <td class="n-decouvert <?= $class ?>">
+                            <a href="index.php?<?=$flagMode ? 'flag-mode&' : ''?>x=<?= $colonne ?>&y=<?= $ligne ?>"
+                                draggable="false"></a>
+                        </td>
+                        <?php
     }
 
 
@@ -279,8 +507,8 @@ class VueJeu
     public function closeTableLine()
     {
         ?>
-            </tr>
-        <?php
+                    </tr>
+                    <?php
     }
 }
 ?>

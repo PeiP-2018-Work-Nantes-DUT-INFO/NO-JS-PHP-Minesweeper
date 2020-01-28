@@ -27,12 +27,12 @@ define("PASSWORD", "password");
  /**
   * Nombre de colonnes du demineur
   */
-  define("NBR_COLONNES", 8);
+  define("NBR_COLONNES", 9);
 
   /**
    * Nombre de lignes du demineur
    */
-  define("NBR_LIGNES", 8);
+  define("NBR_LIGNES", 9);
   
   /**
    * Nombre de mines contenues dans le demineur

@@ -7,7 +7,7 @@
 
 /**
  * Permet de charger la balise head ainsi que le haut de la page
- * 
+ *
  * @param string $pseudo identifiant du joueur
  */
 function headerPageJeu()
