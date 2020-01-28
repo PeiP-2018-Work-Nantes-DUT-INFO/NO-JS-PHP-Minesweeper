@@ -29,7 +29,6 @@ In accordance to PSR-2.
 
 ![Credits](media/s3.png)
 
-
 ## Self hosting (installation)
 
 Minimum PHP version: `7.4`
@@ -42,3 +41,13 @@ Composer is also required
 - Copy past `Config/config.php.example` to `Config/config.php`
 - Edit `Config/config.php` with DB credentials
 - Run `composer install`
+
+## Credits :
+
+PHP version by Eliott Dubois & Simon SASSI
+
+Assets from Microsoft
+
+Font by Gangetsha Lyx
+
+IUT de Nantes 2020
