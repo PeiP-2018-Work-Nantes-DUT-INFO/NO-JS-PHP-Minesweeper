@@ -378,15 +378,15 @@ class VueJeu
             </li>
             <li id="help"><u>H</u>elp
                 <ul class="dropdown-menu">
-                    <li><a href="#">
+                    <li><a href="https://github.com/maxerbox/NO-JS-PHP-Minesweeper">
                             <div class="w18"></div>
-                            <p>Content</p>
+                            <p>Github</p>
                         </a></li>
-                    <li><a href="#">
+                    <li><a href="https://github.com/search/advanced?q=">
                             <div class="w18"></div>
                             <p>Search for Help on ...</p>
                         </a></li>
-                    <li><a href="#">
+                    <li><a href="https://github.com/maxerbox/NO-JS-PHP-Minesweeper/issues">
                             <div class="w18"></div>
                             <p>Using Help</p>
                         </a></li>
