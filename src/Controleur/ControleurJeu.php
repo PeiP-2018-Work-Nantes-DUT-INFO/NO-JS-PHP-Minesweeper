@@ -37,6 +37,7 @@ class ControleurJeu
         $game = unserialize($_SESSION['game']);
         $gamePerdu = $game->estPerdu();
         $gameGagne = $game->aGagne();
+        $animer = $game->estCommence() && !($gamePerdu || $gameGagne);
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
         $unite = (int)($game->drapeauxRestants()%10);
@@ -59,7 +60,10 @@ class ControleurJeu
             false,
             $game->getNbrLignes(),
             $game->getNbrColonnes(),
-            $this->getSessionDifficulte()
+            $this->getSessionDifficulte(),
+            $this->getChiffresTime($game),
+            $animer,
+            $this->sonActive() && (!$gameGagne && !$gamePerdu)
         );
     }
 
@@ -122,6 +126,28 @@ class ControleurJeu
         $this->nouveauJeu();
     }
 
+    /**
+     * Active ou désactive l'état du son
+     */
+    public function changerSon()
+    {
+        if (isset($_SESSION['sound'])) {
+            unset($_SESSION['sound']);
+        } else {
+            $_SESSION['sound'] = true;
+        }
+        $this->afficherJeu();
+    }
+    /**
+     * Permet de savoir si le son est activé
+     *
+     * @return boolean vrai si le son est activé
+     */
+    private function sonActive()
+    {
+        return isset($_SESSION['sound']);
+    }
+
 
     /**
      * Permet de placer un drapeau sur une case
@@ -152,6 +178,7 @@ class ControleurJeu
         $game = unserialize($_SESSION['game']);
         $gamePerdu = $game->estPerdu();
         $gameGagne = $game->aGagne();
+        $animer = $game->estCommence() && !($gamePerdu || $gameGagne);
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
         $unite = (int)($game->drapeauxRestants()%10);
@@ -174,7 +201,10 @@ class ControleurJeu
             true,
             $game->getNbrLignes(),
             $game->getNbrColonnes(),
-            $this->getSessionDifficulte()
+            $this->getSessionDifficulte(),
+            $this->getChiffresTime($game),
+            $animer,
+            $this->sonActive() && (!$gameGagne && !$gamePerdu)
         );
     }
 
@@ -216,7 +246,7 @@ class ControleurJeu
      */
     public function nouveauJeu()
     {
-        header("Refresh: 30; URL=index.php?credits");
+        header("Refresh: 30000; URL=index.php?credits");
         $pseudo = $_SESSION['pseudo'];
         [$nbrColonnes, $nbrLignes, $nbrMines] = $this->getDifficulte();
         $game = new GameState($pseudo, $nbrColonnes, $nbrLignes, $nbrMines);
@@ -237,6 +267,20 @@ class ControleurJeu
         $this->afficherResultat();
     }
 
+    /**
+     * Permet d'obtenir les centaines, dizaines, unités pour l'affichage du temps;
+     *
+     * @param GameState $gameState
+     * @return int[] un tableau contenant  les centaines, dizaines et unités
+     */
+    private function getChiffresTime($gameState)
+    {
+        $secondes = $gameState->getSecondes() % 1000;
+        $unite = (int)($secondes%10);
+        $dizaine = (int)($secondes-$unite)%100/10;
+        $centaine = (int)($secondes/100);
+        return [$centaine, $dizaine, $unite];
+    }
 
     /**
      * Permet de charger la vue des résultats
@@ -246,6 +290,7 @@ class ControleurJeu
         $game = unserialize($_SESSION['game']);
         $gamePerdu = $game->estPerdu();
         $gameGagne = $game->aGagne();
+        $animer = $game->estCommence() && !($gamePerdu || $gameGagne);
         $etatCases = $game->obtenirEtatJeu();
         $pseudo = $_SESSION['pseudo'];
         $unite = (int)($game->drapeauxRestants()%10);
@@ -272,7 +317,10 @@ class ControleurJeu
             false,
             $game->getNbrLignes(),
             $game->getNbrColonnes(),
-            $this->getSessionDifficulte()
+            $this->getSessionDifficulte(),
+            $this->getChiffresTime($game),
+            $animer,
+            ($gamePerdu || $gameGagne) && $this->sonActive()
         );
     }
 

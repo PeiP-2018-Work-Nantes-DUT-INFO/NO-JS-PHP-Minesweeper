@@ -44,8 +44,11 @@ main {
 .minesweeper .game_window .head div.w41 {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+}
+
+.minesweeper .game_window .head .clock-group div.w41 .display-bomb {
     margin-right: 5px;
-    width: 41px;
 }
 
 .minesweeper .game_window .head div.display-bomb {
@@ -262,4 +265,43 @@ div.won div.content div p:nth-child(2) {
 
 div.won div.content div p:last-child {
     width: 60px;
+}
+
+.minesweeper .game_window .head .clock-group div.bomb {
+    background-image: url(../img/display0.png), url(../img/display1.png), url(../img/display2.png), url(../img/display3.png), url(../img/display4.png), url(../img/display5.png), url(../img/display6.png), url(../img/display7.png), url(../img/display8.png), url(../img/display9.png);
+    background-position: 0% calc(21px * 0), 0% calc(21px * 1), 0% calc(21px * 2), 0% calc(21px * 3), 0% calc(21px * 4), 0% calc(21px * 5), 0% calc(21px * 6), 0% calc(21px * 7), 0% calc(21px * 8), 0% calc(21px * 9);
+}
+
+.minesweeper .game_window .head .clock-group .display-bomb {
+    overflow: hidden;
+}
+
+.minesweeper .game_window .head .clock-group .display-bomb .bomb {
+    height: 210px;
+    position: relative;
+}
+
+@-webkit-keyframes counter {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+}
+
+
+@keyframes counter {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
 }

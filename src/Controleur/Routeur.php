@@ -40,6 +40,8 @@ class Routeur
                     $this->ctrlJeu->resetScores();
                 } elseif (isset($_GET['scores'])) {
                     $this->ctrlJeu->afficherResultat();
+                } elseif (isset($_GET['sound'])) {
+                    $this->ctrlJeu->changerSon();
                 } elseif (isset($_GET['credits'])) {
                     $this->ctrlJeu->afficherCredits(filter_input(
                         INPUT_GET,
