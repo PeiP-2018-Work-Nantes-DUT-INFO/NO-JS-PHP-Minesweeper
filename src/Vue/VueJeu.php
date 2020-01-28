@@ -378,7 +378,7 @@ class VueJeu
             </li>
             <li id="help"><u>H</u>elp
                 <ul class="dropdown-menu">
-                    <li><a href="https://github.com/maxerbox/NO-JS-PHP-Minesweeper">
+                    <li><a href="https://github.com/PeiP-2018-Work-Nantes-DUT-INFO/NO-JS-PHP-Minesweeper">
                             <div class="w18"></div>
                             <p>Github</p>
                         </a></li>
@@ -386,7 +386,7 @@ class VueJeu
                             <div class="w18"></div>
                             <p>Search for Help on ...</p>
                         </a></li>
-                    <li><a href="https://github.com/maxerbox/NO-JS-PHP-Minesweeper/issues">
+                    <li><a href="https://github.com/PeiP-2018-Work-Nantes-DUT-INFO/NO-JS-PHP-Minesweeper">
                             <div class="w18"></div>
                             <p>Using Help</p>
                         </a></li>
