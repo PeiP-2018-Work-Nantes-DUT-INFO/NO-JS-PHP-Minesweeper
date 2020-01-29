@@ -174,6 +174,8 @@ class VueJeu
 </div>
         <?php
     }
+
+
     /**
      * Ajoute les balises audio
      *
@@ -189,107 +191,111 @@ class VueJeu
             return;
         } ?>
         <?php if ($estCommencé) :?>
-<audio loop autoplay>
-    <source src="assets/sounds/beep.ogg" type="audio/ogg">
-</audio>
+        <audio loop autoplay>
+            <source src="assets/sounds/beep.ogg" type="audio/ogg">
+        </audio>
         <?php endif?>
 
         <?php if ($estGagne) :?>
-<audio autoplay>
-    <source src="assets/sounds/win.ogg" type="audio/ogg">
-</audio>
+        <audio autoplay>
+            <source src="assets/sounds/win.ogg" type="audio/ogg">
+        </audio>
         <?php endif?>
 
         <?php if ($estPerdu) :?>
-<audio autoplay>
-    <source src="assets/sounds/game_over.ogg" type="audio/ogg">
-</audio>
+        <audio autoplay>
+            <source src="assets/sounds/game_over.ogg" type="audio/ogg">
+        </audio>
         <?php endif?>
         <?php
     }
+
+    /**
+     * 
+     */
     public function genererStyleTimer($chiffresTimer)
     {
         ?>
-<style>
-.minesweeper .game_window .head .clock-group div.centaine.animate {
-    -webkit-animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000 - (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
-    animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000- (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
-    animation-delay: <?=1000 - $chiffresTimer[0] * 100 - $chiffresTimer[1] * 10 - $chiffresTimer[2]?>s, <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s, 0s;
-}
+        <style>
+        .minesweeper .game_window .head .clock-group div.centaine.animate {
+            -webkit-animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000 - (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
+            animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000- (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
+            animation-delay: <?=1000 - $chiffresTimer[0] * 100 - $chiffresTimer[1] * 10 - $chiffresTimer[2]?>s, <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s, 0s;
+        }
 
-.minesweeper .game_window .head .clock-group div.dizaine.animate {
-    -webkit-animation: counter 100s infinite steps(1) forwards, partcounterdizaines <?=100 - (($chiffresTimer[1]+1)%10) * 10?>s steps(<?=10 - (($chiffresTimer[1]+1)%10)?>), partcounterdizainesfirststage <?=10-$chiffresTimer[2]?>s steps(1);
-    animation: counter 100s infinite steps(10) forwards, partcounterdizaines <?=100 - (($chiffresTimer[1]+1)%10) * 10?>s steps(<?=10 - (($chiffresTimer[1]+1)%10)?>), partcounterdizainesfirststage <?=10-$chiffresTimer[2]?>s steps(1);
-    animation-delay: <?=100 - $chiffresTimer[1] * 10 - $chiffresTimer[2]?>s, <?=10 - $chiffresTimer[2]?>s, 0s;
-}
+        .minesweeper .game_window .head .clock-group div.dizaine.animate {
+            -webkit-animation: counter 100s infinite steps(1) forwards, partcounterdizaines <?=100 - (($chiffresTimer[1]+1)%10) * 10?>s steps(<?=10 - (($chiffresTimer[1]+1)%10)?>), partcounterdizainesfirststage <?=10-$chiffresTimer[2]?>s steps(1);
+            animation: counter 100s infinite steps(10) forwards, partcounterdizaines <?=100 - (($chiffresTimer[1]+1)%10) * 10?>s steps(<?=10 - (($chiffresTimer[1]+1)%10)?>), partcounterdizainesfirststage <?=10-$chiffresTimer[2]?>s steps(1);
+            animation-delay: <?=100 - $chiffresTimer[1] * 10 - $chiffresTimer[2]?>s, <?=10 - $chiffresTimer[2]?>s, 0s;
+        }
 
-.minesweeper .game_window .head .clock-group div.unite.animate {
-    -webkit-animation: counter 10s infinite steps(10) forwards, partcounterunites <?=10-$chiffresTimer[2]?>s steps(<?=10-$chiffresTimer[2]?>);
-    animation: counter 10s infinite steps(10) forwards, partcounterunites <?=10-$chiffresTimer[2]?>s steps(<?=10-$chiffresTimer[2]?>);
-    animation-delay: <?=10 - $chiffresTimer[2]?>s, 0s;
+        .minesweeper .game_window .head .clock-group div.unite.animate {
+            -webkit-animation: counter 10s infinite steps(10) forwards, partcounterunites <?=10-$chiffresTimer[2]?>s steps(<?=10-$chiffresTimer[2]?>);
+            animation: counter 10s infinite steps(10) forwards, partcounterunites <?=10-$chiffresTimer[2]?>s steps(<?=10-$chiffresTimer[2]?>);
+            animation-delay: <?=10 - $chiffresTimer[2]?>s, 0s;
 
-}
+        }
 
-@keyframes partcounterunites {
-    0% {
-        -webkit-transform: translateY(-<?=$chiffresTimer[2] * 10?>%);
-        transform: translateY(-<?=$chiffresTimer[2] * 10?>%);
-    }
+        @keyframes partcounterunites {
+            0% {
+                -webkit-transform: translateY(-<?=$chiffresTimer[2] * 10?>%);
+                transform: translateY(-<?=$chiffresTimer[2] * 10?>%);
+            }
 
-    100% {
-        -webkit-transform: translateY(-100%);
-        transform: translateY(-100%);
-    }
-}
+            100% {
+                -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+        }
 
-@keyframes partcounterdizaines {
-    0% {
-        -webkit-transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
-        transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
-    }
+        @keyframes partcounterdizaines {
+            0% {
+                -webkit-transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+                transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+            }
 
-    100% {
-        -webkit-transform: translateY(-100%);
-        transform: translateY(-100%);
-    }
-}
+            100% {
+                -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+        }
 
-@keyframes partcounterdizainesfirststage {
-    0% {
-        -webkit-transform: translateY(-<?=$chiffresTimer[1] * 10?>%);
-        transform: translateY(-<?=$chiffresTimer[1] * 10?>%);
-    }
+        @keyframes partcounterdizainesfirststage {
+            0% {
+                -webkit-transform: translateY(-<?=$chiffresTimer[1] * 10?>%);
+                transform: translateY(-<?=$chiffresTimer[1] * 10?>%);
+            }
 
-    100% {
-        -webkit-transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
-        transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
-    }
-}
+            100% {
+                -webkit-transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+                transform: translateY(-<?=(($chiffresTimer[1]+1)%10) * 10?>%);
+            }
+        }
 
-@keyframes partcountercentaines {
-    0% {
-        -webkit-transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
-        transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
-    }
+        @keyframes partcountercentaines {
+            0% {
+                -webkit-transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+                transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+            }
 
-    100% {
-        -webkit-transform: translateY(-100%);
-        transform: translateY(-100%);
-    }
-}
+            100% {
+                -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+        }
 
-@keyframes partcountercentainesfirststage {
-    0% {
-        -webkit-transform: translateY(-<?=$chiffresTimer[0] * 10?>%);
-        transform: translateY(-<?=$chiffresTimer[0] * 10?>%);
-    }
+        @keyframes partcountercentainesfirststage {
+            0% {
+                -webkit-transform: translateY(-<?=$chiffresTimer[0] * 10?>%);
+                transform: translateY(-<?=$chiffresTimer[0] * 10?>%);
+            }
 
-    100% {
-        -webkit-transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
-        transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
-    }
-}
-</style>
+            100% {
+                -webkit-transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+                transform: translateY(-<?=(($chiffresTimer[0]+1)%10) * 10?>%);
+            }
+        }
+        </style>
         <?php
     }
     
@@ -410,21 +416,21 @@ class VueJeu
                     <div class="bomb unite" style="background-image: url(assets/img/display<?= $unite ?>.png);">
                     </div>
                 </div>
-                <div class="n-decouvert" id="<?= $smiley ?>">
-                    <a href="index.php?reset" draggable="false"></a>
+                <div class="w41">
+                    <div class="n-decouvert" id="<?= $smiley ?>">
+                        <a href="index.php?reset" draggable="false"></a>
+                    </div>
+                    <div class="<?= $flagMode ? '' : 'n-'?>decouvert" id="flag">
+                        <a href="<?= $flagMode ? 'index.php' : 'index.php?flag-mode'?>" draggable="false"></a>
+                    </div>
                 </div>
                 <div class="clock-group">
-                    <div class="w41">
-                        <div class="<?= $flagMode ? '' : 'n-'?>decouvert" id="flag">
-                            <a href="<?= $flagMode ? 'index.php' : 'index.php?flag-mode'?>" draggable="false"></a>
+                    <div class="display-bomb" style="background-image: url(assets/img/display.png);">
+                        <div class="bomb centaine <?= $animer ?  'animate' : ''?>">
                         </div>
-                        <div class="display-bomb" style="background-image: url(assets/img/display.png);">
-                            <div class="bomb centaine <?= $animer ?  'animate' : ''?>">
-                            </div>
-                            <div class="bomb dizaine <?= $animer ?  'animate' : ''?>">
-                            </div>
-                            <div class="bomb unite <?= $animer ?  'animate' : ''?>">
-                            </div>
+                        <div class="bomb dizaine <?= $animer ?  'animate' : ''?>">
+                        </div>
+                        <div class="bomb unite <?= $animer ?  'animate' : ''?>">
                         </div>
                     </div>
                 </div>
