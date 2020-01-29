@@ -76,10 +76,12 @@ class GameState
     private $dateDemarrage;
 
     /**
-     * Nombre de secondes du dernier getSecondes
-     * @var int
+     * Date de fin du jeu
+     *
+     * @var DateTime
      */
-    private $secondes;
+    private $dateFin;
+
 
     /**
      * Initialise le jeu et génère les mines.
@@ -166,8 +168,12 @@ class GameState
                 $this->etatCaseJeu[$x][$y]->surbriller();
                 $this->revelerMines();
                 $this->estPerdu = true;
+                $this->dateFin = new DateTime();
                 return true;
             } else {
+                if ($this->aGagne()) {
+                    $this->dateFin = new DateTime();
+                }
                 return false;
             }
         }
@@ -436,10 +442,10 @@ class GameState
     public function getSecondes()
     {
         if ($this->estPerdu() || $this->aGagne()) {
-            return $this->secondes;
+            return $this->dateFin->getTimestamp() - $this->dateDemarrage->getTimestamp();
+            ;
         } elseif ($this->dateDemarrage != null) {
-            $this->secondes = (new DateTime())->getTimestamp() - $this->dateDemarrage->getTimestamp();
-            return $this->secondes;
+            return (new DateTime())->getTimestamp() - $this->dateDemarrage->getTimestamp();
         } else {
             return 0;
         }

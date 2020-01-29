@@ -211,12 +211,26 @@ class VueJeu
     }
 
     /**
-     * 
+     *
      */
     public function genererStyleTimer($chiffresTimer)
     {
         ?>
         <style>
+        .minesweeper .game_window .head .clock-group div.centaine {
+            top: -<?= $chiffresTimer[0] * 23 ?>px;
+        }
+        .minesweeper .game_window .head .clock-group div.dizaine {
+            top: -<?= $chiffresTimer[1] * 23 ?>px;
+        }
+
+        .minesweeper .game_window .head .clock-group div.unite {
+            top: -<?= $chiffresTimer[2] * 23 ?>px;
+        }
+
+        .minesweeper .game_window .head .clock-group div.animate {
+            top: 0px;
+        }
         .minesweeper .game_window .head .clock-group div.centaine.animate {
             -webkit-animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000 - (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
             animation: counter 1000s infinite steps(10) forwards, partcountercentaines <?=1000- (($chiffresTimer[0]+1)%10) * 100?>s steps(<?=10 - (($chiffresTimer[0]+1)%10)?>), partcountercentainesfirststage <?=100-$chiffresTimer[1]*10 - $chiffresTimer[2]?>s steps(1);
