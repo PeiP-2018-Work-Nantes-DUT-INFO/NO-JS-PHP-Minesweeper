@@ -128,13 +128,14 @@ class ControleurJeu
 
     /**
      * Active ou désactive l'état du son
+     * @param string $son Etat son
      */
-    public function changerSon()
+    public function changerSon($son)
     {
-        if (isset($_SESSION['sound'])) {
-            unset($_SESSION['sound']);
-        } else {
+        if ($son === '1') {
             $_SESSION['sound'] = true;
+        } else {
+            unset($_SESSION['sound']);
         }
         $this->afficherJeu();
     }

@@ -366,7 +366,7 @@ class VueJeu
                             <div class="w18 checked"></div>
                             <p>Color</p>
                         </a></li>
-                    <li><a href="index.php?sound">
+                    <li><a href="index.php?sound=<?= $son ? '0': '1'?>">
                             <div class="w18 <?= $son ? 'checked': ''?>"></div>
                             <p>Sound</p>
                         </a></li>
