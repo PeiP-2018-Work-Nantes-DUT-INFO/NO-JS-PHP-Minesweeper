@@ -94,7 +94,7 @@ class ControleurJeu
                     $this->modele->incrPartieJouees($pseudo);
                 }
                 if ($game->aGagne()) {
-                    $this->modele->incrPartieGagnees($pseudo);
+                    $this->modele->incrPartieGagnees($pseudo, $game->getSecondes());
                 }
                 header("Location: ?scores", false, 301);
             } else {

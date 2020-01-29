@@ -39,7 +39,8 @@ INSERT INTO `joueurs` (`pseudo`, `motDePasse`) VALUES
 CREATE TABLE `parties` (
   `pseudo` varchar(20) NOT NULL,
   `nbPartiesJouees` int(11) NOT NULL,
-  `nbPartiesGagnees` int(11) NOT NULL
+  `nbPartiesGagnees` int(11) NOT NULL,
+  `bestTime` int(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

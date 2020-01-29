@@ -218,14 +218,14 @@ class VueJeu
         ?>
         <style>
         .minesweeper .game_window .head .clock-group div.centaine {
-            top: -<?= $chiffresTimer[0] * 23 ?>px;
+            top:  <?= 1-$chiffresTimer[0] * 23 ?>px;
         }
         .minesweeper .game_window .head .clock-group div.dizaine {
-            top: -<?= $chiffresTimer[1] * 23 ?>px;
+            top: <?= 1-$chiffresTimer[1] * 23 ?>px;
         }
 
         .minesweeper .game_window .head .clock-group div.unite {
-            top: -<?= $chiffresTimer[2] * 23 ?>px;
+            top: <?= 1-$chiffresTimer[2] * 23 ?>px;
         }
 
         .minesweeper .game_window .head .clock-group div.animate {

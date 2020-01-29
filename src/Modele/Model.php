@@ -120,7 +120,7 @@ class Modele
     public function addPartie($pseudo)
     {
         try {
-            $statement = $this->connexion->prepare("INSERT INTO parties VALUES (?,0,0);");
+            $statement = $this->connexion->prepare("INSERT INTO parties VALUES (?,0,0,NULL);");
             $statement->bindParam(1, $pseudo);
             $statement->execute();
         } catch (PDOException $e) {
@@ -159,8 +159,9 @@ class Modele
      * Permet d'incrémenter les parties gagnées d'un joueur
      *
      * @param string $pseudo identifiant du joueur
+     * @param int $temps temps du joueur
      */
-    public function incrPartieGagnees($pseudo)
+    public function incrPartieGagnees($pseudo, $temps)
     {
         try {
             $statement = $this->connexion->prepare("SELECT * FROM parties where pseudo=?;");
@@ -168,10 +169,13 @@ class Modele
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $wins = $result['nbPartiesGagnees'] +1;
+            $result['bestTime'] = $result['bestTime'] == null ? 9999 : $result['bestTime'];
+            $temps = min($temps, $result['bestTime']);
 
-            $statement = $this->connexion->prepare("UPDATE parties SET nbPartiesGagnees = ? WHERE pseudo = ?;");
+            $statement = $this->connexion->prepare("UPDATE parties SET nbPartiesGagnees = ?, bestTime = ? WHERE pseudo = ?;");
             $statement->bindParam(1, $wins);
-            $statement->bindParam(2, $pseudo);
+            $statement->bindParam(2, $temps);
+            $statement->bindParam(3, $pseudo);
             $statement->execute();
         } catch (PDOException $e) {
             $this->deconnexion();
